@@ -45,15 +45,6 @@ INSERT INTO Buyers(Id, FirstName, LastName) VALUES (4, 'Борис',		'Ильин')
 INSERT INTO Buyers(Id, FirstName, LastName) VALUES (5, 'Орландо',	'Юдин')
 INSERT INTO Buyers(Id, FirstName, LastName) VALUES (6, 'Егор',		'Зайцев')
 
-
- 
-Наумов Ростислав 
-Рыбаков Зиновий
-Шамрыло Платон 
-Чикольба Сергей 
-Василенко Жерар 
- Зенон 
-
 INSERT INTO Salers(Id, FirstName, LastName) VALUES (1, 'Ростислав',	 'Наумов')
 INSERT INTO Salers(Id, FirstName, LastName) VALUES (2, 'Зиновий',	 'Рыбаков')
 INSERT INTO Salers(Id, FirstName, LastName) VALUES (3, 'Платон',	 'Шамрыло')
