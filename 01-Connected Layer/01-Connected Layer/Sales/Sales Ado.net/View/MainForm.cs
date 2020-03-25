@@ -28,7 +28,7 @@ namespace Sales
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            this.listView.Show();
+
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
