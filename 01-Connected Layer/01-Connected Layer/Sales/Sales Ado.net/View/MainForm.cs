@@ -10,21 +10,12 @@ namespace Sales
         public System.Windows.Forms.Form Form { get; set; }
         ListView IView.GetListView { get => listView; }
         ListViewItem listViewItem;
-        FormClosedEventHandler closedEventHandler;
 
         public ListViewItem GetListViewItem
         {
             get
             {
                 return listViewItem;
-            }
-        }
-
-        public FormClosedEventHandler ClosedEventHandler
-        {
-            get
-            {
-                return closedEventHandler;
             }
         }
 
@@ -46,7 +37,6 @@ namespace Sales
 
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            Form.FormClosed += closedEventHandler;
         }
 
         public void NewListViewItem()
