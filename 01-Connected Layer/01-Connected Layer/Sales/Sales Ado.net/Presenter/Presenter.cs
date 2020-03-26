@@ -1,31 +1,35 @@
-﻿using System.Windows.Forms;
+﻿using System.Collections.Generic;
 using Sales.Model;
+using Sales.View;
 
 namespace Sales.PresenterNamespace
 {
     class Presenter
     {
-        private ListView _listView = new ListView();
         private ConnectionWithDb _connectionWithDb;
-        private MainForm _mainForm;
+        private List<Row> _rows = new List<Row>();
+        private IView _view;
 
-        public MainForm MyMainForm
+        public Presenter(IView view)
         {
-            get
-            {
-                return _mainForm;
-            }
-        }
-
-        public Presenter()
-        {
+            _view = view;
             _connectionWithDb = new ConnectionWithDb();
             _connectionWithDb.OpenConnection();
-            _listView = _connectionWithDb.FillListWithElements();
-            _mainForm = new MainForm(_listView);
-            if (_mainForm.IsClosed)
+            _rows = _connectionWithDb.FillListWithElements();
+            FillListView();
+        }
+
+        public void FillListView()
+        {
+            foreach (var row in _rows)
             {
-                _connectionWithDb.CloseConnection();
+                _view.NewListViewItem();
+                _view.GetListViewItem.Text = row.BFirstName;
+                _view.GetListViewItem.SubItems.Add(row.BLastName);
+                _view.GetListViewItem.SubItems.Add(row.SFirstName);
+                _view.GetListViewItem.SubItems.Add(row.SLastName);
+                _view.GetListViewItem.SubItems.Add(row.MoneySum);
+                _view.GetListViewItem.SubItems.Add(row.Date);
             }
         }
     }

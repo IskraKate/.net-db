@@ -6,7 +6,6 @@ namespace Sales
 {
     static class Program
     {
-        private static Presenter presenter;
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
@@ -15,8 +14,9 @@ namespace Sales
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            presenter = new Presenter();
-            Application.Run(presenter.MyMainForm);
+            var mainForm = new MainForm();
+            var presenter = new Presenter(mainForm);
+            Application.Run(mainForm);
         }
     }
 }

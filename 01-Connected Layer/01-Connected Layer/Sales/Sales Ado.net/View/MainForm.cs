@@ -1,28 +1,36 @@
-﻿using System;
+﻿using Sales.View;
+using System;
 using System.Windows.Forms;
 
 namespace Sales
 {
-    public partial class MainForm : Form
+    public partial class MainForm : Form, IView
     {
         public bool IsClosed { get; set; }
+        public System.Windows.Forms.Form Form { get; set; }
+        ListView IView.GetListView { get => listView; }
+        ListViewItem listViewItem;
+        FormClosedEventHandler closedEventHandler;
 
-        public ListView ListView
+        public ListViewItem GetListViewItem
         {
             get
             {
-                return listView;
-            }
-            set
-            {
-                listView = value;
+                return listViewItem;
             }
         }
 
-        public MainForm(ListView listView)
+        public FormClosedEventHandler ClosedEventHandler
+        {
+            get
+            {
+                return closedEventHandler;
+            }
+        }
+
+        public MainForm()
         {
             InitializeComponent();
-            this.listView = listView;
             IsClosed = false;
         }
 
@@ -38,7 +46,12 @@ namespace Sales
 
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            IsClosed = true;
+            Form.FormClosed += closedEventHandler;
+        }
+
+        public void NewListViewItem()
+        {
+            listViewItem = listView.Items.Add(new ListViewItem());
         }
     }
 }

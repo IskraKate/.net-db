@@ -1,7 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Windows.Forms;
 
 namespace Sales.Model
 {
@@ -10,7 +10,6 @@ namespace Sales.Model
         private SqlConnection _connection = new SqlConnection();
         private SqlConnectionStringBuilder _builder = new SqlConnectionStringBuilder();
         private string _sqlString;
-        private ListView _listView = new ListView();
         public bool IsConnected { get; set; }
 
         public ConnectionWithDb()
@@ -44,8 +43,9 @@ namespace Sales.Model
             }
         }
 
-        public ListView FillListWithElements()
+        public List<Row> FillListWithElements()
         {
+            List<Row> rows = new List<Row>();
             try
             {
                 using (SqlCommand command = new SqlCommand(_sqlString, _connection))
@@ -53,21 +53,23 @@ namespace Sales.Model
                 {
                     while (reader.Read())
                     {
-                        ListViewItem item = _listView.Items.Add(new ListViewItem());
-                        item.Text = (string)reader["BFirstname"];
-                        item.SubItems.Add((string)reader["BLastname"]);
-                        item.SubItems.Add((string)reader["SFirstname"]);
-                        item.SubItems.Add((string)reader["SLastname"]);
-                        item.SubItems.Add(((int)reader["MoneySum"]).ToString());
-                        item.SubItems.Add(((DateTime)reader["Date"]).ToShortDateString());
+                        rows.Add(new Row
+                        {
+                            BFirstName = (string)reader["BFirstname"],
+                            BLastName = ((string)reader["BLastname"]),
+                            SFirstName = ((string)reader["SFirstname"]),
+                            SLastName = ((string)reader["SLastname"]),
+                            MoneySum = (((int)reader["MoneySum"]).ToString()),
+                            Date  = (((DateTime)reader["Date"]).ToShortDateString())
+                        });
                     }
                 }
-                return _listView;
+                return rows;
             }
             catch (SqlException ex)
             {
                 Console.WriteLine(ex.Message);
-                return _listView;
+                return rows;
             }
         }
 
