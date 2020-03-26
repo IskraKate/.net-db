@@ -6,6 +6,8 @@ namespace Sales.PresenterNamespace
 {
     class Presenter
     {
+        //public delegate void ClosedHandler(string message);
+        //public event ClosedHandler FormClosed;
         private ConnectionWithDb _connectionWithDb;
         private List<Row> _rows = new List<Row>();
         private IView _view;
@@ -17,6 +19,12 @@ namespace Sales.PresenterNamespace
             _connectionWithDb.OpenConnection();
             _rows = _connectionWithDb.FillListWithElements();
             FillListView();
+            _view.FormClosed += _view_FormClosed;
+        }
+
+        private void _view_FormClosed(object sender, System.Windows.Forms.FormClosedEventArgs e)
+        {
+            _connectionWithDb.CloseConnection();
         }
 
         public void FillListView()

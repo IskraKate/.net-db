@@ -37,6 +37,7 @@ namespace Sales
 
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
         {
+
         }
 
         public void NewListViewItem()
