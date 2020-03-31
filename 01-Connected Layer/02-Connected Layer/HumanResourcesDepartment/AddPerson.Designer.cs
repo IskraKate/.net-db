@@ -40,6 +40,7 @@
             // personDismissalNumber
             // 
             this.personDismissalNumber.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBox_KeyPress);
+            // 
             // downloadPhoto
             // 
             this.downloadPhoto.Location = new System.Drawing.Point(34, 450);
@@ -52,9 +53,9 @@
             // 
             // buttonAdd
             // 
-            this.buttonAdd.Location = new System.Drawing.Point(694, 539);
+            this.buttonAdd.Location = new System.Drawing.Point(631, 450);
             this.buttonAdd.Name = "buttonAdd";
-            this.buttonAdd.Size = new System.Drawing.Size(75, 23);
+            this.buttonAdd.Size = new System.Drawing.Size(128, 23);
             this.buttonAdd.TabIndex = 7;
             this.buttonAdd.Text = "Add";
             this.buttonAdd.UseVisualStyleBackColor = true;
@@ -70,6 +71,8 @@
             this.Name = "AddPerson";
             this.Text = "AddPerson";
             this.Load += new System.EventHandler(this.AddPerson_Load);
+            this.Controls.SetChildIndex(this.buttonEdit, 0);
+            this.Controls.SetChildIndex(this.buttonEddited, 0);
             this.Controls.SetChildIndex(this.birthadyDateTimePicker, 0);
             this.Controls.SetChildIndex(this.personPhoto, 0);
             this.Controls.SetChildIndex(this.personName, 0);

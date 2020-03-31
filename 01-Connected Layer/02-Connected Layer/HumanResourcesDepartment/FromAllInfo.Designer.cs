@@ -192,6 +192,7 @@
             this.buttonEddited.TabIndex = 14;
             this.buttonEddited.Text = "Editted";
             this.buttonEddited.UseVisualStyleBackColor = true;
+            this.buttonEddited.Click += new System.EventHandler(this.buttonEddited_Click);
             // 
             // FormAllInfo
             // 

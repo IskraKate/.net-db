@@ -30,7 +30,6 @@ namespace HumanResourcesDepartment
         {
             InitializeComponent();
             this.AddPersonEvent += formNameList.AddPerson;
-            this.FormClosed += AddPerson_FormClosed;
             birthadyDateTimePicker.Format = DateTimePickerFormat.Custom;
             birthadyDateTimePicker.Enabled = true;
             buttonEdit.Enabled = false;
@@ -68,36 +67,38 @@ namespace HumanResourcesDepartment
 
         private void buttonAdd_Click(object sender, EventArgs e)
         {
-            if(personPhoto.Image != null && personName.Text != "" && personSurname.Text!= "" && personPatronymic.Text != "")
+            try
             {
                 path = @"C:\Users\Iskra\source\repos\bpu-1821-homework\.net-db\01-Connected Layer\02-Connected Layer\HumanResourcesDepartment\PersonalPhotos\" + personName.Text + personSurname.Text + personPatronymic.Text + ".jpeg";
                 personPhoto.Image.Save(path, System.Drawing.Imaging.ImageFormat.Jpeg);
 
+                _personInfo.FirstName = personName.Text;
+                _personInfo.LastName = personSurname.Text;
+                _personInfo.Patronymic = personSurname.Text;
+                _personInfo.Birthday = birthadyDateTimePicker.Value;
+                _personInfo.ContractNumber = int.Parse(personContractNumber.Text);
+                _personInfo.DismissalNumber = int.Parse(personDismissalNumber.Text);
+           
+                AddPersonEvent(_personInfo);
+
+                string sqlString = "INSERT INTO Persons(FirstName, LastName, Patronymic, Birthday, ContractNumber, DismissalNumber, PhotoPath) VALUES (@FirstName, @LastName, @Patronymic, @Birthday, @ContractNumber, @DismissalNumber, @PhotoPath)";
+                using (SqlCommand command = new SqlCommand(sqlString, FormNameList.connection))
+                {
+                    command.Parameters.Add(new SqlParameter("@Firstname", personName.Text));
+                    command.Parameters.Add(new SqlParameter("@LastName", personSurname.Text));
+                    command.Parameters.Add(new SqlParameter("@Patronymic", personPatronymic.Text));
+                    command.Parameters.Add(new SqlParameter("@Birthday", birthadyDateTimePicker.Value));
+                    command.Parameters.Add(new SqlParameter("@ContractNumber", personContractNumber.Text));
+                    command.Parameters.Add(new SqlParameter("@DismissalNumber", personDismissalNumber.Text));
+                    command.Parameters.Add(new SqlParameter("@PhotoPath", path));
+                    command.ExecuteNonQuery();
+                }
                 this.Close();
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Cannot save the file check that all fields are filled", "Error",MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message);
             }
-        }
-
-        private void AddPerson_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            AddPersonEvent(_personInfo);
-
-            string sqlString = "INSERT INTO Persons(FirstName, LastName, Patronymic, Birthday, ContractNumber, DismissalNumber, PhotoPath) VALUES (@FirstName, @LastName, @Patronymic, @Birthday, @ContractNumber, @DismissalNumber, @PhotoPath)";
-            using (SqlCommand command = new SqlCommand(sqlString, FormNameList.connection))
-            {
-                command.Parameters.Add(new SqlParameter("@Firstname", personName.Text));
-                command.Parameters.Add(new SqlParameter("@LastName", personSurname.Text));
-                command.Parameters.Add(new SqlParameter("@Patronymic", personPatronymic.Text));
-                command.Parameters.Add(new SqlParameter("@Birthday", birthadyDateTimePicker.Value));
-                command.Parameters.Add(new SqlParameter("@ContractNumber", personContractNumber.Text));
-                command.Parameters.Add(new SqlParameter("@DismissalNumber", personDismissalNumber.Text));
-                command.Parameters.Add(new SqlParameter("@PhotoPath", path));
-                command.ExecuteNonQuery();
-            }
-
         }
 
         private void TextBox_KeyPress(object sender, KeyPressEventArgs e)
