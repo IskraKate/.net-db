@@ -90,6 +90,7 @@
             this.MaximizeBox = false;
             this.Name = "FormNameList";
             this.Text = "HumanResources";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FormNameList_FormClosed);
             this.Load += new System.EventHandler(this.mainForm_Load);
             this.ResumeLayout(false);
 

@@ -208,5 +208,10 @@ namespace HumanResourcesDepartment
 
             Refresh();
         }
+
+        private void FormNameList_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            connection.Close();
+        }
     }
 }
