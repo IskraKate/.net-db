@@ -10,8 +10,7 @@ namespace HumanResourcesDepartment
     {
         public static SqlConnection connection = new SqlConnection();
         public List<PersonInfo> infos = new List<PersonInfo>();
-        string _sqlString = "SELECT Persons.Id, Persons.FirstName, Persons.LastName, Persons.Patronymic, Persons.Birthday, Persons.ContractNumber,                                                              Persons.DismissalNumber, Persons.PhotoPath " +
-                            "FROM Persons";
+        string _sqlString = "ShowPersons";
         private delegate void PersonAllInfoHadler(PersonInfo personInfo);
         private event PersonAllInfoHadler PersonAllInfoEvent;
 
@@ -72,23 +71,27 @@ namespace HumanResourcesDepartment
         public void FillListInfo()
         {
             using (SqlCommand command = new SqlCommand(_sqlString, connection))
-            using (SqlDataReader reader = command.ExecuteReader())
             {
-                while (reader.Read())
+                command.CommandType = System.Data.CommandType.StoredProcedure;
+
+                using (SqlDataReader reader = command.ExecuteReader())
                 {
-                    infos.Add(new PersonInfo
+                    while (reader.Read())
                     {
-                        Id = int.Parse(reader["Id"].ToString()),
-                        FirstName = (string)reader["Firstname"],
-                        LastName = ((string)reader["Lastname"]),
-                        Patronymic = ((string)reader["Patronymic"]),
-                        Birthday =  (DateTime)reader["Birthday"],
-                        ContractNumber = int.Parse(reader["ContractNumber"].ToString()),
-                        DismissalNumber = int.Parse(reader["DismissalNumber"].ToString()),
-                        PhotoPath = (reader["PhotoPath"]) != System.DBNull.Value ? ((string)reader["PhotoPath"]) : string.Empty
-                    });
+                        infos.Add(new PersonInfo
+                        {
+                            Id = int.Parse(reader["Id"].ToString()),
+                            FirstName = (string)reader["Firstname"],
+                            LastName = ((string)reader["Lastname"]),
+                            Patronymic = ((string)reader["Patronymic"]),
+                            Birthday = (DateTime)reader["Birthday"],
+                            ContractNumber = int.Parse(reader["ContractNumber"].ToString()),
+                            DismissalNumber = int.Parse(reader["DismissalNumber"].ToString()),
+                            PhotoPath = (reader["PhotoPath"]) != System.DBNull.Value ? ((string)reader["PhotoPath"]) : string.Empty
+                        });
+                    }
+                    reader.Close();
                 }
-                reader.Close();
             }
         }
 
@@ -97,14 +100,18 @@ namespace HumanResourcesDepartment
             try
             {
                 using (SqlCommand command = new SqlCommand(_sqlString, connection))
-                using (SqlDataReader reader = command.ExecuteReader())
                 {
-                    foreach (var info in infos)
+                    command.CommandType = System.Data.CommandType.StoredProcedure;
+
+                    using (SqlDataReader reader = command.ExecuteReader())
                     {
-                        var listViewItem = listViewNames.Items.Add(new ListViewItem());
-                        listViewItem.Text = info.FirstName +' '+ info.LastName + ' ' + info.Patronymic;
+                        foreach (var info in infos)
+                        {
+                            var listViewItem = listViewNames.Items.Add(new ListViewItem());
+                            listViewItem.Text = info.FirstName + ' ' + info.LastName + ' ' + info.Patronymic;
+                        }
+                        reader.Close();
                     }
-                    reader.Close();
                 }
             }
             catch (SqlException ex)
@@ -150,9 +157,11 @@ namespace HumanResourcesDepartment
 
             try
             {
-                string sqlString = "UPDATE Persons SET FirstName = @FirstName, LastName = @LastName, Patronymic = @Patronymic, Birthday = @Birthday, ContractNumber = @ContractNumber, DismissalNumber = @DismissalNumber WHERE Id = @Id";
+                string sqlString = "EditPerson";
                 using (SqlCommand command = new SqlCommand(sqlString, connection))
                 {
+                    command.CommandType = System.Data.CommandType.StoredProcedure;
+
                     command.Parameters.Add(new SqlParameter("@Id",              personInfoEddited.Id));
                     command.Parameters.Add(new SqlParameter("@FirstName",       personInfoEddited.FirstName));
                     command.Parameters.Add(new SqlParameter("@LastName",        personInfoEddited.LastName));
@@ -191,9 +200,11 @@ namespace HumanResourcesDepartment
             {
                 try
                 {
-                    string sqlString = "DELETE FROM Persons WHERE Id = @Id";
+                    string sqlString = "DeletePerson";
                     using (SqlCommand command = new SqlCommand(sqlString, connection))
                     {
+                        command.CommandType = System.Data.CommandType.StoredProcedure;
+
                         command.Parameters.Add(new SqlParameter("@Id", infos[listViewNames.SelectedItems[0].Index].Id));
                         command.ExecuteNonQuery();
                     }

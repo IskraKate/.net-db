@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace _01_Disconnected_layer_proj
@@ -14,23 +7,29 @@ namespace _01_Disconnected_layer_proj
     {
         User _userInfo;
 
+        public delegate void DeleleUserHandler(User user);
+        public event DeleleUserHandler DeleteUser;
+
+        public delegate void EditUserHandler(User user);
+        public event EditUserHandler EditUser;
+
         public FullUserInfoForm()
         {
             InitializeComponent();
         }
 
-        public FullUserInfoForm(Users usersList)
+        public FullUserInfoForm(Users usersList, User user)
         {
             InitializeComponent();
-            
-        }
 
-        public void UserFullInfoShow(User user)
-        {
+            DeleteUser += usersList.DeleteUser;
+            EditUser += usersList.EditUser;
+
             _userInfo = user;
             textBoxLogin.Text = _userInfo.Login;
             textBoxPassword.Text = _userInfo.Password;
             textBoxAddress.Text = _userInfo.Address;
+            checkBoxAdmin.Checked = _userInfo.IsAdmin;
             textBoxNumber.Text = _userInfo.TelephoneNumber.ToString();
         }
 
@@ -42,16 +41,34 @@ namespace _01_Disconnected_layer_proj
             textBoxPassword.ReadOnly = false;
             textBoxAddress.ReadOnly = false;
             textBoxNumber.ReadOnly = false;
+            checkBoxAdmin.Enabled = true;
         }
 
         private void buttonEditted_Click(object sender, EventArgs e)
         {
+            _userInfo.Login = textBoxLogin.Text;
+            _userInfo.Password = textBoxPassword.Text;
+            _userInfo.Address = textBoxAddress.Text;
+            _userInfo.TelephoneNumber = int.Parse(textBoxNumber.Text);
+
+            EditUser(_userInfo);
             this.Close();
         }
 
         private void FullUserInfoForm_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void buttonDelete_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show("Are You sure You want to delete this user?", "Deleting user", MessageBoxButtons.YesNo);
+
+            if(result == DialogResult.Yes)
+            {
+                DeleteUser(_userInfo);
+                this.Close();
+            }
         }
     }
 }

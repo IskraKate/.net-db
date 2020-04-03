@@ -81,9 +81,10 @@ namespace HumanResourcesDepartment
            
                 AddPersonEvent(_personInfo);
 
-                string sqlString = "INSERT INTO Persons(FirstName, LastName, Patronymic, Birthday, ContractNumber, DismissalNumber, PhotoPath) VALUES (@FirstName, @LastName, @Patronymic, @Birthday, @ContractNumber, @DismissalNumber, @PhotoPath)";
+                string sqlString = "AddPerson";
                 using (SqlCommand command = new SqlCommand(sqlString, FormNameList.connection))
                 {
+                    command.CommandType = System.Data.CommandType.StoredProcedure;
                     command.Parameters.Add(new SqlParameter("@Firstname", personName.Text));
                     command.Parameters.Add(new SqlParameter("@LastName", personSurname.Text));
                     command.Parameters.Add(new SqlParameter("@Patronymic", personPatronymic.Text));

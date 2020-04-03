@@ -12,17 +12,52 @@ namespace _01_Disconnected_layer_proj
 {
     public partial class AddForm : FullUserInfoForm
     {
-        public AddForm()
+        private delegate bool CheckUniqueHandler(string login);
+        private event CheckUniqueHandler CheckUnique;
+
+        private delegate void AddUserHandler(User user);
+        private event AddUserHandler AddUser;
+        
+        public AddForm(Users usersList)
         {
             InitializeComponent();
 
-            buttonEdit.Enabled = false;
-            buttonEdit.Visible = false;
-            buttonEditted.Enabled = false;
-            buttonEditted.Visible = false;
-            buttonDelete.Enabled = false;
-            buttonDelete.Visible = false;
+            CheckUnique += usersList.CheckUnique;
+            AddUser += usersList.AddUser;
+        }
 
+
+        private void addButton_Click(object sender, EventArgs e)
+        {
+            if (textBoxLogin.Text != string.Empty && textBoxPassword.Text != string.Empty && textBoxAddress.Text != string.Empty && textBoxNumber.Text != string.Empty)
+            {
+                if (CheckUnique(textBoxLogin.Text))
+                {
+                    User user = new User
+                    {
+                        Login = textBoxLogin.Text,
+                        Password = textBoxPassword.Text,
+                        Address = textBoxAddress.Text,
+                        TelephoneNumber = long.Parse(textBoxNumber.Text),
+                        IsAdmin = checkBoxAdmin.Checked
+                    };
+
+                    AddUser(user);
+                }
+                else
+                {
+                    MessageBox.Show("Logis is not unique");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please fill all of fields");
+            }
+        }
+
+        private void exitButton_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }
