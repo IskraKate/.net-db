@@ -35,7 +35,7 @@ namespace _01_Disconnected_layer_proj
             _sqlDataAdapter = new SqlDataAdapter();
 
             _sqlDataAdapter.SelectCommand = new SqlCommand("SELECT Id, Login, Password, Address, TelephoneNumber, Admin FROM Users",
-                                                            _sqlConnection); ;
+                                                            _sqlConnection); 
 
             _sqlDataAdapter.InsertCommand = new SqlCommand("INSERT INTO Users(Login, Password, Address, TelephoneNumber, Admin)" +
                                                            "VALUES (@Login, @Password, @Address, @TelephoneNumber, @Admin)", _sqlConnection);
