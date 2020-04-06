@@ -10,7 +10,7 @@ CREATE DATABASE BooksAuthorsPresses
 GO
 
 USE BooksAuthorsPresses
-Go
+GO
 
 CREATE TABLE Authors
 (	
