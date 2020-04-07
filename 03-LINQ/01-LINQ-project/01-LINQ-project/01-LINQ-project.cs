@@ -1,10 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace _01_LINQ_project
 {
@@ -25,13 +21,13 @@ namespace _01_LINQ_project
     {
         static void Main(string[] args)
         {
-            var _schedules = new List<Schedule>();
-            var _daysOfWork = new List<DaysOfWork>();
-            string _employeeName = "First Employee";
+            var schedules = new List<Schedule>();
+            var daysOfWork = new List<DaysOfWork>();
+            string employeeName = "First Employee";
 
             #region AddingScheduleElements
 
-            _schedules.Add(new Schedule
+            schedules.Add(new Schedule
             {
                 Name = "First Employee",
                 DateIn = new DateTime(2020, 04, 06),
@@ -39,7 +35,7 @@ namespace _01_LINQ_project
             });
 
 
-            _schedules.Add(new Schedule
+            schedules.Add(new Schedule
             {
                 Name = "Second Employee",
                 DateIn = new DateTime(2020, 04, 16),
@@ -47,7 +43,7 @@ namespace _01_LINQ_project
             });
 
 
-            _schedules.Add(new Schedule
+            schedules.Add(new Schedule
             {
                 Name = "Third Employee",
                 DateIn = new DateTime(2020, 05, 01),
@@ -58,52 +54,63 @@ namespace _01_LINQ_project
 
             #region AddingDayOfWeekElements
 
-            _daysOfWork.Add(new DaysOfWork
+            daysOfWork.Add(new DaysOfWork
             {
-                Schedule = _schedules[0],
+                Schedule = schedules[0],
                 Day = DayOfWeek.Monday
             });
 
-            _daysOfWork.Add(new DaysOfWork
+            daysOfWork.Add(new DaysOfWork
             {
-                Schedule = _schedules[1],
+                Schedule = schedules[1],
                 Day = DayOfWeek.Thursday
             });
 
-            _daysOfWork.Add(new DaysOfWork
+            daysOfWork.Add(new DaysOfWork
             {
-                Schedule = _schedules[2],
+                Schedule = schedules[2],
                 Day = DayOfWeek.Wednesday
             });
 
             #endregion
 
+            var emloyeeDays =
+                             (from d in daysOfWork
+                              where d.Schedule.Name == employeeName
+                              select d).ToList();
 
+            //Синтаксис методов
+            var range =
+                         emloyeeDays
+                        .Select(e => Enumerable.Range(0, 1 + e.Schedule.DateOut.Subtract(e.Schedule.DateIn).Days)
+                        .Select(offset => e.Schedule.DateIn.AddDays(offset)).Where(date => date.DayOfWeek == e.Day)
+                        .ToArray());
 
-            DateTime dateTime1 = new DateTime(2020, 04, 07);
-            DateTime dateTime2 = new DateTime(2020, 05, 07);
+            //Синтаксис запросов
+            var range1 =
+                        from e in emloyeeDays
+                        select new
+                        {
+                            Dates = Enumerable.Range(0, 1 + e.Schedule.DateOut.Subtract(e.Schedule.DateIn).Days).Select(offset => e.Schedule.DateIn.AddDays(offset)).ToArray()
+                        }.Dates.Where(date => date.DayOfWeek == e.Day);
 
-
-            var array = Enumerable.Range(0, 1 + dateTime2.Subtract(dateTime1).Days)
-              .Select(offset => dateTime1.AddDays(offset))
-            .ToArray();
-
-            //from d in _daysOfWork
-            //            where d.Schedule.Name == _employeeName
-            //            select (offset =>
-            //            {
-            //                Enumerable.Range(0, 1 + d.Schedule.DateOut.Subtract(d.Schedule.DateIn).Days)
-            //                 .Select(offset => d.Schedule.DateIn.AddDays(offset));
-            //             });
-                        
-                        
-
-
-            foreach (var a in array)
+            foreach (var item in range1)
             {
-                Console.WriteLine(a.ToShortDateString());
+                foreach (var i in item)
+                {
+                    Console.WriteLine(i.ToShortDateString());
+                }
             }
+            Console.WriteLine();
 
+            foreach (var item in range)
+            {
+                foreach(var i in item)
+                {
+                    Console.WriteLine(i.ToShortDateString());
+                }
+            }
+            Console.WriteLine();
         }
     }
 }
