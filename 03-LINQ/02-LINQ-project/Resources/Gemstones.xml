@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<gemstones>
+	<gemstone>
+		<name>Amber</name>	
+		<color>Orange</color>
+		<opacity>1</opacity>
+		<type>Semiprecious</type>
+		<description>Amber is fossilized tree resin, which has been appreciated for its color and natural beauty since Neolithic times. Much valued from antiquity to the present as a gemstone, amber is made into a variety of decorative objects. Amber is used in jewelry. It has also been used as a healing agent in folk medicine.</description>
+	</gemstone>
+	<gemstone>
+		<name>Amethyst</name>
+		<color>Purple</color>
+		<opacity>1</opacity>
+		<type>Precious</type>
+		<description>Amethyst is a violet variety of quartz. The name comes from the Koine Greek ἀμέθυστος amethystos from ἀ- a-, "not" and μεθύσκω methysko / μεθύω methyo, "intoxicate", a reference to the belief that the stone protected its owner from drunkenness. The ancient Greeks wore amethyst and carved drinking vessels from it in the belief that it would prevent intoxication.</description>
+	</gemstone>
+	<gemstone>
+		<name>Ametrine</name>
+		<color>Purple</color>
+		<opacity>1</opacity>
+		<type>Precious</type>
+		<description>Ametrine, also known as trystine or by its trade name as bolivianite, is a naturally occurring variety of quartz. It is a mixture of amethyst and citrine with zones of purple and yellow or orange. Almost all commercially available ametrine is mined in Bolivia.</description>
+	</gemstone>
+	<gemstone>
+		<name>Cetrine</name>
+		<color>Orange</color>
+		<opacity>1</opacity>
+		<type>Precious</type>
+		<description>Citrine is defined as “a pale yellow quartz resembling topaz.” Amethyst and citrine are both varieties of quartz, one of the most common minerals in the Earth's crust. The natural abundance and infinite variety of quartz have made it the most widely used of all gem minerals.</description>
+	</gemstone>
+	<gemstone>
+		<name>Garnet</name>
+		<color>Red</color>
+		<opacity>1</opacity>
+		<type>Precious</type>
+		<description>Garnets ( /ˈɡɑːrnɪt/) are a group of silicate minerals that have been used since the Bronze Age as gemstones and abrasives. All species of garnets possess similar physical properties and crystal forms, but differ in chemical composition. The different species are pyrope, almandine, spessartine, grossular (varieties of which are hessonite or cinnamon-stone and tsavorite), uvarovite and andradite. The garnets make up two solid solution series: pyrope-almandine-spessartine and uvarovite-grossular-andradite.</description>
+	</gemstone>
+</gemstones>

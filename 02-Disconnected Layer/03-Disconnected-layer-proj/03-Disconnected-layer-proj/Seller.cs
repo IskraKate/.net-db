@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace _03_Disconnected_layer_proj
+﻿namespace _03_Disconnected_layer_proj
 {
     public class Seller
     {
