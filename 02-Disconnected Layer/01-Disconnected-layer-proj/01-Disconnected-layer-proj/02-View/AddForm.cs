@@ -41,7 +41,7 @@ namespace _01_Disconnected_layer_proj
                         TelephoneNumber = long.Parse(textBoxNumber.Text),
                         IsAdmin = checkBoxAdmin.Checked
                     };
-
+                    this.Close();
                     AddUser(user);
                 }
                 else
@@ -53,11 +53,7 @@ namespace _01_Disconnected_layer_proj
             {
                 MessageBox.Show("Please fill all of fields");
             }
-        }
-
-        private void exitButton_Click(object sender, EventArgs e)
-        {
-            this.Close();
+       
         }
     }
 }

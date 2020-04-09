@@ -46,33 +46,38 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AddForm.cs">
+    <Compile Include="01-Model\IModel.cs" />
+    <Compile Include="01-Model\Model.cs" />
+    <Compile Include="02-View\IView.cs" />
+    <Compile Include="03-Presenter\Presenter.cs" />
+    <Compile Include="02-View\AddForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AddForm.Designer.cs">
+    <Compile Include="02-View\AddForm.Designer.cs">
       <DependentUpon>AddForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="FullUserInfoForm.cs">
+    <Compile Include="02-View\FullUserInfoForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FullUserInfoForm.Designer.cs">
+    <Compile Include="02-View\FullUserInfoForm.Designer.cs">
       <DependentUpon>FullUserInfoForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="UsersListForm.cs">
+    <Compile Include="User.cs" />
+    <Compile Include="02-View\UsersListForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UsersListForm.Designer.cs">
+    <Compile Include="02-View\UsersListForm.Designer.cs">
       <DependentUpon>UsersListForm.cs</DependentUpon>
     </Compile>
     <Compile Include="UsersList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="AddForm.resx">
+    <EmbeddedResource Include="02-View\AddForm.resx">
       <DependentUpon>AddForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FullUserInfoForm.resx">
+    <EmbeddedResource Include="02-View\FullUserInfoForm.resx">
       <DependentUpon>FullUserInfoForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UsersListForm.resx">
+    <EmbeddedResource Include="02-View\UsersListForm.resx">
       <DependentUpon>UsersListForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">

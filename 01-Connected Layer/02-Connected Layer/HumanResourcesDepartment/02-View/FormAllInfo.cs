@@ -1,42 +1,46 @@
-﻿using System;
+﻿using HumanResourcesDepartment.ModelNamespace;
+using System;
 using System.Drawing;
+using System.IO;
 using System.Windows.Forms;
 
 namespace HumanResourcesDepartment
 {
     public partial class FormAllInfo : Form
     {
-        private delegate void PersonEdittedHandler(FormNameList.PersonInfo personInfoEddited);
-        private event PersonEdittedHandler PersonEddited;
-        private FormNameList.PersonInfo _personInfo;
+        private delegate void PersonEdittedHandler(PersonInfo personInfoEddited);
+        private event PersonEdittedHandler PersonEdited;
+        private PersonInfo _personInfo;
+
         public FormAllInfo()
         {
             InitializeComponent();
         }
 
-        public FormAllInfo(FormNameList formNameList)
+        public FormAllInfo(FormNameList formNameList, PersonInfo personInfo)
         {
             InitializeComponent();
-            PersonEddited += formNameList.personInfoEddited_FormAllInfo;
+            _personInfo = personInfo;
+            PersonAllInfoShow();
+            PersonEdited += formNameList.personInfoEddited_FormAllInfo;
             personName.HideSelection = true;
         }
 
-        public void PersonAllInfoShow(FormNameList.PersonInfo personInfo)
+        private void PersonAllInfoShow()
         {
-            _personInfo = personInfo;
-            personName.Text = personInfo.FirstName;
-            personSurname.Text = personInfo.LastName;
-            personPatronymic.Text = personInfo.Patronymic;
-            personContractNumber.Text = personInfo.ContractNumber.ToString();
-            personDismissalNumber.Text = personInfo.ContractNumber.ToString();
-            birthadyDateTimePicker.Value = personInfo.Birthday;
+            personName.Text = _personInfo.FirstName;
+            personSurname.Text = _personInfo.LastName;
+            personPatronymic.Text = _personInfo.Patronymic;
+            personContractNumber.Text = _personInfo.ContractNumber.ToString();
+            personDismissalNumber.Text = _personInfo.ContractNumber.ToString();
+            birthadyDateTimePicker.Value = _personInfo.Birthday;
             birthadyDateTimePicker.Format = DateTimePickerFormat.Custom;
 
-            if (personInfo.PhotoPath != "")
+            if (!string.IsNullOrEmpty(_personInfo.PhotoPath))
             {
-                personPhoto.Image = new Bitmap(personInfo.PhotoPath);
+                if(File.Exists(_personInfo.PhotoPath))
+                personPhoto.Image = new Bitmap(_personInfo.PhotoPath);
             }
-
         }
 
         private void FormAllInfo_Load(object sender, EventArgs e)
@@ -64,7 +68,7 @@ namespace HumanResourcesDepartment
         private void buttonEddited_Click(object sender, EventArgs e)
         {
             DialogResult dlgRslt = MessageBox.Show("Do you really want to edit the item?", "Question", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
-            if(dlgRslt == DialogResult.OK)
+            if (dlgRslt == DialogResult.OK)
             {
                 buttonEdit.Enabled = true;
                 buttonEddited.Enabled = false;
@@ -74,7 +78,8 @@ namespace HumanResourcesDepartment
                 _personInfo.ContractNumber = int.Parse(personContractNumber.Text);
                 _personInfo.DismissalNumber = int.Parse(personContractNumber.Text);
                 _personInfo.Birthday = birthadyDateTimePicker.Value;
-                PersonEddited(_personInfo);
+                PersonEdited(_personInfo);
+                this.Close();
             }
         }
     }

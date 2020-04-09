@@ -55,11 +55,6 @@ namespace _01_Disconnected_layer_proj
             this.Close();
         }
 
-        private void FullUserInfoForm_Load(object sender, EventArgs e)
-        {
-
-        }
-
         private void buttonDelete_Click(object sender, EventArgs e)
         {
             DialogResult result = MessageBox.Show("Are You sure You want to delete this user?", "Deleting user", MessageBoxButtons.YesNo);

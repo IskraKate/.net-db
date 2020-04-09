@@ -1,13 +1,10 @@
-﻿using System;
-using System.Windows.Forms;
-using Sales;
+﻿using System.Windows.Forms;
 
 namespace Sales.View
 {
     interface IView
     {
         event FormClosedEventHandler FormClosed;
-        ListView GetListView { get; }
         ListViewItem GetListViewItem { get; }
         void NewListViewItem();
     }

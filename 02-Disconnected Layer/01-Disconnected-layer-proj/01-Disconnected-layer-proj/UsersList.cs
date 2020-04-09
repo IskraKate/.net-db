@@ -1,4 +1,6 @@
-﻿using System;
+﻿using _01_Disconnected_layer_proj._01_Model;
+using _01_Disconnected_layer_proj._03_Presenter;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,7 +18,10 @@ namespace _01_Disconnected_layer_proj
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Users());
+            Users userListForm = new Users();
+            Model model = new Model();
+            Presenter presenter = new Presenter(model, userListForm);
+            Application.Run(userListForm);
         }
     }
 }

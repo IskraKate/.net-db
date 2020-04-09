@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using HumanResourcesDepartment.ModelNamespace;
+using HumanResourcesDepartment.PresenterNamespace;
+using System;
 using System.Windows.Forms;
 
 namespace HumanResourcesDepartment
@@ -16,7 +15,10 @@ namespace HumanResourcesDepartment
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FormNameList());
+            var model = new Model();
+            var formNameList = new FormNameList();
+            var presenter = new Presenter(formNameList, model);
+            Application.Run(formNameList);
         }
     }
 }

@@ -46,34 +46,39 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AddPerson.cs">
+    <Compile Include="01-Model\IModel.cs" />
+    <Compile Include="01-Model\Model.cs" />
+    <Compile Include="01-Model\PersonInfo.cs" />
+    <Compile Include="03-Presenter\Presenter.cs" />
+    <Compile Include="02-View\AddPerson.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AddPerson.Designer.cs">
+    <Compile Include="02-View\AddPerson.Designer.cs">
       <DependentUpon>AddPerson.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormNameList.cs">
+    <Compile Include="02-View\FormNameList.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormNameList.Designer.cs">
+    <Compile Include="02-View\FormNameList.Designer.cs">
       <DependentUpon>FormNameList.cs</DependentUpon>
     </Compile>
-    <Compile Include="FromAllInfo.cs">
+    <Compile Include="02-View\FormAllInfo.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FromAllInfo.Designer.cs">
-      <DependentUpon>FromAllInfo.cs</DependentUpon>
+    <Compile Include="02-View\FormAllInfo.Designer.cs">
+      <DependentUpon>FormAllInfo.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="AddPerson.resx">
+    <Compile Include="02-View\IView.cs" />
+    <EmbeddedResource Include="02-View\AddPerson.resx">
       <DependentUpon>AddPerson.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormNameList.resx">
+    <EmbeddedResource Include="02-View\FormNameList.resx">
       <DependentUpon>FormNameList.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FromAllInfo.resx">
-      <DependentUpon>FromAllInfo.cs</DependentUpon>
+    <EmbeddedResource Include="02-View\FormAllInfo.resx">
+      <DependentUpon>FormAllInfo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -97,5 +102,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

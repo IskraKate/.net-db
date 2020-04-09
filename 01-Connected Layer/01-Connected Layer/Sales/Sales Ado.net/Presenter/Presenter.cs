@@ -1,13 +1,10 @@
 ﻿using System.Collections.Generic;
 using Sales.Model;
 using Sales.View;
-
 namespace Sales.PresenterNamespace
 {
     class Presenter
     {
-        //public delegate void ClosedHandler(string message);
-        //public event ClosedHandler FormClosed;
         private ConnectionWithDb _connectionWithDb;
         private List<Row> _rows = new List<Row>();
         private IView _view;

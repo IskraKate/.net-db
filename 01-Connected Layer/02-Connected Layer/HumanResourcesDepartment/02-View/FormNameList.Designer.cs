@@ -65,6 +65,7 @@
             this.listViewNames.Location = new System.Drawing.Point(12, 91);
             this.listViewNames.MultiSelect = false;
             this.listViewNames.Name = "listViewNames";
+            this.listViewNames.Scrollable = false;
             this.listViewNames.Size = new System.Drawing.Size(767, 495);
             this.listViewNames.TabIndex = 7;
             this.listViewNames.UseCompatibleStateImageBehavior = false;
@@ -90,8 +91,6 @@
             this.MaximizeBox = false;
             this.Name = "FormNameList";
             this.Text = "HumanResources";
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FormNameList_FormClosed);
-            this.Load += new System.EventHandler(this.mainForm_Load);
             this.ResumeLayout(false);
 
         }

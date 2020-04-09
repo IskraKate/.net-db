@@ -192,7 +192,6 @@
             this.Name = "FullUserInfoForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "User Info";
-            this.Load += new System.EventHandler(this.FullUserInfoForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -30,23 +30,30 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AddForm));
             this.addButton = new System.Windows.Forms.Button();
-            this.exitButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // textBoxNumber
             // 
+            this.textBoxNumber.Location = new System.Drawing.Point(8, 210);
+            this.textBoxNumber.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.textBoxNumber.ReadOnly = false;
             // 
             // textBoxLogin
             // 
+            this.textBoxLogin.Location = new System.Drawing.Point(8, 39);
+            this.textBoxLogin.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.textBoxLogin.ReadOnly = false;
             // 
             // textBoxAddress
             // 
+            this.textBoxAddress.Location = new System.Drawing.Point(8, 154);
+            this.textBoxAddress.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.textBoxAddress.ReadOnly = false;
             // 
             // textBoxPassword
             // 
+            this.textBoxPassword.Location = new System.Drawing.Point(8, 97);
+            this.textBoxPassword.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.textBoxPassword.ReadOnly = false;
             // 
             // checkBoxAdmin
@@ -55,34 +62,23 @@
             // 
             // addButton
             // 
-            this.addButton.Location = new System.Drawing.Point(136, 227);
-            this.addButton.Margin = new System.Windows.Forms.Padding(2);
+            this.addButton.Location = new System.Drawing.Point(255, 281);
+            this.addButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.addButton.Name = "addButton";
-            this.addButton.Size = new System.Drawing.Size(56, 24);
+            this.addButton.Size = new System.Drawing.Size(75, 30);
             this.addButton.TabIndex = 12;
             this.addButton.Text = "Add";
             this.addButton.UseVisualStyleBackColor = true;
             this.addButton.Click += new System.EventHandler(this.addButton_Click);
             // 
-            // exitButton
-            // 
-            this.exitButton.Location = new System.Drawing.Point(240, 227);
-            this.exitButton.Margin = new System.Windows.Forms.Padding(2);
-            this.exitButton.Name = "exitButton";
-            this.exitButton.Size = new System.Drawing.Size(56, 24);
-            this.exitButton.TabIndex = 13;
-            this.exitButton.Text = "Exit";
-            this.exitButton.UseVisualStyleBackColor = true;
-            this.exitButton.Click += new System.EventHandler(this.exitButton_Click);
-            // 
             // AddForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(453, 262);
-            this.Controls.Add(this.exitButton);
+            this.ClientSize = new System.Drawing.Size(604, 322);
             this.Controls.Add(this.addButton);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.Name = "AddForm";
             this.Text = "Add User";
             this.Controls.SetChildIndex(this.textBoxLogin, 0);
@@ -98,7 +94,6 @@
             this.Controls.SetChildIndex(this.buttonDelete, 0);
             this.Controls.SetChildIndex(this.checkBoxAdmin, 0);
             this.Controls.SetChildIndex(this.addButton, 0);
-            this.Controls.SetChildIndex(this.exitButton, 0);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -107,6 +102,5 @@
         #endregion
 
         protected System.Windows.Forms.Button addButton;
-        protected System.Windows.Forms.Button exitButton;
     }
 }
