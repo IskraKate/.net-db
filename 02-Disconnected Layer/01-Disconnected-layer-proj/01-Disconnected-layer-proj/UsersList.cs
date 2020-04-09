@@ -17,7 +17,7 @@ namespace _01_Disconnected_layer_proj
             Application.SetCompatibleTextRenderingDefault(false);
             Users userListForm = new Users();
             Model model = new Model();
-            Presenter presenter = new Presenter(model, userListForm);
+            UserListFormPresenter userListFormPresenter = new UserListFormPresenter(userListForm, model);
             Application.Run(userListForm);
         }
     }

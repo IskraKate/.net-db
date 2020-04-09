@@ -1,5 +1,7 @@
-﻿using System.Data;
+﻿using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
+using System.Linq;
 
 namespace _01_Disconnected_layer_proj._01_Model
 {
@@ -34,6 +36,28 @@ namespace _01_Disconnected_layer_proj._01_Model
             get { return _sqlDataAdapter; }
         }
 
+        public List<User> FillList(List<User> userList)
+        {
+            if(userList.Count>0)
+            userList.Clear();
+
+            _myUsersDataSet.Clear();
+            _sqlDataAdapter.Fill(_myUsersDataSet);
+
+            userList = _myUsersDataSet.Tables[0].AsEnumerable().Select(dataRow =>
+            new User
+            {
+                Id = dataRow.Field<long>("Id"),
+                Login = dataRow.Field<string>("Login"),
+                Password = dataRow.Field<string>("Password"),
+                Address = dataRow.Field<string>("Address"),
+                TelephoneNumber = dataRow.Field<long>("TelephoneNumber"),
+                IsAdmin = dataRow.Field<bool>("Admin")
+
+            }).ToList();
+
+            return userList;
+        }
 
         public void SelectCommand()
         {

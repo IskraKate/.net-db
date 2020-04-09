@@ -15,8 +15,8 @@ namespace _01_Disconnected_layer_proj
         {
             InitializeComponent();
 
-            CheckUnique += usersList.CheckUnique;
-            AddUser += usersList.AddUser;
+            //CheckUnique += usersList.CheckUnique;
+            //AddUser += usersList.AddUser;
         }
 
 

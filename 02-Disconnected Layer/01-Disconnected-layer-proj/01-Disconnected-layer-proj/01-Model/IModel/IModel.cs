@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 
 namespace _01_Disconnected_layer_proj._01_Model
@@ -7,5 +8,6 @@ namespace _01_Disconnected_layer_proj._01_Model
     {
        DataSet MyUsersDataSet { get; }
        SqlDataAdapter SqlDataAdapter { get; }
+       List<User> FillList(List<User> userList);
     }
 }

@@ -22,8 +22,8 @@ namespace _01_Disconnected_layer_proj
         {
             InitializeComponent();
 
-            DeleteUser += usersList.DeleteUser;
-            EditUser += usersList.EditUser;
+            //DeleteUser += usersList.DeleteUser;
+            //EditUser += usersList.EditUser;
 
             _userInfo = user;
             textBoxLogin.Text = _userInfo.Login;

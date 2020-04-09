@@ -57,10 +57,12 @@ CREATE PROCEDURE EditPerson
     @Patronymic NVARCHAR(100),
 	@Birthday Date,
 	@ContractNumber bigint,
-	@DismissalNumber bigint
+	@DismissalNumber bigint,
+	@PhotoPath NVARCHAR(1000)
 AS
 UPDATE Persons 
-SET FirstName = @FirstName, LastName = @LastName, Patronymic = @Patronymic, Birthday = @Birthday, ContractNumber = @ContractNumber, DismissalNumber = @DismissalNumber 
+SET FirstName = @FirstName, LastName = @LastName, Patronymic = @Patronymic, Birthday = @Birthday,
+ContractNumber = @ContractNumber, DismissalNumber = @DismissalNumber, PhotoPath = @PhotoPath
 WHERE Id = @Id
 GO
 
