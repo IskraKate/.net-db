@@ -45,17 +45,20 @@ namespace HumanResourcesDepartment
             FillListView();
         }
 
-        private void listViewNames_MouseDoubleClick(object sender, MouseEventArgs e)
+        private void listViewNames_MouseDoubleClick(object sender, EventArgs e)
         {
             if (listViewNames.SelectedItems.Count > 0)
             {
                 var formAllInfo = new FormAllInfo(this, PersonInfo, listViewNames.SelectedIndices[0]);
+                var editPersonPresenter = new EditPersonPresenter(formAllInfo, Model.GetModel());
+
                 formAllInfo.ShowDialog();
             }
 
             ViewEvent?.Invoke(this, EventArgs.Empty);
 
             FillListView();
+
         }
 
         private void deleteButton_Click(object sender, EventArgs e)

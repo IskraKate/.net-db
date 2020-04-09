@@ -44,6 +44,7 @@
             this.birthdayLabel = new System.Windows.Forms.Label();
             this.buttonEdit = new System.Windows.Forms.Button();
             this.buttonEddited = new System.Windows.Forms.Button();
+            this.buttonDownloadPhoto = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.personPhoto)).BeginInit();
             this.SuspendLayout();
             // 
@@ -194,11 +195,24 @@
             this.buttonEddited.UseVisualStyleBackColor = true;
             this.buttonEddited.Click += new System.EventHandler(this.buttonEddited_Click);
             // 
+            // buttonDownloadPhoto
+            // 
+            this.buttonDownloadPhoto.Enabled = false;
+            this.buttonDownloadPhoto.Location = new System.Drawing.Point(34, 425);
+            this.buttonDownloadPhoto.Name = "buttonDownloadPhoto";
+            this.buttonDownloadPhoto.Size = new System.Drawing.Size(328, 28);
+            this.buttonDownloadPhoto.TabIndex = 15;
+            this.buttonDownloadPhoto.Text = "Download";
+            this.buttonDownloadPhoto.UseVisualStyleBackColor = true;
+            this.buttonDownloadPhoto.Visible = false;
+            this.buttonDownloadPhoto.Click += new System.EventHandler(this.downloadPhoto_Click);
+            // 
             // FormAllInfo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 486);
+            this.Controls.Add(this.buttonDownloadPhoto);
             this.Controls.Add(this.buttonEddited);
             this.Controls.Add(this.buttonEdit);
             this.Controls.Add(this.birthdayLabel);
@@ -215,6 +229,7 @@
             this.Controls.Add(this.personPhoto);
             this.Controls.Add(this.personName);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "FormAllInfo";
             this.Text = "All Info";
             this.Load += new System.EventHandler(this.FormAllInfo_Load);
@@ -240,5 +255,6 @@
         protected System.Windows.Forms.DateTimePicker birthadyDateTimePicker;
         protected System.Windows.Forms.Button buttonEddited;
         protected System.Windows.Forms.Button buttonEdit;
+        private System.Windows.Forms.Button buttonDownloadPhoto;
     }
 }

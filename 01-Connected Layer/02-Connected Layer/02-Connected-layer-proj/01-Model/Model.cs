@@ -112,6 +112,12 @@ namespace HumanResourcesDepartment.ModelNamespace
                     command.Parameters.Add(new SqlParameter("@Birthday", personInfoEdited.Birthday));
                     command.Parameters.Add(new SqlParameter("@ContractNumber", personInfoEdited.ContractNumber));
                     command.Parameters.Add(new SqlParameter("@DismissalNumber", personInfoEdited.DismissalNumber));
+
+                    if(!String.IsNullOrEmpty(personInfoEdited.PhotoPath))
+                    {
+                        command.Parameters.Add(new SqlParameter("@PhotoPath", personInfoEdited.PhotoPath));
+                    }
+
                     command.ExecuteNonQuery();
                 }
             }

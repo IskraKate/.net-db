@@ -11,7 +11,6 @@ namespace Sales
 
         public event EventHandler ViewEvent;
 
-
         public MainForm()
         {
             InitializeComponent();

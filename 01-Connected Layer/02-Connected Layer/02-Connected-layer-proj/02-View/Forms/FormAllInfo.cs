@@ -13,6 +13,8 @@ namespace HumanResourcesDepartment
         public event EventHandler ViewEvent;
 
         private int _index;
+        private string _path = "";
+
         public List<PersonInfo> PersonInfo { get; set; }
 
         public PersonInfo CurrentPerson { get { return PersonInfo[_index]; } }
@@ -41,6 +43,11 @@ namespace HumanResourcesDepartment
             personDismissalNumber.Text = PersonInfo[_index].DismissalNumber.ToString();
             birthadyDateTimePicker.Value = PersonInfo[_index].Birthday;
 
+            if(!String.IsNullOrEmpty(PersonInfo[_index].PhotoPath) && File.Exists(PersonInfo[_index].PhotoPath))
+            {
+                personPhoto.Image = new Bitmap(PersonInfo[_index].PhotoPath);
+            }
+
             birthadyDateTimePicker.Format = DateTimePickerFormat.Custom;
 
             if (!string.IsNullOrEmpty(PersonInfo[_index].PhotoPath))
@@ -62,9 +69,39 @@ namespace HumanResourcesDepartment
             personContractNumber.ReadOnly = false;
             personDismissalNumber.ReadOnly = false;
 
+
             birthadyDateTimePicker.Enabled = true;
+
             buttonEddited.Enabled = true;
+
             buttonEdit.Enabled = false;
+
+            buttonDownloadPhoto.Enabled = true;
+            buttonDownloadPhoto.Visible = true;
+        }
+
+        private void downloadPhoto_Click(object sender, EventArgs e)
+        {
+            var ofd = new OpenFileDialog();
+            ofd.Filter = "Image Files(*.BMP, *.JPEG, *JPG, *.PNG, *.GIF)|*.BMP; *.JPEG; *JPG; *.PNG; *.GIF|All files (*.*)|*.*";
+
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    personPhoto.Image = new Bitmap(ofd.FileName);
+                }
+                catch
+                {
+                    MessageBox.Show("Cannot open the file", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+
+            if (personPhoto.Image != null)
+            {
+                _path = PersonInfo[_index].FirstName + PersonInfo[_index].LastName + ".jpg";
+                personPhoto.Image.Save(_path, System.Drawing.Imaging.ImageFormat.Jpeg);
+            }
         }
 
         private void TextBox_KeyPress(object sender, KeyPressEventArgs e)
@@ -87,8 +124,10 @@ namespace HumanResourcesDepartment
                 PersonInfo[_index].ContractNumber = int.Parse(personContractNumber.Text);
                 PersonInfo[_index].DismissalNumber = int.Parse(personContractNumber.Text);
                 PersonInfo[_index].Birthday = birthadyDateTimePicker.Value;
+                PersonInfo[_index].PhotoPath = _path;
 
-                ViewEvent?.Invoke(this, EventArgs.Empty);
+                //ViewEvent?.Invoke(this, EventArgs.Empty);
+                ViewEvent(this, EventArgs.Empty);
 
                 this.Close();
             }

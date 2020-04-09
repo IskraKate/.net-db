@@ -7,13 +7,13 @@ using System.Windows.Forms;
 
 namespace HumanResourcesDepartment
 {
-    public partial class FormAddPerson : FormAllInfo
+    public partial class FormAddPerson : FormAllInfo, IView
     {
-        public event EventHandler ViewEvent;
+        public new event EventHandler ViewEvent;
    
-        string path;
+        private string _path;
 
-        public List<PersonInfo> PersonInfo { get; set; }
+        public new  List<PersonInfo> PersonInfo { get; set; }
 
         public FormAddPerson()
         {
@@ -71,10 +71,10 @@ namespace HumanResourcesDepartment
         {
             try
             {
-                path = @"PersonPhotos\" + personName.Text + personSurname.Text + personPatronymic.Text + ".jpeg";
+                _path = personName.Text + personSurname.Text + personPatronymic.Text + ".jpeg";
 
                 if (personPhoto.Image != null)
-                    personPhoto.Image.Save(path, System.Drawing.Imaging.ImageFormat.Jpeg);
+                    personPhoto.Image.Save(_path, System.Drawing.Imaging.ImageFormat.Jpeg);
 
                 PersonInfo.Add(new PersonInfo
                 {
@@ -89,8 +89,9 @@ namespace HumanResourcesDepartment
                 ViewEvent(this, EventArgs.Empty);
                 this.Close();
             }
-            catch
+            catch(Exception ex)
             {
+                MessageBox.Show(ex.Message);
                 this.Close();
             }
         }
