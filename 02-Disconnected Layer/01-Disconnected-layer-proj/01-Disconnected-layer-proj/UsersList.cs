@@ -1,9 +1,6 @@
 ﻿using _01_Disconnected_layer_proj._01_Model;
 using _01_Disconnected_layer_proj._03_Presenter;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace _01_Disconnected_layer_proj

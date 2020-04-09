@@ -1,6 +1,6 @@
 ﻿namespace HumanResourcesDepartment
 {
-    partial class AddPerson
+    partial class FormAddPerson
     {
         /// <summary>
         /// Required designer variable.

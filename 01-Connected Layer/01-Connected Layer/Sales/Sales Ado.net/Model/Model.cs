@@ -1,18 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Data.SqlClient;
 
-namespace Sales.Model
+namespace Sales.ModelNamespace
 {
-    class ConnectionWithDb
+    class Model: IDisposable, IModel
     {
         private SqlConnection _connection = new SqlConnection();
         private SqlConnectionStringBuilder _builder = new SqlConnectionStringBuilder();
         private string _sqlString;
-        public bool IsConnected { get; set; }
 
-        public ConnectionWithDb()
+        public Model()
         {
             _sqlString =
                             "SELECT Buyers.FirstName AS BFirstName, Buyers.LastName AS BLastName, Salers.FirstName AS SFirstName, Salers.LastName AS SLastName, Sales.MoneySum, Sales.[Date] " +
@@ -39,7 +37,6 @@ namespace Sales.Model
             catch (SqlException ex)
             {
                 Console.WriteLine(ex.Message);
-                IsConnected = false;
             }
         }
 
@@ -59,8 +56,8 @@ namespace Sales.Model
                             BLastName = ((string)reader["BLastname"]),
                             SFirstName = ((string)reader["SFirstname"]),
                             SLastName = ((string)reader["SLastname"]),
-                            MoneySum = (((int)reader["MoneySum"]).ToString()),
-                            Date  = (((DateTime)reader["Date"]).ToShortDateString())
+                            MoneySum = (int)reader["MoneySum"],
+                            Date  = (DateTime)reader["Date"]
                         });
                     }
                 }
@@ -73,13 +70,9 @@ namespace Sales.Model
             }
         }
 
-        public void CloseConnection()
+        public void Dispose()
         {
-            if (_connection.State == ConnectionState.Open)
-            {
-                _connection.Close();
-                IsConnected = false;
-            }
+            _connection.Close();
         }
     }
 }

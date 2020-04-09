@@ -46,38 +46,38 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="01-Model\IModel.cs" />
+    <Compile Include="01-Model\IModel\IModel.cs" />
     <Compile Include="01-Model\Model.cs" />
-    <Compile Include="02-View\IView.cs" />
     <Compile Include="03-Presenter\Presenter.cs" />
-    <Compile Include="02-View\AddForm.cs">
+    <Compile Include="02-View\Forms\AddForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="02-View\AddForm.Designer.cs">
+    <Compile Include="02-View\Forms\AddForm.Designer.cs">
       <DependentUpon>AddForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="02-View\FullUserInfoForm.cs">
+    <Compile Include="02-View\Forms\FullUserInfoForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="02-View\FullUserInfoForm.Designer.cs">
+    <Compile Include="02-View\Forms\FullUserInfoForm.Designer.cs">
       <DependentUpon>FullUserInfoForm.cs</DependentUpon>
     </Compile>
     <Compile Include="User.cs" />
-    <Compile Include="02-View\UsersListForm.cs">
+    <Compile Include="02-View\Forms\UsersListForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="02-View\UsersListForm.Designer.cs">
+    <Compile Include="02-View\Forms\UsersListForm.Designer.cs">
       <DependentUpon>UsersListForm.cs</DependentUpon>
     </Compile>
     <Compile Include="UsersList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="02-View\AddForm.resx">
+    <Compile Include="02-View\IView\IView.cs" />
+    <EmbeddedResource Include="02-View\Forms\AddForm.resx">
       <DependentUpon>AddForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="02-View\FullUserInfoForm.resx">
+    <EmbeddedResource Include="02-View\Forms\FullUserInfoForm.resx">
       <DependentUpon>FullUserInfoForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="02-View\UsersListForm.resx">
+    <EmbeddedResource Include="02-View\Forms\UsersListForm.resx">
       <DependentUpon>UsersListForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -102,5 +102,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,11 +1,13 @@
-﻿using System.Windows.Forms;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Sales.View
 {
     interface IView
     {
-        event FormClosedEventHandler FormClosed;
-        ListViewItem GetListViewItem { get; }
-        void NewListViewItem();
+        List<Row> Rows { get; set; }
+
+        event EventHandler ViewEvent;
+
     }
 }

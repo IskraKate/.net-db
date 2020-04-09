@@ -48,36 +48,40 @@
   <ItemGroup>
     <Compile Include="01-Model\IModel.cs" />
     <Compile Include="01-Model\Model.cs" />
-    <Compile Include="01-Model\PersonInfo.cs" />
-    <Compile Include="03-Presenter\Presenter.cs" />
-    <Compile Include="02-View\AddPerson.cs">
+    <Compile Include="02-View\Interfaces\IDispose.cs" />
+    <Compile Include="PersonInfo.cs" />
+    <Compile Include="02-View\Interfaces\IDelete.cs" />
+    <Compile Include="03-Presenter\AddPersonPresenter.cs" />
+    <Compile Include="03-Presenter\EditPersonPresenter.cs" />
+    <Compile Include="03-Presenter\NameListPresenter.cs" />
+    <Compile Include="02-View\Forms\FormAddPerson.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="02-View\AddPerson.Designer.cs">
-      <DependentUpon>AddPerson.cs</DependentUpon>
+    <Compile Include="02-View\Forms\FormAddPerson.Designer.cs">
+      <DependentUpon>FormAddPerson.cs</DependentUpon>
     </Compile>
-    <Compile Include="02-View\FormNameList.cs">
+    <Compile Include="02-View\Forms\FormNameList.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="02-View\FormNameList.Designer.cs">
+    <Compile Include="02-View\Forms\FormNameList.Designer.cs">
       <DependentUpon>FormNameList.cs</DependentUpon>
     </Compile>
-    <Compile Include="02-View\FormAllInfo.cs">
+    <Compile Include="02-View\Forms\FormAllInfo.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="02-View\FormAllInfo.Designer.cs">
+    <Compile Include="02-View\Forms\FormAllInfo.Designer.cs">
       <DependentUpon>FormAllInfo.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="02-View\IView.cs" />
-    <EmbeddedResource Include="02-View\AddPerson.resx">
-      <DependentUpon>AddPerson.cs</DependentUpon>
+    <Compile Include="02-View\Interfaces\IView.cs" />
+    <EmbeddedResource Include="02-View\Forms\FormAddPerson.resx">
+      <DependentUpon>FormAddPerson.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="02-View\FormNameList.resx">
+    <EmbeddedResource Include="02-View\Forms\FormNameList.resx">
       <DependentUpon>FormNameList.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="02-View\FormAllInfo.resx">
+    <EmbeddedResource Include="02-View\Forms\FormAllInfo.resx">
       <DependentUpon>FormAllInfo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">

@@ -1,5 +1,5 @@
-﻿using HumanResourcesDepartment.ModelNamespace;
-using HumanResourcesDepartment.PresenterNamespace;
+﻿using HumanResourcesDepartment._03_Presenter;
+using HumanResourcesDepartment.ModelNamespace;
 using System;
 using System.Windows.Forms;
 
@@ -13,12 +13,12 @@ namespace HumanResourcesDepartment
         [STAThread]
         static void Main()
         {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            var model = new Model();
-            var formNameList = new FormNameList();
-            var presenter = new Presenter(formNameList, model);
-            Application.Run(formNameList);
+            
+                Application.EnableVisualStyles();
+                Application.SetCompatibleTextRenderingDefault(false);
+                var formNameList = new FormNameList();
+                var nameListPresenter = new NameListPresenter(formNameList, Model.GetModel());
+                Application.Run(formNameList);
         }
     }
 }

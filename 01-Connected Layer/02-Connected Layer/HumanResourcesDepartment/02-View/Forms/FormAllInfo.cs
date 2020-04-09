@@ -1,45 +1,52 @@
 ﻿using HumanResourcesDepartment.ModelNamespace;
+using HumanResourcesDepartment.View;
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 
 namespace HumanResourcesDepartment
 {
-    public partial class FormAllInfo : Form
+    public partial class FormAllInfo : Form, IView
     {
-        private delegate void PersonEdittedHandler(PersonInfo personInfoEddited);
-        private event PersonEdittedHandler PersonEdited;
-        private PersonInfo _personInfo;
+        public event EventHandler ViewEvent;
+
+        private int _index;
+        public List<PersonInfo> PersonInfo { get; set; }
+
+        public PersonInfo CurrentPerson { get { return PersonInfo[_index]; } }
 
         public FormAllInfo()
         {
             InitializeComponent();
         }
 
-        public FormAllInfo(FormNameList formNameList, PersonInfo personInfo)
+        public FormAllInfo(FormNameList formNameList, List<PersonInfo> personInfo, int index)
         {
             InitializeComponent();
-            _personInfo = personInfo;
+            PersonInfo = personInfo;
+            _index = index;
             PersonAllInfoShow();
-            PersonEdited += formNameList.personInfoEddited_FormAllInfo;
+
             personName.HideSelection = true;
         }
 
         private void PersonAllInfoShow()
         {
-            personName.Text = _personInfo.FirstName;
-            personSurname.Text = _personInfo.LastName;
-            personPatronymic.Text = _personInfo.Patronymic;
-            personContractNumber.Text = _personInfo.ContractNumber.ToString();
-            personDismissalNumber.Text = _personInfo.ContractNumber.ToString();
-            birthadyDateTimePicker.Value = _personInfo.Birthday;
+            personName.Text = PersonInfo[_index].FirstName;
+            personSurname.Text = PersonInfo[_index].LastName;
+            personPatronymic.Text = PersonInfo[_index].Patronymic;
+            personContractNumber.Text = PersonInfo[_index].ContractNumber.ToString();
+            personDismissalNumber.Text = PersonInfo[_index].DismissalNumber.ToString();
+            birthadyDateTimePicker.Value = PersonInfo[_index].Birthday;
+
             birthadyDateTimePicker.Format = DateTimePickerFormat.Custom;
 
-            if (!string.IsNullOrEmpty(_personInfo.PhotoPath))
+            if (!string.IsNullOrEmpty(PersonInfo[_index].PhotoPath))
             {
-                if(File.Exists(_personInfo.PhotoPath))
-                personPhoto.Image = new Bitmap(_personInfo.PhotoPath);
+                if(File.Exists(PersonInfo[_index].PhotoPath))
+                personPhoto.Image = new Bitmap(PersonInfo[_index].PhotoPath);
             }
         }
 
@@ -54,6 +61,7 @@ namespace HumanResourcesDepartment
             personPatronymic.ReadOnly = false;
             personContractNumber.ReadOnly = false;
             personDismissalNumber.ReadOnly = false;
+
             birthadyDateTimePicker.Enabled = true;
             buttonEddited.Enabled = true;
             buttonEdit.Enabled = false;
@@ -72,13 +80,16 @@ namespace HumanResourcesDepartment
             {
                 buttonEdit.Enabled = true;
                 buttonEddited.Enabled = false;
-                _personInfo.FirstName = personName.Text;
-                _personInfo.LastName = personSurname.Text;
-                _personInfo.Patronymic = personPatronymic.Text;
-                _personInfo.ContractNumber = int.Parse(personContractNumber.Text);
-                _personInfo.DismissalNumber = int.Parse(personContractNumber.Text);
-                _personInfo.Birthday = birthadyDateTimePicker.Value;
-                PersonEdited(_personInfo);
+
+                PersonInfo[_index].FirstName = personName.Text;
+                PersonInfo[_index].LastName = personSurname.Text;
+                PersonInfo[_index].Patronymic = personPatronymic.Text;
+                PersonInfo[_index].ContractNumber = int.Parse(personContractNumber.Text);
+                PersonInfo[_index].DismissalNumber = int.Parse(personContractNumber.Text);
+                PersonInfo[_index].Birthday = birthadyDateTimePicker.Value;
+
+                ViewEvent?.Invoke(this, EventArgs.Empty);
+
                 this.Close();
             }
         }

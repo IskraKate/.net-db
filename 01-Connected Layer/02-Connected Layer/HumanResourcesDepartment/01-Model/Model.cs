@@ -6,15 +6,22 @@ using System.Windows.Forms;
 
 namespace HumanResourcesDepartment.ModelNamespace
 {
-    class Model : IModel
+    class Model : IModel, IDisposable
     {
+        private static IModel _model = new Model();
+
         private SqlConnection _connection = new SqlConnection();
         private List<PersonInfo> _infos = new List<PersonInfo>();
-        private string _sqlString = "ShowPersons";
+        private string _sqlString;
 
-        public List<PersonInfo> GetInfos()
+        private Model()
         {
-            return _infos;
+
+        }
+
+        static public IModel GetModel()
+        {
+            return _model;
         }
 
         public void Connect()
@@ -34,14 +41,17 @@ namespace HumanResourcesDepartment.ModelNamespace
             }
         }
 
-        public void FillList()
+        public List<PersonInfo> FillList()
         {
+            _infos.Clear();
+            _sqlString = "ShowPersons";
+
             using (SqlCommand command = new SqlCommand(_sqlString, _connection))
             {
                 command.CommandType = System.Data.CommandType.StoredProcedure;
 
                 using (SqlDataReader reader = command.ExecuteReader())
-                {
+                { 
                     while (reader.Read())
                     {
                         _infos.Add(new PersonInfo
@@ -58,6 +68,7 @@ namespace HumanResourcesDepartment.ModelNamespace
                     }
                     reader.Close();
                 }
+                return _infos;
             }
         }
 
@@ -119,7 +130,7 @@ namespace HumanResourcesDepartment.ModelNamespace
                 {
                     command.CommandType = System.Data.CommandType.StoredProcedure;
 
-                    command.Parameters.Add(new SqlParameter("@Id", _infos[index].Id));
+                    command.Parameters.Add(new SqlParameter("@Id", index));
                     command.ExecuteNonQuery();
                 }
             }
@@ -129,13 +140,12 @@ namespace HumanResourcesDepartment.ModelNamespace
             }
         }
 
-        public void CloseConnection()
+         public void Dispose()
         {
             if (_connection.State == ConnectionState.Open)
             {
                 _connection.Close();
             }
         }
-
     }
 }

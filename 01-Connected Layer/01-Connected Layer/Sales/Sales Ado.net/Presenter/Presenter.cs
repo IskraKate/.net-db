@@ -1,41 +1,27 @@
-﻿using System.Collections.Generic;
-using Sales.Model;
+﻿using System;
+using System.Collections.Generic;
+using Sales.ModelNamespace;
 using Sales.View;
 namespace Sales.PresenterNamespace
 {
     class Presenter
     {
-        private ConnectionWithDb _connectionWithDb;
         private List<Row> _rows = new List<Row>();
         private IView _view;
+        private IModel _model;
 
-        public Presenter(IView view)
+        public Presenter(IView view, IModel model)
         {
             _view = view;
-            _connectionWithDb = new ConnectionWithDb();
-            _connectionWithDb.OpenConnection();
-            _rows = _connectionWithDb.FillListWithElements();
-            FillListView();
-            _view.FormClosed += _view_FormClosed;
+            _model = model;
+            _model.OpenConnection();
+            _view.ViewEvent += OnUpdate;
         }
 
-        private void _view_FormClosed(object sender, System.Windows.Forms.FormClosedEventArgs e)
+        public void OnUpdate(object sender, EventArgs e)
         {
-            _connectionWithDb.CloseConnection();
+            _view.Rows = _model.FillListWithElements();
         }
 
-        public void FillListView()
-        {
-            foreach (var row in _rows)
-            {
-                _view.NewListViewItem();
-                _view.GetListViewItem.Text = row.BFirstName;
-                _view.GetListViewItem.SubItems.Add(row.BLastName);
-                _view.GetListViewItem.SubItems.Add(row.SFirstName);
-                _view.GetListViewItem.SubItems.Add(row.SLastName);
-                _view.GetListViewItem.SubItems.Add(row.MoneySum);
-                _view.GetListViewItem.SubItems.Add(row.Date);
-            }
-        }
     }
 }

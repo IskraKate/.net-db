@@ -1,41 +1,52 @@
 ﻿using HumanResourcesDepartment.ModelNamespace;
+using HumanResourcesDepartment.View;
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 
 namespace HumanResourcesDepartment
 {
-    public partial class AddPerson : FormAllInfo
+    public partial class FormAddPerson : FormAllInfo
     {
-        private delegate void AddPersonHandler(PersonInfo personInfo);
-        private event AddPersonHandler AddPersonEvent;
+        public event EventHandler ViewEvent;
+   
         string path;
-        PersonInfo _personInfo = new PersonInfo();
 
-        public AddPerson()
+        public List<PersonInfo> PersonInfo { get; set; }
+
+        public FormAddPerson()
         {
             InitializeComponent();
         }
 
-        public AddPerson(FormNameList formNameList)
+        public FormAddPerson(FormNameList formNameList)
         {
             InitializeComponent();
-            this.AddPersonEvent += formNameList.AddPerson;
+
+            PersonInfo = formNameList.PersonInfo;
+
+            #region Controls settings
             birthadyDateTimePicker.Format = DateTimePickerFormat.Custom;
             birthadyDateTimePicker.Enabled = true;
+
             buttonEdit.Enabled = false;
             buttonEddited.Enabled = false;
+
             buttonEdit.Visible = false;
             buttonEddited.Visible = false;
-        }
 
-        private void AddPerson_Load(object sender, EventArgs e)
-        {
             personName.ReadOnly = false;
             personSurname.ReadOnly = false;
             personPatronymic.ReadOnly = false;
             personContractNumber.ReadOnly = false;
             personDismissalNumber.ReadOnly = false;
+            #endregion
+        }
+
+        private void AddPerson_Load(object sender, EventArgs e)
+        {
+ 
         }
 
         private void downloadPhoto_Click(object sender, EventArgs e)
@@ -62,17 +73,20 @@ namespace HumanResourcesDepartment
             {
                 path = @"PersonPhotos\" + personName.Text + personSurname.Text + personPatronymic.Text + ".jpeg";
 
-                if(personPhoto.Image != null)
-                personPhoto.Image.Save(path, System.Drawing.Imaging.ImageFormat.Jpeg);
+                if (personPhoto.Image != null)
+                    personPhoto.Image.Save(path, System.Drawing.Imaging.ImageFormat.Jpeg);
 
-                _personInfo.FirstName = personName.Text;
-                _personInfo.LastName = personSurname.Text;
-                _personInfo.Patronymic = personSurname.Text;
-                _personInfo.Birthday = birthadyDateTimePicker.Value;
-                _personInfo.ContractNumber = int.Parse(personContractNumber.Text);
-                _personInfo.DismissalNumber = int.Parse(personDismissalNumber.Text);
+                PersonInfo.Add(new PersonInfo
+                {
+                    FirstName = personName.Text,
+                    LastName = personSurname.Text,
+                    Patronymic = personPatronymic.Text,
+                    Birthday = birthadyDateTimePicker.Value,
+                    ContractNumber = int.Parse(personContractNumber.Text),
+                    DismissalNumber = int.Parse(personDismissalNumber.Text)
+                });
 
-                AddPersonEvent(_personInfo);
+                ViewEvent(this, EventArgs.Empty);
                 this.Close();
             }
             catch
@@ -86,5 +100,6 @@ namespace HumanResourcesDepartment
             if ((e.KeyChar <= 48 || e.KeyChar >= 59) && e.KeyChar != 8)
                 e.Handled = true;
         }
+
     }
 }

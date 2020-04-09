@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using Sales.ModelNamespace;
 using Sales.PresenterNamespace;
 
 namespace Sales
@@ -12,11 +13,14 @@ namespace Sales
         [STAThread]
         static void Main()
         {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            var mainForm = new MainForm();
-            var presenter = new Presenter(mainForm);
-            Application.Run(mainForm);
+            using (var model = new Model())
+            {
+                Application.EnableVisualStyles();
+                Application.SetCompatibleTextRenderingDefault(false);
+                var mainForm = new MainForm();
+                var presenter = new Presenter(mainForm, model);
+                Application.Run(mainForm);
+            }
         }
     }
 }
