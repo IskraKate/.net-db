@@ -1,4 +1,6 @@
-﻿namespace _01_Disconnected_layer_proj
+﻿using System;
+
+namespace _01_Disconnected_layer_proj
 {
     partial class FullUserInfoForm
     {
@@ -28,6 +30,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FullUserInfoForm));
             this.textBoxLogin = new System.Windows.Forms.TextBox();
             this.textBoxAddress = new System.Windows.Forms.TextBox();
@@ -41,94 +44,97 @@
             this.buttonEditted = new System.Windows.Forms.Button();
             this.buttonDelete = new System.Windows.Forms.Button();
             this.checkBoxAdmin = new System.Windows.Forms.CheckBox();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // textBoxLogin
             // 
-            this.textBoxLogin.Location = new System.Drawing.Point(12, 32);
-            this.textBoxLogin.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBoxLogin.Location = new System.Drawing.Point(16, 39);
+            this.textBoxLogin.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBoxLogin.Name = "textBoxLogin";
             this.textBoxLogin.ReadOnly = true;
-            this.textBoxLogin.Size = new System.Drawing.Size(427, 20);
+            this.textBoxLogin.Size = new System.Drawing.Size(568, 22);
             this.textBoxLogin.TabIndex = 0;
-            this.textBoxLogin.Text = "UsersLogin";
+            this.textBoxLogin.Validating += new System.ComponentModel.CancelEventHandler(this.textBoxLogin_Validating);
+            this.textBoxLogin.Validated += new System.EventHandler(this.textBoxLogin_Validated);
             // 
             // textBoxAddress
             // 
-            this.textBoxAddress.Location = new System.Drawing.Point(12, 125);
-            this.textBoxAddress.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBoxAddress.Location = new System.Drawing.Point(16, 154);
+            this.textBoxAddress.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBoxAddress.Name = "textBoxAddress";
             this.textBoxAddress.ReadOnly = true;
-            this.textBoxAddress.Size = new System.Drawing.Size(427, 20);
+            this.textBoxAddress.Size = new System.Drawing.Size(568, 22);
             this.textBoxAddress.TabIndex = 1;
-            this.textBoxAddress.Text = "UsersAddress";
+            this.textBoxAddress.Validating += new System.ComponentModel.CancelEventHandler(this.textBoxAddress_Validating);
+            this.textBoxAddress.Validated += new System.EventHandler(this.textBoxAddress_Validated);
             // 
             // textBoxPassword
             // 
-            this.textBoxPassword.Location = new System.Drawing.Point(12, 79);
-            this.textBoxPassword.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBoxPassword.Location = new System.Drawing.Point(16, 97);
+            this.textBoxPassword.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBoxPassword.Name = "textBoxPassword";
             this.textBoxPassword.ReadOnly = true;
-            this.textBoxPassword.Size = new System.Drawing.Size(427, 20);
+            this.textBoxPassword.Size = new System.Drawing.Size(568, 22);
             this.textBoxPassword.TabIndex = 2;
-            this.textBoxPassword.Text = "UsersPassword";
+            this.textBoxPassword.MouseClick += new System.Windows.Forms.MouseEventHandler(this.textBoxPassword_MouseClick);
+            this.textBoxPassword.Validating += new System.ComponentModel.CancelEventHandler(this.textBoxPassword_Validating);
+            this.textBoxPassword.Validated += new System.EventHandler(this.textBoxPassword_Validated);
             // 
             // textBoxNumber
             // 
-            this.textBoxNumber.Location = new System.Drawing.Point(12, 171);
-            this.textBoxNumber.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBoxNumber.Location = new System.Drawing.Point(16, 210);
+            this.textBoxNumber.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBoxNumber.Name = "textBoxNumber";
             this.textBoxNumber.ReadOnly = true;
-            this.textBoxNumber.Size = new System.Drawing.Size(427, 20);
+            this.textBoxNumber.Size = new System.Drawing.Size(568, 22);
             this.textBoxNumber.TabIndex = 3;
-            this.textBoxNumber.Text = "0123456789";
+            this.textBoxNumber.Validating += new System.ComponentModel.CancelEventHandler(this.textBoxNumber_Validating);
+            this.textBoxNumber.Validated += new System.EventHandler(this.textBoxNumber_Validated);
             // 
             // labelLogin
             // 
             this.labelLogin.AutoSize = true;
-            this.labelLogin.Location = new System.Drawing.Point(10, 16);
-            this.labelLogin.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelLogin.Location = new System.Drawing.Point(13, 20);
             this.labelLogin.Name = "labelLogin";
-            this.labelLogin.Size = new System.Drawing.Size(36, 13);
+            this.labelLogin.Size = new System.Drawing.Size(47, 17);
             this.labelLogin.TabIndex = 4;
             this.labelLogin.Text = "Login:";
             // 
             // labelPassword
             // 
             this.labelPassword.AutoSize = true;
-            this.labelPassword.Location = new System.Drawing.Point(10, 63);
-            this.labelPassword.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelPassword.Location = new System.Drawing.Point(13, 78);
             this.labelPassword.Name = "labelPassword";
-            this.labelPassword.Size = new System.Drawing.Size(56, 13);
+            this.labelPassword.Size = new System.Drawing.Size(73, 17);
             this.labelPassword.TabIndex = 5;
             this.labelPassword.Text = "Password:";
             // 
             // labelAddress
             // 
             this.labelAddress.AutoSize = true;
-            this.labelAddress.Location = new System.Drawing.Point(10, 109);
-            this.labelAddress.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelAddress.Location = new System.Drawing.Point(13, 134);
             this.labelAddress.Name = "labelAddress";
-            this.labelAddress.Size = new System.Drawing.Size(76, 13);
+            this.labelAddress.Size = new System.Drawing.Size(102, 17);
             this.labelAddress.TabIndex = 6;
             this.labelAddress.Text = "Email Address:";
             // 
             // labelTelNumber
             // 
             this.labelTelNumber.AutoSize = true;
-            this.labelTelNumber.Location = new System.Drawing.Point(10, 155);
-            this.labelTelNumber.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelTelNumber.Location = new System.Drawing.Point(13, 191);
             this.labelTelNumber.Name = "labelTelNumber";
-            this.labelTelNumber.Size = new System.Drawing.Size(101, 13);
+            this.labelTelNumber.Size = new System.Drawing.Size(134, 17);
             this.labelTelNumber.TabIndex = 7;
             this.labelTelNumber.Text = "Telephone Number:";
             // 
             // buttonEdit
             // 
-            this.buttonEdit.Location = new System.Drawing.Point(466, 29);
-            this.buttonEdit.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonEdit.Location = new System.Drawing.Point(621, 36);
+            this.buttonEdit.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.buttonEdit.Name = "buttonEdit";
-            this.buttonEdit.Size = new System.Drawing.Size(56, 24);
+            this.buttonEdit.Size = new System.Drawing.Size(75, 30);
             this.buttonEdit.TabIndex = 8;
             this.buttonEdit.Text = "Edit";
             this.buttonEdit.UseVisualStyleBackColor = true;
@@ -137,10 +143,10 @@
             // buttonEditted
             // 
             this.buttonEditted.Enabled = false;
-            this.buttonEditted.Location = new System.Drawing.Point(466, 76);
-            this.buttonEditted.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonEditted.Location = new System.Drawing.Point(621, 94);
+            this.buttonEditted.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.buttonEditted.Name = "buttonEditted";
-            this.buttonEditted.Size = new System.Drawing.Size(56, 24);
+            this.buttonEditted.Size = new System.Drawing.Size(75, 30);
             this.buttonEditted.TabIndex = 9;
             this.buttonEditted.Text = "Editted";
             this.buttonEditted.UseVisualStyleBackColor = true;
@@ -148,10 +154,10 @@
             // 
             // buttonDelete
             // 
-            this.buttonDelete.Location = new System.Drawing.Point(466, 122);
-            this.buttonDelete.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonDelete.Location = new System.Drawing.Point(621, 150);
+            this.buttonDelete.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.buttonDelete.Name = "buttonDelete";
-            this.buttonDelete.Size = new System.Drawing.Size(56, 24);
+            this.buttonDelete.Size = new System.Drawing.Size(75, 30);
             this.buttonDelete.TabIndex = 10;
             this.buttonDelete.Text = "Delete";
             this.buttonDelete.UseVisualStyleBackColor = true;
@@ -161,19 +167,23 @@
             // 
             this.checkBoxAdmin.AutoSize = true;
             this.checkBoxAdmin.Enabled = false;
-            this.checkBoxAdmin.Location = new System.Drawing.Point(12, 199);
-            this.checkBoxAdmin.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.checkBoxAdmin.Location = new System.Drawing.Point(16, 246);
+            this.checkBoxAdmin.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.checkBoxAdmin.Name = "checkBoxAdmin";
-            this.checkBoxAdmin.Size = new System.Drawing.Size(55, 17);
+            this.checkBoxAdmin.Size = new System.Drawing.Size(69, 21);
             this.checkBoxAdmin.TabIndex = 11;
             this.checkBoxAdmin.Text = "Admin";
             this.checkBoxAdmin.UseVisualStyleBackColor = true;
             // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            // 
             // FullUserInfoForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(541, 226);
+            this.ClientSize = new System.Drawing.Size(721, 278);
             this.Controls.Add(this.checkBoxAdmin);
             this.Controls.Add(this.buttonDelete);
             this.Controls.Add(this.buttonEditted);
@@ -187,15 +197,17 @@
             this.Controls.Add(this.textBoxAddress);
             this.Controls.Add(this.textBoxLogin);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.MaximizeBox = false;
             this.Name = "FullUserInfoForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "User Info";
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
+
 
         #endregion
 
@@ -211,5 +223,6 @@
         protected System.Windows.Forms.Button buttonEdit;
         protected System.Windows.Forms.Button buttonEditted;
         protected System.Windows.Forms.Button buttonDelete;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
     }
 }

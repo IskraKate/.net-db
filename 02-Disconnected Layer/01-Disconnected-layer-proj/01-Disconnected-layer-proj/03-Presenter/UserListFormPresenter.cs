@@ -1,11 +1,6 @@
 ﻿using _01_Disconnected_layer_proj._01_Model;
 using _01_Disconnected_layer_proj._02_View;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms.VisualStyles;
 
 namespace _01_Disconnected_layer_proj._03_Presenter
 {
@@ -23,7 +18,7 @@ namespace _01_Disconnected_layer_proj._03_Presenter
 
         public void FillListFromBase(object sender, EventArgs e)
         {
-            _view.UserList = _model.FillList(_view.UserList);
+            _view.UserList = _model.Fill(_view.UserList);
         }
     }
 }

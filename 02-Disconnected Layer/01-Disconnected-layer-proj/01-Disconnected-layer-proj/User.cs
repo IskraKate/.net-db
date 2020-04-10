@@ -1,13 +1,13 @@
 ﻿namespace _01_Disconnected_layer_proj
 {
-    public struct User
+    public class User
     {
-        public long Id;
-        public string Login;
-        public string Password;
-        public string Address;
-        public long TelephoneNumber;
-        public bool IsAdmin;
+        public long Id { get; set; }
+        public string Login { get; set; }
+        public string Password { get; set; }
+        public string Address { get; set; }
+        public long TelephoneNumber { get; set; }
+        public bool IsAdmin { get; set; }
     }
 
 }

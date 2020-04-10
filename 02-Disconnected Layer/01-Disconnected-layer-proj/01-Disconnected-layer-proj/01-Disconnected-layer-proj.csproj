@@ -46,12 +46,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="01-Model\IModel\IModel.cs" />
-    <Compile Include="01-Model\IModel\Model.cs" />
+    <Compile Include="01-Model\Interfaces\IModel.cs" />
+    <Compile Include="01-Model\Model.cs" />
+    <Compile Include="02-View\Interfaces\IDelete.cs" />
+    <Compile Include="02-View\Interfaces\IValidate.cs" />
     <Compile Include="03-Presenter\AddFormPresenter.cs" />
     <Compile Include="03-Presenter\FullUserListPresenter.cs" />
     <Compile Include="03-Presenter\UserListFormPresenter.cs" />
-    <Compile Include="03-Presenter\Presenter.cs" />
     <Compile Include="02-View\Forms\AddForm.cs">
       <SubType>Form</SubType>
     </Compile>

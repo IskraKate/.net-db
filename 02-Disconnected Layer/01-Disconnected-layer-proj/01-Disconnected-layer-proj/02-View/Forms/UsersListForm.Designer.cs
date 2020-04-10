@@ -48,6 +48,7 @@
             this.listBoxUsers.ScrollAlwaysVisible = true;
             this.listBoxUsers.Size = new System.Drawing.Size(397, 354);
             this.listBoxUsers.TabIndex = 0;
+            this.listBoxUsers.DoubleClick += new System.EventHandler(this.listBoxUsers_MouseDoubleClick);
             // 
             // checkBoxAdminShower
             // 
@@ -59,6 +60,7 @@
             this.checkBoxAdminShower.TabIndex = 1;
             this.checkBoxAdminShower.Text = "ShowAdmins";
             this.checkBoxAdminShower.UseVisualStyleBackColor = true;
+            this.checkBoxAdminShower.CheckedChanged += new System.EventHandler(this.checkBoxAdminShower_CheckedChanged);
             // 
             // buttonAdd
             // 
@@ -69,6 +71,7 @@
             this.buttonAdd.TabIndex = 2;
             this.buttonAdd.Text = "Add";
             this.buttonAdd.UseVisualStyleBackColor = true;
+            this.buttonAdd.Click += new System.EventHandler(this.buttonAdd_Click);
             // 
             // Users
             // 

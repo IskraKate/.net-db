@@ -37,24 +37,32 @@
             this.textBoxNumber.Location = new System.Drawing.Point(8, 210);
             this.textBoxNumber.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.textBoxNumber.ReadOnly = false;
+            this.textBoxNumber.Validating += new System.ComponentModel.CancelEventHandler(this.textBoxNumber_Validating);
+            this.textBoxNumber.Validated += new System.EventHandler(this.textBoxNumber_Validated);
             // 
             // textBoxLogin
             // 
             this.textBoxLogin.Location = new System.Drawing.Point(8, 39);
             this.textBoxLogin.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.textBoxLogin.ReadOnly = false;
+            this.textBoxLogin.Validating += new System.ComponentModel.CancelEventHandler(this.textBoxLogin_Validating);
+            this.textBoxLogin.Validated += new System.EventHandler(this.textBoxLogin_Validated);
             // 
             // textBoxAddress
             // 
             this.textBoxAddress.Location = new System.Drawing.Point(8, 154);
             this.textBoxAddress.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.textBoxAddress.ReadOnly = false;
+            this.textBoxAddress.Validating += new System.ComponentModel.CancelEventHandler(this.textBoxAddress_Validating);
+            this.textBoxAddress.Validated += new System.EventHandler(this.textBoxAddress_Validated);
             // 
             // textBoxPassword
             // 
             this.textBoxPassword.Location = new System.Drawing.Point(8, 97);
             this.textBoxPassword.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.textBoxPassword.ReadOnly = false;
+            this.textBoxPassword.Validating += new System.ComponentModel.CancelEventHandler(this.textBoxPassword_Validating);
+            this.textBoxPassword.Validated += new System.EventHandler(this.textBoxPassword_Validated);
             // 
             // checkBoxAdmin
             // 

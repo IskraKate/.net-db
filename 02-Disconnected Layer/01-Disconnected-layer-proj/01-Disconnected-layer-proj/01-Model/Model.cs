@@ -7,12 +7,13 @@ namespace _01_Disconnected_layer_proj._01_Model
 {
     class Model : IModel
     {
+        private static IModel _model = new Model();
         private SqlConnection _sqlConnection;
         private DataSet _myUsersDataSet;
         private SqlDataAdapter _sqlDataAdapter;
         private string _connectionString = "Data Source=(local);Initial Catalog=UsersDb;Integrated Security=True";
 
-        public Model()
+        private Model()
         {
             _sqlConnection = new SqlConnection(_connectionString);
             _myUsersDataSet = new DataSet("UsersDb");
@@ -26,20 +27,63 @@ namespace _01_Disconnected_layer_proj._01_Model
             DeleteCommand();
         }
 
-        public DataSet MyUsersDataSet
+        static public IModel GetModel()
         {
-            get { return _myUsersDataSet; }
+            return _model;
         }
 
-        public SqlDataAdapter SqlDataAdapter
+        public void Edit(User user)
         {
-            get { return _sqlDataAdapter; }
+            foreach (DataRow selectedRow in _myUsersDataSet.Tables[0].Rows)
+            {
+                if (selectedRow.Field<long>("Id") == user.Id)
+                {
+                    selectedRow.SetField<string>("Login", user.Login);
+                    selectedRow.SetField<string>("Password", user.Password);
+                    selectedRow.SetField<string>("Address", user.Address);
+                    selectedRow.SetField<long>("TelephoneNumber", user.TelephoneNumber);
+                    selectedRow.SetField<bool>("Admin", user.IsAdmin);
+                }
+            }
+            _sqlDataAdapter.Update(_myUsersDataSet);
         }
 
-        public List<User> FillList(List<User> userList)
+        public void Delete(User user)
         {
-            if(userList.Count>0)
-            userList.Clear();
+            for (int i = 0; i < _myUsersDataSet.Tables[0].Rows.Count; i++)
+            {
+                DataRow selectedRow = _myUsersDataSet.Tables[0].Rows[i];
+
+                if (selectedRow.Field<long>("Id") == user.Id)
+                {
+                    _myUsersDataSet.Tables[0].Rows[i].Delete();
+                    break;
+                }
+            }
+
+            _sqlDataAdapter.Update(_myUsersDataSet);
+        }
+
+        public void Add(User user)
+        {
+            DataTable dt = _myUsersDataSet.Tables[0];
+            DataRow newRow = dt.NewRow();
+
+            newRow.SetField<string>("Login", user.Login);
+            newRow.SetField<string>("Password", user.Password);
+            newRow.SetField<string>("Address", user.Address);
+            newRow.SetField<long>("TelephoneNumber", user.TelephoneNumber);
+            newRow.SetField<bool>("Admin", user.IsAdmin);
+
+            dt.Rows.Add(newRow);
+
+            _sqlDataAdapter.Update(_myUsersDataSet);
+        }
+
+        public List<User> Fill(List<User> userList)
+        {
+            if (userList.Count > 0)
+                userList.Clear();
 
             _myUsersDataSet.Clear();
             _sqlDataAdapter.Fill(_myUsersDataSet);
