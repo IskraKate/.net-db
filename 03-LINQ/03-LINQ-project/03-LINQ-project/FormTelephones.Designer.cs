@@ -35,6 +35,10 @@
             this.buttonAdd = new System.Windows.Forms.Button();
             this.buttonDelete = new System.Windows.Forms.Button();
             this.buttonEdit = new System.Windows.Forms.Button();
+            this.checkBoxCAsc = new System.Windows.Forms.CheckBox();
+            this.checkBoxCDesc = new System.Windows.Forms.CheckBox();
+            this.checkBoxTAsc = new System.Windows.Forms.CheckBox();
+            this.checkBoxTDesc = new System.Windows.Forms.CheckBox();
             columnHeaderTelephone = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SuspendLayout();
             // 
@@ -97,20 +101,70 @@
             this.buttonEdit.UseVisualStyleBackColor = true;
             this.buttonEdit.Click += new System.EventHandler(this.buttonEdit_Click);
             // 
+            // checkBoxCAsc
+            // 
+            this.checkBoxCAsc.AutoSize = true;
+            this.checkBoxCAsc.Location = new System.Drawing.Point(12, 8);
+            this.checkBoxCAsc.Name = "checkBoxCAsc";
+            this.checkBoxCAsc.Size = new System.Drawing.Size(37, 21);
+            this.checkBoxCAsc.TabIndex = 5;
+            this.checkBoxCAsc.Text = "↓";
+            this.checkBoxCAsc.UseVisualStyleBackColor = true;
+            this.checkBoxCAsc.CheckedChanged += new System.EventHandler(this.checkBoxCAsc_CheckedChanged);
+            // 
+            // checkBoxCDesc
+            // 
+            this.checkBoxCDesc.AutoSize = true;
+            this.checkBoxCDesc.Location = new System.Drawing.Point(54, 8);
+            this.checkBoxCDesc.Name = "checkBoxCDesc";
+            this.checkBoxCDesc.Size = new System.Drawing.Size(37, 21);
+            this.checkBoxCDesc.TabIndex = 6;
+            this.checkBoxCDesc.Text = "↑";
+            this.checkBoxCDesc.UseVisualStyleBackColor = true;
+            this.checkBoxCDesc.CheckedChanged += new System.EventHandler(this.checkBoxCDesc_CheckedChanged);
+            // 
+            // checkBoxTAsc
+            // 
+            this.checkBoxTAsc.AutoSize = true;
+            this.checkBoxTAsc.Location = new System.Drawing.Point(193, 8);
+            this.checkBoxTAsc.Name = "checkBoxTAsc";
+            this.checkBoxTAsc.Size = new System.Drawing.Size(37, 21);
+            this.checkBoxTAsc.TabIndex = 7;
+            this.checkBoxTAsc.Text = "↓";
+            this.checkBoxTAsc.UseVisualStyleBackColor = true;
+            this.checkBoxTAsc.CheckedChanged += new System.EventHandler(this.checkBoxTAsc_CheckedChanged);
+            // 
+            // checkBoxTDesc
+            // 
+            this.checkBoxTDesc.AutoSize = true;
+            this.checkBoxTDesc.Location = new System.Drawing.Point(235, 8);
+            this.checkBoxTDesc.Name = "checkBoxTDesc";
+            this.checkBoxTDesc.Size = new System.Drawing.Size(37, 21);
+            this.checkBoxTDesc.TabIndex = 8;
+            this.checkBoxTDesc.Text = "↑";
+            this.checkBoxTDesc.UseVisualStyleBackColor = true;
+            this.checkBoxTDesc.CheckedChanged += new System.EventHandler(this.checkBoxTDesc_CheckedChanged);
+            // 
             // FormTelephones
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(501, 473);
+            this.Controls.Add(this.checkBoxTDesc);
+            this.Controls.Add(this.checkBoxTAsc);
+            this.Controls.Add(this.checkBoxCDesc);
+            this.Controls.Add(this.checkBoxCAsc);
             this.Controls.Add(this.buttonEdit);
             this.Controls.Add(this.buttonDelete);
             this.Controls.Add(this.buttonAdd);
             this.Controls.Add(this.listViewTelephones);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "FormTelephones";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Telephones";
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -121,6 +175,10 @@
         private System.Windows.Forms.Button buttonAdd;
         private System.Windows.Forms.Button buttonDelete;
         private System.Windows.Forms.Button buttonEdit;
+        private System.Windows.Forms.CheckBox checkBoxCAsc;
+        private System.Windows.Forms.CheckBox checkBoxCDesc;
+        private System.Windows.Forms.CheckBox checkBoxTAsc;
+        private System.Windows.Forms.CheckBox checkBoxTDesc;
     }
 }
 

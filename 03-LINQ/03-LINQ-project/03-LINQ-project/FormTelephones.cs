@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Windows.Forms;
 
@@ -14,10 +15,9 @@ namespace _03_LINQ_project
         {
             _contactsList = new List<Telephones>();
             InitializeComponent();
-            //FillingWithTestElements();
-            //CreateFile();
             ReadFromFile();
             FillListView();
+            checkBoxCAsc.Checked = true;
         }
 
         public void FillListView()
@@ -156,6 +156,54 @@ namespace _03_LINQ_project
             FillListView();
 
             CreateFile();
+        }
+
+        private void checkBoxCAsc_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBoxCAsc.Checked)
+            {
+                checkBoxCDesc.Checked = false;
+                checkBoxTAsc.Checked = false;
+                checkBoxTDesc.Checked = false;
+                _contactsList = _contactsList.OrderBy(c => c.Name).ToList();
+            }
+            FillListView();
+        }
+
+        private void checkBoxCDesc_CheckedChanged(object sender, EventArgs e)
+        {
+            if(checkBoxCDesc.Checked)
+            {
+                checkBoxCAsc.Checked = false;
+                checkBoxTDesc.Checked = false;
+                checkBoxTDesc.Checked = false;
+                _contactsList = _contactsList.OrderByDescending(c => c.Name).ToList();
+            }
+            FillListView();
+        }
+
+        private void checkBoxTAsc_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBoxTAsc.Checked)
+            {
+                checkBoxTDesc.Checked = false;
+                checkBoxCAsc.Checked = false;
+                checkBoxCDesc.Checked = false;
+                _contactsList = _contactsList.OrderBy(c => c.Telephone).ToList();
+            }
+            FillListView();
+        }
+
+        private void checkBoxTDesc_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBoxTDesc.Checked)
+            {
+                checkBoxTAsc.Checked = false;
+                checkBoxCAsc.Checked = false;
+                checkBoxCDesc.Checked = false;
+                _contactsList = _contactsList.OrderByDescending(c => c.Telephone).ToList();
+            }
+            FillListView();
         }
     }
 }
