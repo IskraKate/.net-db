@@ -35,37 +35,40 @@
             this.comboBoxPresses = new System.Windows.Forms.ComboBox();
             this.listBoxBooks = new System.Windows.Forms.ListBox();
             this.burronSearch = new System.Windows.Forms.Button();
-            this.labelAuthors = new System.Windows.Forms.Label();
-            this.labelPresses = new System.Windows.Forms.Label();
             this.labelBooks = new System.Windows.Forms.Label();
+            this.groupBoxAuthors = new System.Windows.Forms.GroupBox();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groupBoxAuthors.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // checkBoxAuthors
             // 
             this.checkBoxAuthors.AutoSize = true;
-            this.checkBoxAuthors.Location = new System.Drawing.Point(500, 50);
+            this.checkBoxAuthors.Location = new System.Drawing.Point(479, 30);
             this.checkBoxAuthors.Name = "checkBoxAuthors";
             this.checkBoxAuthors.Size = new System.Drawing.Size(79, 21);
             this.checkBoxAuthors.TabIndex = 0;
             this.checkBoxAuthors.Text = "Authors";
             this.checkBoxAuthors.UseVisualStyleBackColor = true;
-            this.checkBoxAuthors.CheckedChanged += new System.EventHandler(this.checkBoxAuthors_CheckedChanged);
+            this.checkBoxAuthors.CheckedChanged += new System.EventHandler(this.CheckedChanged);
             // 
             // checkBoxPresses
             // 
             this.checkBoxPresses.AutoSize = true;
-            this.checkBoxPresses.Location = new System.Drawing.Point(500, 130);
+            this.checkBoxPresses.Location = new System.Drawing.Point(477, 33);
             this.checkBoxPresses.Name = "checkBoxPresses";
             this.checkBoxPresses.Size = new System.Drawing.Size(81, 21);
             this.checkBoxPresses.TabIndex = 1;
             this.checkBoxPresses.Text = "Presses";
             this.checkBoxPresses.UseVisualStyleBackColor = true;
-            this.checkBoxPresses.CheckedChanged += new System.EventHandler(this.checkBoxPresses_CheckedChanged);
+            this.checkBoxPresses.CheckedChanged += new System.EventHandler(this.CheckedChanged);
             // 
             // comboBoxAuthors
             // 
             this.comboBoxAuthors.FormattingEnabled = true;
-            this.comboBoxAuthors.Location = new System.Drawing.Point(23, 48);
+            this.comboBoxAuthors.Location = new System.Drawing.Point(6, 28);
             this.comboBoxAuthors.Name = "comboBoxAuthors";
             this.comboBoxAuthors.Size = new System.Drawing.Size(440, 24);
             this.comboBoxAuthors.TabIndex = 2;
@@ -73,7 +76,7 @@
             // comboBoxPresses
             // 
             this.comboBoxPresses.FormattingEnabled = true;
-            this.comboBoxPresses.Location = new System.Drawing.Point(23, 128);
+            this.comboBoxPresses.Location = new System.Drawing.Point(6, 31);
             this.comboBoxPresses.Name = "comboBoxPresses";
             this.comboBoxPresses.Size = new System.Drawing.Size(440, 24);
             this.comboBoxPresses.TabIndex = 3;
@@ -95,25 +98,7 @@
             this.burronSearch.TabIndex = 5;
             this.burronSearch.Text = "Search";
             this.burronSearch.UseVisualStyleBackColor = true;
-            this.burronSearch.Click += new System.EventHandler(this.burronSearch_Click);
-            // 
-            // labelAuthors
-            // 
-            this.labelAuthors.AutoSize = true;
-            this.labelAuthors.Location = new System.Drawing.Point(20, 29);
-            this.labelAuthors.Name = "labelAuthors";
-            this.labelAuthors.Size = new System.Drawing.Size(57, 17);
-            this.labelAuthors.TabIndex = 6;
-            this.labelAuthors.Text = "Authors";
-            // 
-            // labelPresses
-            // 
-            this.labelPresses.AutoSize = true;
-            this.labelPresses.Location = new System.Drawing.Point(20, 109);
-            this.labelPresses.Name = "labelPresses";
-            this.labelPresses.Size = new System.Drawing.Size(59, 17);
-            this.labelPresses.TabIndex = 7;
-            this.labelPresses.Text = "Presses";
+            this.burronSearch.Click += new System.EventHandler(this.buttonSearch_Click);
             // 
             // labelBooks
             // 
@@ -124,23 +109,48 @@
             this.labelBooks.TabIndex = 8;
             this.labelBooks.Text = "Books";
             // 
+            // groupBoxAuthors
+            // 
+            this.groupBoxAuthors.Controls.Add(this.comboBoxAuthors);
+            this.groupBoxAuthors.Controls.Add(this.checkBoxAuthors);
+            this.groupBoxAuthors.Location = new System.Drawing.Point(23, 26);
+            this.groupBoxAuthors.Name = "groupBoxAuthors";
+            this.groupBoxAuthors.Size = new System.Drawing.Size(577, 71);
+            this.groupBoxAuthors.TabIndex = 9;
+            this.groupBoxAuthors.TabStop = false;
+            this.groupBoxAuthors.Text = "Authors";
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.comboBoxPresses);
+            this.groupBox1.Controls.Add(this.checkBoxPresses);
+            this.groupBox1.Location = new System.Drawing.Point(23, 115);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(577, 71);
+            this.groupBox1.TabIndex = 10;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Presses";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(626, 670);
+            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.groupBoxAuthors);
             this.Controls.Add(this.labelBooks);
-            this.Controls.Add(this.labelPresses);
-            this.Controls.Add(this.labelAuthors);
             this.Controls.Add(this.burronSearch);
             this.Controls.Add(this.listBoxBooks);
-            this.Controls.Add(this.comboBoxPresses);
-            this.Controls.Add(this.comboBoxAuthors);
-            this.Controls.Add(this.checkBoxPresses);
-            this.Controls.Add(this.checkBoxAuthors);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MainForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "BooksAuthorsPresses";
+            this.Load += new System.EventHandler(this.MainForm_Load);
+            this.groupBoxAuthors.ResumeLayout(false);
+            this.groupBoxAuthors.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -154,9 +164,10 @@
         private System.Windows.Forms.ComboBox comboBoxPresses;
         private System.Windows.Forms.ListBox listBoxBooks;
         private System.Windows.Forms.Button burronSearch;
-        private System.Windows.Forms.Label labelAuthors;
-        private System.Windows.Forms.Label labelPresses;
         private System.Windows.Forms.Label labelBooks;
+        private System.Windows.Forms.GroupBox groupBoxAuthors;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private System.Windows.Forms.GroupBox groupBox1;
     }
 }
 

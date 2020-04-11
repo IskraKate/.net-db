@@ -1,140 +1,77 @@
-﻿using System.Collections.Generic;
-using System.Data;
-using System.Data.SqlClient;
-using System.Linq;
+﻿using _02_Disconected_layer_proj._02_View.Interfaces;
+using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace _02_Disconected_layer_proj
 {
-    public struct Book
+    public partial class MainForm : Form, IView
     {
-        public long Id;
-        public string Title;
+        public List<Book> Books { get; set; }
+        public List<Author> Authors { get; set; }
+        public List<Press> Presses { get; set; }
 
-        public long AuthorFk;
-        public long PressFk;
-    }
-
-    public struct Author
-    {
-        public long Id;
-        public string Name;
-    }
-
-    public struct Press
-    {
-        public long Id;
-        public string Name;
-    }
-
-    public partial class MainForm : Form
-    {
-        private SqlConnection _sqlConnection;
-        private DataSet _dataSet;
-        List<Book> _bookList = new List<Book>();
-        List<Author> _authorList = new List<Author>();
-        List<Press> _pressList = new List<Press>();
-        private SqlDataAdapter _sqlDataAdapter;
-        private string _commandSelect;
         private string _authorSearch;
         private string _pressSearch;
         private bool _canSearch = false;
+
         private long _indexAuthor = -1;
         private long _indexPress = -1;
 
+        public event EventHandler ViewEvent;
+
         public MainForm()
         {
-            string connectionString = "Data Source=(local);Initial Catalog=BooksAuthorsPresses;Integrated Security=True";
-            _sqlConnection = new SqlConnection(connectionString);
-            _dataSet = new DataSet("BooksAuthorsPresses");
-            _sqlDataAdapter = new SqlDataAdapter();
-
             InitializeComponent();
 
             comboBoxAuthors.Enabled = false;
             comboBoxPresses.Enabled = false;
 
-            FillComboboxAuthors();
-            FillComboboxPresses();
-
-            FillListBooks();
+            Books = new List<Book>();
+            Authors = new List<Author>();
+            Presses = new List<Press>();
         }
 
-        public void FillComboboxAuthors()
+        private void FillComboboxAuthors()
         {
-            _commandSelect = "SELECT Id, Name FROM Authors";
-            _sqlDataAdapter.SelectCommand = new SqlCommand(_commandSelect, _sqlConnection);
-
-            _dataSet.Clear();
             comboBoxAuthors.Items.Clear();
-            _sqlDataAdapter.Fill(_dataSet);
-            _authorList.Clear();
 
-            _authorList = _dataSet.Tables[0].AsEnumerable().Select(dataRow =>
-            new Author
-            {
-                Id = dataRow.Field<long>("Id"),
-                Name = dataRow.Field<string>("Name")
-            }).ToList();
-
-            foreach (var author in _authorList)
+            foreach (var author in Authors)
             {
                 comboBoxAuthors.Items.Add(author.Name);
             }
         }
 
-        public void FillComboboxPresses()
+        private void FillComboboxPresses()
         {
-            _commandSelect = "SELECT Id, Name FROM Presses";
-            _sqlDataAdapter.SelectCommand = new SqlCommand(_commandSelect, _sqlConnection);
-
-            _dataSet.Clear();
             comboBoxPresses.Items.Clear();
-            _sqlDataAdapter.Fill(_dataSet);
-            _pressList.Clear();
-
-            _pressList = _dataSet.Tables[0].AsEnumerable().Select(dataRow =>
-            new Press
-            {
-                Id = dataRow.Field<long>("Id"),
-                Name = dataRow.Field<string>("Name")
-            }).ToList();
-
-            foreach (var press in _pressList)
+            foreach (var press in Presses)
             {
                 comboBoxPresses.Items.Add(press.Name);
             }
         }
 
-        private void checkBoxAuthors_CheckedChanged(object sender, System.EventArgs e)
+        private void CheckedChanged(object sender, System.EventArgs e)
         {
-            if (checkBoxAuthors.Checked)
-            {
-                comboBoxAuthors.Enabled = true;
-            }
-            else
-            {
-                comboBoxAuthors.Enabled = false;
-                comboBoxAuthors.SelectedItem = null;
-                _authorSearch = null;
-            }   
-        }
+            CheckBox checkBox = sender as CheckBox;
 
-        private void checkBoxPresses_CheckedChanged(object sender, System.EventArgs e)
-        {
-            if (checkBoxPresses.Checked)
+            ComboBox comboBox = checkBox.Parent.Controls[0] as ComboBox;
+
+            if (checkBox.Checked)
             {
-                comboBoxPresses.Enabled = true;
+                comboBox.Enabled = true;
             }
             else
             {
-                comboBoxPresses.Enabled = false;
-                comboBoxPresses.SelectedItem = null;
+                comboBox.Enabled = false;
+                comboBox.SelectedItem = null;
+
+                _authorSearch = null;
                 _pressSearch = null;
             }
         }
 
-        private void burronSearch_Click(object sender, System.EventArgs e)
+        private void buttonSearch_Click(object sender, EventArgs e)
         {
             //Вариант когда есть выбранный элемент
             if (comboBoxAuthors.SelectedItem != null)
@@ -159,8 +96,6 @@ namespace _02_Disconected_layer_proj
                 //но кнопка искать нажата
                 if (!comboBoxAuthors.Enabled && !comboBoxPresses.Enabled)
                 {
-                    MessageBox.Show("Choose press, author or both, please", "Press, author or both?",
-                                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     _canSearch = false;
                 }
             }
@@ -197,7 +132,7 @@ namespace _02_Disconected_layer_proj
             FillListBoxBooks();
         }
 
-        public void Search()
+        private void Search()
         {
             if (_canSearch)
             {
@@ -206,7 +141,7 @@ namespace _02_Disconected_layer_proj
 
                 if (_authorSearch != null && _pressSearch == null)
                 {
-                    foreach (var author in _authorList)
+                    foreach (var author in Authors)
                     {
                         if (_authorSearch == author.Name)
                         {
@@ -218,7 +153,7 @@ namespace _02_Disconected_layer_proj
 
                 else if (_authorSearch == null && _pressSearch != null)
                 {
-                    foreach (var press in _pressList)
+                    foreach (var press in Presses)
                     {
                         if (_pressSearch == press.Name)
                         {
@@ -230,7 +165,7 @@ namespace _02_Disconected_layer_proj
 
                 else if (_authorSearch != null && _pressSearch != null)
                 {
-                    foreach (var author in _authorList)
+                    foreach (var author in Authors)
                     {
                         if (_authorSearch == author.Name)
                         {
@@ -239,7 +174,7 @@ namespace _02_Disconected_layer_proj
                         }
                     }
 
-                    foreach (var press in _pressList)
+                    foreach (var press in Presses)
                     {
                         if (_pressSearch == press.Name)
                         {
@@ -252,50 +187,37 @@ namespace _02_Disconected_layer_proj
             }
         }
 
-        public void FillListBooks()
-        {
-            _commandSelect = "SELECT Books.Id, Title, AuthorFk, PressFk FROM Books, Authors, Presses" +
-                             " WHERE AuthorFk=Authors.Id AND PressFk = Presses.Id";
-                _sqlDataAdapter.SelectCommand = new SqlCommand(_commandSelect, _sqlConnection);
-
-                _dataSet.Clear();
-                _sqlDataAdapter.Fill(_dataSet);
-                _bookList.Clear();
-
-            _bookList = _dataSet.Tables[0].AsEnumerable().Select(dataRow =>
-            new Book
-            {
-                Id = dataRow.Field<long>("Id"),
-                Title = dataRow.Field<string>("Title"),
-
-                AuthorFk = dataRow.Field<long>("AuthorFk"),
-                PressFk = dataRow.Field<long>("PressFk")
-            }).ToList();
-        }
-
-        public void FillListBoxBooks()
+        private void FillListBoxBooks()
         {
             listBoxBooks.Items.Clear();
 
-            if(_indexAuthor != -1 && _indexPress != -1)
+            if (_indexAuthor != -1 && _indexPress != -1 && _canSearch)
             {
                 SearchAuthorAndPress();
+                return;
             }
 
-            if(_indexAuthor != -1 && _indexPress == -1)
+            if (_indexAuthor != -1 && _indexPress == -1 && _canSearch)
             {
                 SearchAuthor();
+                return;
             }
 
-            if(_indexPress != -1 && _indexAuthor == -1)
+            if (_indexPress != -1 && _indexAuthor == -1 && _canSearch)
             {
                 SearchPress();
+                return;
+            }
+
+            foreach (var book in Books)
+            {
+                listBoxBooks.Items.Add(book.Title);
             }
         }
 
-        public void SearchAuthorAndPress()
+        private void SearchAuthorAndPress()
         {
-            foreach (var book in _bookList)
+            foreach (var book in Books)
             {
                 if (book.AuthorFk == _indexAuthor && book.PressFk == _indexPress)
                 {
@@ -304,9 +226,9 @@ namespace _02_Disconected_layer_proj
             }
         }
 
-        public void SearchAuthor()
+        private void SearchAuthor()
         {
-            foreach (var book in _bookList)
+            foreach (var book in Books)
             {
                 if (book.AuthorFk == _indexAuthor)
                 {
@@ -315,9 +237,9 @@ namespace _02_Disconected_layer_proj
             }
         }
 
-        public void SearchPress()
+        private void SearchPress()
         {
-            foreach (var book in _bookList)
+            foreach (var book in Books)
             {
                 if (book.PressFk == _indexPress)
                 {
@@ -325,5 +247,13 @@ namespace _02_Disconected_layer_proj
                 }
             }
         }
+
+        private void MainForm_Load(object sender, System.EventArgs e)
+        {
+            ViewEvent?.Invoke(this, EventArgs.Empty);
+            FillComboboxAuthors();
+            FillComboboxPresses();
+        }
+
     }
 }

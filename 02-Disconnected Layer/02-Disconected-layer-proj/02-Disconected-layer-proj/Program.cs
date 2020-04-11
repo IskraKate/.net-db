@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using _02_Disconected_layer_proj._01_Model;
+using _02_Disconected_layer_proj._03_Presenter;
+using System;
 using System.Windows.Forms;
 
 namespace _02_Disconected_layer_proj
@@ -16,7 +15,9 @@ namespace _02_Disconected_layer_proj
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainForm());
+            MainForm booksAuthorsPresses = new MainForm();
+            MainFormPresenter mainFormPresenter = new MainFormPresenter(booksAuthorsPresses, Model.GetModel);
+            Application.Run(booksAuthorsPresses);
         }
     }
 }

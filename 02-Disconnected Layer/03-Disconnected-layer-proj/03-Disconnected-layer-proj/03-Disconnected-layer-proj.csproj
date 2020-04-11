@@ -46,28 +46,35 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AddForm.cs">
+    <Compile Include="01-Model\Model.cs" />
+    <Compile Include="02-View\Interfaces\IDelete.cs" />
+    <Compile Include="02-View\Interfaces\ISave.cs" />
+    <Compile Include="02-View\Interfaces\IView.cs" />
+    <Compile Include="02-View\Forms\AddForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AddForm.Designer.cs">
+    <Compile Include="02-View\Forms\AddForm.Designer.cs">
       <DependentUpon>AddForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Buyer.cs" />
-    <Compile Include="FridgeShop.cs">
+    <Compile Include="03-Presenter\AddFormPresenter.cs" />
+    <Compile Include="03-Presenter\MainFormPresenter.cs" />
+    <Compile Include="Elements\Buyer.cs" />
+    <Compile Include="02-View\Forms\FridgeShop.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FridgeShop.Designer.cs">
+    <Compile Include="02-View\Forms\FridgeShop.Designer.cs">
       <DependentUpon>FridgeShop.cs</DependentUpon>
     </Compile>
-    <Compile Include="Fridge.cs" />
+    <Compile Include="Elements\Fridge.cs" />
+    <Compile Include="01-Model\Interfaces\IModel.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Check.cs" />
-    <Compile Include="Seller.cs" />
-    <EmbeddedResource Include="AddForm.resx">
+    <Compile Include="Elements\Check.cs" />
+    <Compile Include="Elements\Seller.cs" />
+    <EmbeddedResource Include="02-View\Forms\AddForm.resx">
       <DependentUpon>AddForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FridgeShop.resx">
+    <EmbeddedResource Include="02-View\Forms\FridgeShop.resx">
       <DependentUpon>FridgeShop.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">

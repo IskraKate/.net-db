@@ -45,6 +45,7 @@ namespace _01_Disconnected_layer_proj._01_Model
                     selectedRow.SetField<bool>("Admin", user.IsAdmin);
                 }
             }
+
             _sqlDataAdapter.Update(_myUsersDataSet);
         }
 

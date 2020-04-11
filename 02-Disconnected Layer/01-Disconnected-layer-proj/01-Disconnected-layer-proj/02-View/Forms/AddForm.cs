@@ -62,6 +62,8 @@ namespace _01_Disconnected_layer_proj
                 
         }
 
+        #region ParentValidatingEvents
+
         private void textBoxLogin_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
 
@@ -82,6 +84,10 @@ namespace _01_Disconnected_layer_proj
 
         }
 
+        #endregion
+
+        #region ParentValidatedEnets
+
         private void textBoxNumber_Validated(object sender, EventArgs e)
         {
 
@@ -101,5 +107,7 @@ namespace _01_Disconnected_layer_proj
         {
 
         }
+        #endregion
+
     }
 }

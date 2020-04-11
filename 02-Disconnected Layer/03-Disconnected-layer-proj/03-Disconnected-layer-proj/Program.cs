@@ -1,6 +1,8 @@
-﻿using System;
+﻿using _03_Disconnected_layer_proj._03_Presenter;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -16,7 +18,9 @@ namespace _03_Disconnected_layer_proj
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FridgeShop());
+            var fridgeShop = new FridgeShop();
+            MainFormPresenter mainFormPresenter = new MainFormPresenter(fridgeShop, _03_Disconnected_layer_proj._01_Model.Model.GetModel);
+            Application.Run(fridgeShop);
         }
     }
 }

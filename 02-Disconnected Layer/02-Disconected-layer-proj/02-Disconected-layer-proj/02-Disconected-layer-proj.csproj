@@ -46,15 +46,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BooksAuthorsPresses.cs">
+    <Compile Include="01-Model\Interfaces\IModel.cs" />
+    <Compile Include="01-Model\Model.cs" />
+    <Compile Include="02-View\Forms\BooksAuthorsPresses.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="BooksAuthorsPresses.Designer.cs">
+    <Compile Include="02-View\Forms\BooksAuthorsPresses.Designer.cs">
       <DependentUpon>BooksAuthorsPresses.cs</DependentUpon>
     </Compile>
+    <Compile Include="02-View\Interfaces\IView.cs" />
+    <Compile Include="03-Presenter\MainFormPresenter.cs" />
+    <Compile Include="Elements\Author.cs" />
+    <Compile Include="Elements\Book.cs" />
+    <Compile Include="Elements\Press.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="BooksAuthorsPresses.resx">
+    <EmbeddedResource Include="02-View\Forms\BooksAuthorsPresses.resx">
       <DependentUpon>BooksAuthorsPresses.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -79,5 +86,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
