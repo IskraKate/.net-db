@@ -1,4 +1,6 @@
 ﻿using _03_Disconnected_layer_proj._02_View;
+using _03_Disconnected_layer_proj._02_View.Forms;
+using _03_Disconnected_layer_proj._02_View.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -8,86 +10,126 @@ using System.Windows.Forms;
 
 namespace _03_Disconnected_layer_proj
 {
-    public partial class AddForm : Form, IView
+    public partial class AddForm : Form, IAdd
     {
         public List<Check> CheckList { get; set; }
-        public List<Buyer> BuyerList { get; set; }
-        public List<Fridge> FridgeList { get; set; }
-        public List<Seller> SellerList { get; set; }
+        public List<Buyer> Buyers { get; set; }
+        public List<Fridge> Fridges { get; set; }
+        public List<Seller> Sellers { get; set; }
 
-        public Check check { get; }
+        public event EventHandler AddEvent;
+        public event EventHandler AddCheck;
+        public event EventHandler AddBuyerEvent;
+        public event EventHandler AddSellerEvent;
+        public event EventHandler AddFridgeEvent;
 
-        public event EventHandler ViewEvent;
-
-        public AddForm()
+        public AddForm(List<Check> checkList)
         {
             InitializeComponent();
+
+            CheckList = checkList;
         }
 
-        public AddForm(FridgeShop fridgeShop)
+        public void Load()
         {
-            InitializeComponent();
-            CheckList = new List<Check>();
-       
-            //AddCheck += fridgeShop.AddCheck;
+            AddEvent?.Invoke(this, EventArgs.Empty);
 
-            //foreach (DataRow row in _dataSet.Tables[0].Rows)
-            //{
-            //    Buyer buyer = new Buyer(row.Field<long>("Id"), row.Field<string>("Name"));
-            //    buyerComboBox.Items.Add(buyer);
-            //}
-            //buyerComboBox.DisplayMember = "Name";
-            //buyerComboBox.SelectedIndex = 0;
+            FillBuyerComboBox();
+            FillSellerComboBox();
+            FillFridgeComboBox();
+        }
+        private void FillBuyerComboBox()
+        {
+            buyerComboBox.Items.Clear();
 
+            foreach (Buyer buyer in Buyers)
+            {
+                buyerComboBox.Items.Add(buyer);
+            }
+            buyerComboBox.DisplayMember = "Name";
+            buyerComboBox.SelectedIndex = 0;
+        }
+        private void FillSellerComboBox()
+        {
+            sellerComboBox.Items.Clear();
 
-            //_dataSet = new DataSet("FridgeShopDB");
-            //fridgeShop.SqlDataAdapter.SelectCommand = new SqlCommand("SELECT * FROM Sellers", fridgeShop.SqlConnection);
-            //fridgeShop.SqlDataAdapter.Fill(_dataSet);
-            //foreach (DataRow row in _dataSet.Tables[0].Rows)
-            //{
-            //    Seller seller = new Seller(row.Field<long>("Id"), row.Field<string>("Name"));
-            //    sellerComboBox.Items.Add(seller);
-            //}
-            //sellerComboBox.DisplayMember = "Name";
-            //sellerComboBox.SelectedIndex = 0;
+            foreach (Seller seller in Sellers)
+            {
+                sellerComboBox.Items.Add(seller);
+            }
+            sellerComboBox.DisplayMember = "Name";
+            sellerComboBox.SelectedIndex = 0;
+        }
+        private void FillFridgeComboBox()
+        {
+            fridgeComboBox.Items.Clear();
 
-
-            //_dataSet = new DataSet("FridgeShopDB");
-            //fridgeShop.SqlDataAdapter.SelectCommand = new SqlCommand("SELECT * FROM Fridges", fridgeShop.SqlConnection);
-            //fridgeShop.SqlDataAdapter.Fill(_dataSet);
-            //foreach (DataRow row in _dataSet.Tables[0].Rows)
-            //{
-            //    Fridge fridge = new Fridge(row.Field<long>("Id"), row.Field<string>("Brand"), row.Field<string>("Number"));
-            //    fridgeComboBox.Items.Add(fridge);
-            //}
-            //fridgeComboBox.DisplayMember = "Brand";
-            //fridgeComboBox.SelectedIndex = 0;
+            foreach (Fridge fridge in Fridges)
+            {
+                fridgeComboBox.Items.Add(fridge);
+            }
+            fridgeComboBox.DisplayMember = "Brand";
+            fridgeComboBox.SelectedIndex = 0;
         }
 
+        private void addBuyerButton_Click(object sender, EventArgs e)
+        {
+            AddElementForm form = new AddElementForm(this, "Buyer");
+            form.ShowDialog();
+        }
+        private void addSellerButton_Click(object sender, EventArgs e)
+        {
+            AddElementForm form = new AddElementForm(this, "Seller");
+            form.ShowDialog();
+        }
+        private void addFridgeButton_Click(object sender, EventArgs e)
+        {
+            AddFridgeForm form = new AddFridgeForm(this);
+            form.ShowDialog();
+        }
+
+        public void AddBuyer(Buyer buyer)
+        {
+            AddBuyerEvent(buyer, EventArgs.Empty);
+            FillBuyerComboBox();
+        }
+        public void AddSeller(Seller seller)
+        {
+            AddSellerEvent(seller, EventArgs.Empty);
+            FillSellerComboBox();
+        }
+        public void AddFridge(Fridge fridge)
+        {
+            AddFridgeEvent(fridge, EventArgs.Empty);
+            FillFridgeComboBox();
+        }
 
 
         private void buttonAdd_Click(object sender, EventArgs e)
         {
-            //if (textBoxNumber.Text != string.Empty && dateTimePicker.Value != null &&
-            //    buyerComboBox.SelectedItem != null && sellerComboBox.SelectedItem != null && fridgeComboBox.SelectedItem != null)
-            //{
-            //    Buyer buyer = buyerComboBox.SelectedItem as Buyer;
-            //    Seller seller = sellerComboBox.SelectedItem as Seller;
-            //    Fridge fridge = fridgeComboBox.SelectedItem as Fridge;
+            if (textBoxNumber.Text != string.Empty && dateTimePicker.Value != null &&
+                buyerComboBox.SelectedItem != null && sellerComboBox.SelectedItem != null && fridgeComboBox.SelectedItem != null)
+            {
+                Buyer buyer = buyerComboBox.SelectedItem as Buyer;
+                Seller seller = sellerComboBox.SelectedItem as Seller;
+                Fridge fridge = fridgeComboBox.SelectedItem as Fridge;
 
-            //    Check check = new Check(int.Parse(textBoxNumber.Text),
-            //                            dateTimePicker.Value,
-            //                            buyer.Id,
-            //                            seller.Id,
-            //                            fridge.Id);
+                Check check = new Check{Number = textBoxNumber.Text,
+                                        Date = dateTimePicker.Value,
+                                        Buyer = buyer,
+                                        Seller = seller,
+                                        Fridge = fridge
+                                        };
+                
+                CheckList.Add(check);
+                AddCheck(check, EventArgs.Empty);
 
-            //    AddCheck(check);
-            //    this.Close();
-            //}
-            //else
-            //{
-            //    MessageBox.Show("Please fill all the fields");
-            //}
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("Please fill all the fields");
+            }
         }
 
         private void buttonCancel_Click(object sender, EventArgs e)

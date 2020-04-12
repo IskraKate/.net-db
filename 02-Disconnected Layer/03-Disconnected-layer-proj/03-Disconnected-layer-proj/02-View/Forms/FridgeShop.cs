@@ -1,5 +1,6 @@
 ﻿using _03_Disconnected_layer_proj._02_View;
 using _03_Disconnected_layer_proj._02_View.Interfaces;
+using _03_Disconnected_layer_proj._03_Presenter;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
@@ -25,22 +26,30 @@ namespace _03_Disconnected_layer_proj
 
         private void FillListView()
         {
+            listViewCheck.Items.Clear();
+
             foreach (var check in CheckList)
             {
                 ListViewItem item = listViewCheck.Items.Add(new ListViewItem());
                 item.Text = check.Number.ToString();
-                item.SubItems.Add(check.Date.ToString());
-                item.SubItems.Add(check.Brand);
-                item.SubItems.Add(check.Buyer);
-                item.SubItems.Add(check.Seller);
+                item.SubItems.Add(check.Date.ToShortDateString());
+                item.SubItems.Add(check.Fridge.Brand);
+                item.SubItems.Add(check.Buyer.Name);
+                item.SubItems.Add(check.Seller.Name);
             }
 
         }
 
         private void AddRecieptButton_Click(object sender, EventArgs e)
         {
-            AddForm addForm = new AddForm(this);
+            AddForm addForm = new AddForm(CheckList);
+            AddFormPresenter presenter = new AddFormPresenter(addForm, _01_Model.Model.GetModel);
+            addForm.Load();
+
             addForm.ShowDialog();
+
+            ViewEvent?.Invoke(this, EventArgs.Empty);
+            FillListView();
         }
 
         private void deleteButton_Click(object sender, EventArgs e)
@@ -60,46 +69,6 @@ namespace _03_Disconnected_layer_proj
         {
             ViewEvent?.Invoke(this, EventArgs.Empty);
             FillListView();
-        }
-
-        private void AddCheck(Check check)
-        {
-            //    MyFridgeDataSet = new DataSet("FridgeShopDB");
-
-            //    SqlDataAdapter.InsertCommand = new SqlCommand("INSERT INTO Checks(Number, Date, BuyerFk, SellerFk, FridgeFk)" +
-            //                                    "VALUES (@Number, @Date, @BuyerFk, @SellerFk, @FridgeFk)", SqlConnection);
-            //    SqlDataAdapter.InsertCommand.Parameters.Add("@Number", SqlDbType.BigInt, 8, "Number");
-            //    SqlDataAdapter.InsertCommand.Parameters.Add("@Date", SqlDbType.Date, 3, "Date");
-            //    SqlDataAdapter.InsertCommand.Parameters.Add("@BuyerFk", SqlDbType.BigInt, 8, "BuyerFk");
-            //    SqlDataAdapter.InsertCommand.Parameters.Add("@SellerFk", SqlDbType.BigInt, 8, "SellerFk");
-            //    SqlDataAdapter.InsertCommand.Parameters.Add("@FridgeFk", SqlDbType.BigInt, 8, "FridgeFk");
-
-
-            //    SqlDataAdapter.SelectCommand = new SqlCommand("SELECT Number, Date, BuyerFk, SellerFk, FridgeFk " +
-            //                                                  "FROM Checks", SqlConnection);
-            //    SqlDataAdapter.Fill(MyFridgeDataSet);
-
-
-
-            //    DataRow dataRow = MyFridgeDataSet.Tables[0].NewRow();
-
-            //    dataRow.SetField<int>("Number", check.Number);
-            //    dataRow.SetField<DateTime>("Date", check.Date);
-            //    dataRow.SetField<long>("BuyerFk", check.BuyerId);
-            //    dataRow.SetField<long>("SellerFk", check.SellerId);
-            //    dataRow.SetField<long>("FridgeFk", check.FridgeId);
-
-            //    MyFridgeDataSet.Tables[0].Rows.Add(dataRow);
-            //    CheckList.Add(check);
-
-            //    SqlDataAdapter.Update(MyFridgeDataSet);
-            //    FillDataGridView();
-            //}
-
-            //private void FridgeShop_FormClosing(object sender, FormClosingEventArgs e)
-            //{
-            //    SqlConnection.Close();
-            //}
         }
     }
 }

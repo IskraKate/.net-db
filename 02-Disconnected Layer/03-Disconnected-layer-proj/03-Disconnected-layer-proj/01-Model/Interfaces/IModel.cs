@@ -1,15 +1,22 @@
-﻿using _03_Disconnected_layer_proj.Elements;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace _03_Disconnected_layer_proj.Model
 {
     interface IModel
     {
-        List<Check> FillCkeckList(List<Check> checks);
-        List<Buyer> FillBuyerList(List<Buyer> buyers);
-        List<Fridge> FillFridgeList(List<Fridge> fridges);
-        List<Seller> FillSellerList(List<Seller> sellers);
+        List<Check> Fill(List<Check> checks);
+        void AddCheck(Check check);
+        void AddBuyer(Buyer buyer);
+        void AddSeller(Seller seller);
+        void AddFridge(Fridge fridge);
+        
         void Delete(Check check);
         void SaveToXML(List<Check> checkList);
+
+
+
+        List<Buyer> Buyers { get; set; }
+        List<Seller> Sellers { get; set; }
+        List<Fridge> Fridges { get; set; }
     }
 }

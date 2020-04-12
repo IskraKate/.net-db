@@ -42,10 +42,9 @@
             // 
             // AddCheckButton
             // 
-            this.AddCheckButton.Location = new System.Drawing.Point(536, 44);
-            this.AddCheckButton.Margin = new System.Windows.Forms.Padding(4);
+            this.AddCheckButton.Location = new System.Drawing.Point(524, 36);
             this.AddCheckButton.Name = "AddCheckButton";
-            this.AddCheckButton.Size = new System.Drawing.Size(112, 28);
+            this.AddCheckButton.Size = new System.Drawing.Size(84, 23);
             this.AddCheckButton.TabIndex = 1;
             this.AddCheckButton.Text = "Add Check";
             this.AddCheckButton.UseVisualStyleBackColor = true;
@@ -53,10 +52,9 @@
             // 
             // SaveButton
             // 
-            this.SaveButton.Location = new System.Drawing.Point(536, 115);
-            this.SaveButton.Margin = new System.Windows.Forms.Padding(4);
+            this.SaveButton.Location = new System.Drawing.Point(524, 93);
             this.SaveButton.Name = "SaveButton";
-            this.SaveButton.Size = new System.Drawing.Size(112, 28);
+            this.SaveButton.Size = new System.Drawing.Size(84, 23);
             this.SaveButton.TabIndex = 2;
             this.SaveButton.Text = "Save to XML";
             this.SaveButton.UseVisualStyleBackColor = true;
@@ -64,10 +62,9 @@
             // 
             // deleteButton
             // 
-            this.deleteButton.Location = new System.Drawing.Point(536, 79);
-            this.deleteButton.Margin = new System.Windows.Forms.Padding(4);
+            this.deleteButton.Location = new System.Drawing.Point(524, 64);
             this.deleteButton.Name = "deleteButton";
-            this.deleteButton.Size = new System.Drawing.Size(112, 28);
+            this.deleteButton.Size = new System.Drawing.Size(84, 23);
             this.deleteButton.TabIndex = 4;
             this.deleteButton.Text = "Delete";
             this.deleteButton.UseVisualStyleBackColor = true;
@@ -82,11 +79,12 @@
             this.columnHeaderBuyer,
             this.columnHeaderSeller});
             this.listViewCheck.HideSelection = false;
-            this.listViewCheck.Location = new System.Drawing.Point(12, 44);
+            this.listViewCheck.Location = new System.Drawing.Point(9, 36);
+            this.listViewCheck.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.listViewCheck.MultiSelect = false;
             this.listViewCheck.Name = "listViewCheck";
             this.listViewCheck.Scrollable = false;
-            this.listViewCheck.Size = new System.Drawing.Size(517, 367);
+            this.listViewCheck.Size = new System.Drawing.Size(510, 299);
             this.listViewCheck.TabIndex = 5;
             this.listViewCheck.UseCompatibleStateImageBehavior = false;
             this.listViewCheck.View = System.Windows.Forms.View.Details;
@@ -118,16 +116,16 @@
             // 
             // FridgeShop
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(660, 423);
+            this.ClientSize = new System.Drawing.Size(619, 345);
             this.Controls.Add(this.listViewCheck);
             this.Controls.Add(this.deleteButton);
             this.Controls.Add(this.SaveButton);
             this.Controls.Add(this.AddCheckButton);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.MaximizeBox = false;
             this.Name = "FridgeShop";
             this.ShowInTaskbar = false;

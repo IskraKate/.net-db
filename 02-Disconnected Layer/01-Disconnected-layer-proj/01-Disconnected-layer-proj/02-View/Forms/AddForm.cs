@@ -16,6 +16,7 @@ namespace _01_Disconnected_layer_proj
         {
             InitializeComponent();
             UserList = userList;
+            textBoxPassword.UseSystemPasswordChar = true;
         }
 
         public new bool Check()
@@ -45,7 +46,9 @@ namespace _01_Disconnected_layer_proj
             }
             else
             {
-                MessageBox.Show("Please fill all of fields");
+                MessageBox.Show("Please fill all fields");
+
+                return;
             }
 
             if (Check())
@@ -57,6 +60,7 @@ namespace _01_Disconnected_layer_proj
             else
             {
                 UserList.Remove(UserList.Last());
+
                 MessageBox.Show("Login is not unique");
             }
                 

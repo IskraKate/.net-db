@@ -21,7 +21,3 @@ CREATE TABLE Users
 	[TelephoneNumber] bigint,
 	[Admin] bit
 )
-
-INSERT INTO Users([Login], [Password], [Address], [TelephoneNumber], [Admin]) VALUES ('MyLogin', 'MyPassword', 'some@gmail.com', 0123456789, 0);
-INSERT INTO Users([Login], [Password], [Address], [TelephoneNumber], [Admin]) VALUES ('MyLogin1', 'MyPassword1', 'some1@gmail.com', 0123456789, 0);
-INSERT INTO Users([Login], [Password], [Address], [TelephoneNumber], [Admin]) VALUES ('MyLogin1', 'MyPassword1', 'some1@gmail.com', 0123456789, 1);

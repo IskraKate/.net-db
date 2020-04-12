@@ -47,6 +47,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="01-Model\Model.cs" />
+    <Compile Include="02-View\Forms\AddElementForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="02-View\Forms\AddElementForm.Designer.cs">
+      <DependentUpon>AddElementForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="02-View\Forms\AddFridgeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="02-View\Forms\AddFridgeForm.Designer.cs">
+      <DependentUpon>AddFridgeForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="02-View\Interfaces\IAdd.cs" />
     <Compile Include="02-View\Interfaces\IDelete.cs" />
     <Compile Include="02-View\Interfaces\ISave.cs" />
     <Compile Include="02-View\Interfaces\IView.cs" />
@@ -71,8 +84,14 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Elements\Check.cs" />
     <Compile Include="Elements\Seller.cs" />
+    <EmbeddedResource Include="02-View\Forms\AddElementForm.resx">
+      <DependentUpon>AddElementForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="02-View\Forms\AddForm.resx">
       <DependentUpon>AddForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="02-View\Forms\AddFridgeForm.resx">
+      <DependentUpon>AddFridgeForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="02-View\Forms\FridgeShop.resx">
       <DependentUpon>FridgeShop.cs</DependentUpon>

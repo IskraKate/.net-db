@@ -34,7 +34,7 @@ CREATE TABLE Buyers
 CREATE TABLE Checks
 (
 	Id bigint PRIMARY KEY IDENTITY(1,1),
-	Number int,
+	Number nvarchar(50),
 	[Date] date,
 	BuyerFk bigint,
 	SellerFk bigint,
@@ -56,9 +56,9 @@ INSERT INTO Buyers([Name]) VALUES ('First Buyer')
 INSERT INTO Buyers([Name]) VALUES ('Second Buyer')
 INSERT INTO Buyers([Name]) VALUES ('Third Buyer')
 
-INSERT INTO Checks(Number, [Date], BuyerFk, SellerFk, FridgeFk) VALUES (123456, '2020-01-02', 1, 1, 1)
-INSERT INTO Checks(Number, [Date], BuyerFk, SellerFk, FridgeFk) VALUES (234567, '2019-10-03', 2, 2, 2)
-INSERT INTO Checks(Number, [Date], BuyerFk, SellerFk, FridgeFk) VALUES (345678, '2018-05-04', 3, 3, 3)
-INSERT INTO Checks(Number, [Date], BuyerFk, SellerFk, FridgeFk) VALUES (567891, '2020-07-05', 1, 1, 4)
-INSERT INTO Checks(Number, [Date], BuyerFk, SellerFk, FridgeFk) VALUES (111213, '2017-04-06', 2, 2, 5)
-INSERT INTO Checks(Number, [Date], BuyerFk, SellerFk, FridgeFk) VALUES (141516, '2019-01-07', 3, 3, 6)
+INSERT INTO Checks(Number, [Date], BuyerFk, SellerFk, FridgeFk) VALUES ('123456', '2020-01-02', 1, 1, 1)
+INSERT INTO Checks(Number, [Date], BuyerFk, SellerFk, FridgeFk) VALUES ('234567', '2019-10-03', 2, 2, 2)
+INSERT INTO Checks(Number, [Date], BuyerFk, SellerFk, FridgeFk) VALUES ('345678', '2018-05-04', 3, 3, 3)
+INSERT INTO Checks(Number, [Date], BuyerFk, SellerFk, FridgeFk) VALUES ('567891', '2020-07-05', 1, 1, 4)
+INSERT INTO Checks(Number, [Date], BuyerFk, SellerFk, FridgeFk) VALUES ('111213', '2017-04-06', 2, 2, 5)
+INSERT INTO Checks(Number, [Date], BuyerFk, SellerFk, FridgeFk) VALUES ('141516', '2019-01-07', 3, 3, 6)

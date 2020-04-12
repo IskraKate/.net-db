@@ -153,9 +153,14 @@ namespace _01_Disconnected_layer_proj
                 return false;
             }
 
-            if (login.Length > 8)
+            if(login.Length < 6)
             {
                 errorMessage = "maximum size is 16 symbols\n";
+            }
+
+            if (login.Length > 15)
+            {
+                errorMessage = "maximum size is 15 symbols\n";
             }
 
             foreach (var chr in login)
@@ -185,9 +190,14 @@ namespace _01_Disconnected_layer_proj
                 return false;
             }
 
-            if (password.Length > 16)
+            if(password.Length < 6)
             {
-                errorMessage = "maximum size is 16 symbols\n";
+                errorMessage = "minimum size is 6 symbols\n";
+            }
+
+            if (password.Length > 15)
+            {
+                errorMessage = "maximum size is 15 symbols\n";
             }
 
             foreach (var chr in password)
