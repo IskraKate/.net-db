@@ -13,9 +13,9 @@ namespace Sales.ModelNamespace
         public Model()
         {
             _sqlString =
-                            "SELECT Buyers.FirstName AS BFirstName, Buyers.LastName AS BLastName, Salers.FirstName AS SFirstName, Salers.LastName AS SLastName, Sales.MoneySum, Sales.[Date] " +
-                            "FROM Salers, Buyers, Sales " +
-                            "WHERE Sales.BuyerFk = Buyers.Id AND Sales.SalerFk = Salers.Id";
+                            "SELECT Buyers.FirstName AS BFirstName, Buyers.LastName AS BLastName, Sellers.FirstName AS SFirstName, Sellers.LastName AS SLastName, Sales.MoneySum, Sales.[Date] " +
+                            "FROM Sellers, Buyers, Sales " +
+                            "WHERE Sales.BuyerFk = Buyers.Id AND Sales.SellerFk = Sellers.Id";
             Initialize();
         }
 

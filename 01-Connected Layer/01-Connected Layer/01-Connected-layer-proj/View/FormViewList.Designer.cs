@@ -51,13 +51,13 @@
             // 
             // SFirstName
             // 
-            this.SFirstName.Text = "Saler`s Name";
+            this.SFirstName.Text = "Seller`s Name";
             this.SFirstName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.SFirstName.Width = 145;
             // 
             // SLastName
             // 
-            this.SLastName.Text = "Saler`s Lastname";
+            this.SLastName.Text = "Seller`s Lastname";
             this.SLastName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.SLastName.Width = 145;
             // 

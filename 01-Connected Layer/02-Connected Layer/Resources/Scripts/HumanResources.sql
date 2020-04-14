@@ -12,7 +12,7 @@ GO
 USE HumanResources
 Go
 
-CREATE TABLE Persons
+CREATE TABLE People
 (   
 	Id bigint PRIMARY KEY IDENTITY(1,1),
 	FirstName nvarchar(100),	
@@ -24,16 +24,16 @@ CREATE TABLE Persons
 	PhotoPath nvarchar(1000)
 )
 
-INSERT INTO Persons(FirstName, LastName, Patronymic, Birthday, ContractNumber, DismissalNumber, PhotoPath) 
+INSERT INTO People(FirstName, LastName, Patronymic, Birthday, ContractNumber, DismissalNumber, PhotoPath) 
 VALUES ('SomeName', 'SomeSurname', 'SomePatronymic', '1994-04-08', 1234567, 7654321, 'kitten1.JPG')
 
-INSERT INTO Persons(FirstName, LastName, Patronymic, Birthday, ContractNumber, DismissalNumber, PhotoPath) 
+INSERT INTO People(FirstName, LastName, Patronymic, Birthday, ContractNumber, DismissalNumber, PhotoPath) 
 VALUES ('SomeBody', 'OnceToldMe', 'ThatWorldIsGonnaRowMe', '1994-04-08', 1234567, 7654321, NULL)
 GO
 
-CREATE PROCEDURE ShowPersons AS
-SELECT Persons.Id, Persons.FirstName, Persons.LastName, Persons.Patronymic, Persons.Birthday, Persons.ContractNumber, Persons.DismissalNumber, Persons.PhotoPath
-FROM Persons
+CREATE PROCEDURE ShowPeople AS
+SELECT People.Id, People.FirstName, People.LastName, People.Patronymic, People.Birthday, People.ContractNumber, People.DismissalNumber, People.PhotoPath
+FROM People
 GO
 
 CREATE PROCEDURE AddPerson
@@ -45,7 +45,7 @@ CREATE PROCEDURE AddPerson
 	@DismissalNumber bigint,
 	@PhotoPath NVARCHAR(1000)
 AS
-INSERT INTO Persons(FirstName, LastName, Patronymic, Birthday, ContractNumber, DismissalNumber, PhotoPath) 
+INSERT INTO People(FirstName, LastName, Patronymic, Birthday, ContractNumber, DismissalNumber, PhotoPath) 
 VALUES (@FirstName, @LastName, @Patronymic, @Birthday, @ContractNumber, @DismissalNumber, @PhotoPath)
 GO
 
@@ -60,7 +60,7 @@ CREATE PROCEDURE EditPerson
 	@DismissalNumber bigint,
 	@PhotoPath NVARCHAR(1000)
 AS
-UPDATE Persons 
+UPDATE People 
 SET FirstName = @FirstName, LastName = @LastName, Patronymic = @Patronymic, Birthday = @Birthday,
 ContractNumber = @ContractNumber, DismissalNumber = @DismissalNumber, PhotoPath = @PhotoPath
 WHERE Id = @Id
@@ -70,5 +70,5 @@ GO
 CREATE PROCEDURE DeletePerson 
     @Id bigint
 AS
-DELETE FROM Persons WHERE Id = @Id
+DELETE FROM People WHERE Id = @Id
 GO

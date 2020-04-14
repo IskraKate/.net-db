@@ -44,7 +44,7 @@ namespace HumanResourcesDepartment.ModelNamespace
         public List<PersonInfo> FillList()
         {
             _infos.Clear();
-            _sqlString = "ShowPersons";
+            _sqlString = "ShowPeople";
 
             using (SqlCommand command = new SqlCommand(_sqlString, _connection))
             {

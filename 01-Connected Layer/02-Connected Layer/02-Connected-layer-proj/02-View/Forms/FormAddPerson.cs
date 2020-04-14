@@ -83,7 +83,8 @@ namespace HumanResourcesDepartment
                     Patronymic = personPatronymic.Text,
                     Birthday = birthadyDateTimePicker.Value,
                     ContractNumber = int.Parse(personContractNumber.Text),
-                    DismissalNumber = int.Parse(personDismissalNumber.Text)
+                    DismissalNumber = int.Parse(personDismissalNumber.Text),
+                    PhotoPath = _path
                 });
 
                 ViewEvent(this, EventArgs.Empty);

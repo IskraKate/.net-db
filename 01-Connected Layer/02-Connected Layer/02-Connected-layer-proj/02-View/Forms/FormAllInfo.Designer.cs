@@ -228,9 +228,11 @@
             this.Controls.Add(this.personSurname);
             this.Controls.Add(this.personPhoto);
             this.Controls.Add(this.personName);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "FormAllInfo";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "All Info";
             this.Load += new System.EventHandler(this.FormAllInfo_Load);
             ((System.ComponentModel.ISupportInitialize)(this.personPhoto)).EndInit();

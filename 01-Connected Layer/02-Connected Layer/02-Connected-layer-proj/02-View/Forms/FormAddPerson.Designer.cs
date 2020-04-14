@@ -61,14 +61,15 @@
             this.buttonAdd.UseVisualStyleBackColor = true;
             this.buttonAdd.Click += new System.EventHandler(this.buttonAdd_Click);
             // 
-            // AddPerson
+            // FormAddPerson
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 542);
             this.Controls.Add(this.buttonAdd);
             this.Controls.Add(this.downloadPhoto);
-            this.Name = "AddPerson";
+            this.Name = "FormAddPerson";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "AddPerson";
             this.Load += new System.EventHandler(this.AddPerson_Load);
             this.Controls.SetChildIndex(this.buttonEdit, 0);
