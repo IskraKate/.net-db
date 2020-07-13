@@ -4,11 +4,10 @@ using System.Collections.Generic;
 
 namespace HumanResourcesDepartment.View
 {
+    public delegate void DeleteHandler(int index);
     interface IView
     {
         event EventHandler ViewEvent;
-
-        List<PersonInfo> PersonInfo { get; set; }
-
+        event DeleteHandler DeleteEvent;
     }
 }

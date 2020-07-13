@@ -1,19 +1,15 @@
-﻿using HumanResourcesDepartment.ModelNamespace;
-using HumanResourcesDepartment.View;
+﻿using HumanResourcesDepartment._02_View.Interfaces;
 using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 
 namespace HumanResourcesDepartment
 {
-    public partial class FormAddPerson : FormAllInfo, IView
+    public partial class FormAddPerson : FormAllInfo, IAdd
     {
-        public new event EventHandler ViewEvent;
-   
         private string _path;
 
-        public new  List<PersonInfo> PersonInfo { get; set; }
+        public event AddHandler AddEvent;
 
         public FormAddPerson()
         {
@@ -23,8 +19,6 @@ namespace HumanResourcesDepartment
         public FormAddPerson(FormNameList formNameList)
         {
             InitializeComponent();
-
-            PersonInfo = formNameList.PersonInfo;
 
             #region Controls settings
             birthadyDateTimePicker.Format = DateTimePickerFormat.Custom;
@@ -46,7 +40,7 @@ namespace HumanResourcesDepartment
 
         private void AddPerson_Load(object sender, EventArgs e)
         {
- 
+
         }
 
         private void downloadPhoto_Click(object sender, EventArgs e)
@@ -76,18 +70,9 @@ namespace HumanResourcesDepartment
                 if (personPhoto.Image != null)
                     personPhoto.Image.Save(_path, System.Drawing.Imaging.ImageFormat.Jpeg);
 
-                PersonInfo.Add(new PersonInfo
-                {
-                    FirstName = personName.Text,
-                    LastName = personSurname.Text,
-                    Patronymic = personPatronymic.Text,
-                    Birthday = birthadyDateTimePicker.Value,
-                    ContractNumber = int.Parse(personContractNumber.Text),
-                    DismissalNumber = int.Parse(personDismissalNumber.Text),
-                    PhotoPath = _path
-                });
+                AddEvent?.Invoke(personName.Text, personSurname.Text, personPatronymic.Text, int.Parse(personDismissalNumber.Text), int.Parse(personContractNumber.Text),
+                    birthadyDateTimePicker.Value, _path);
 
-                ViewEvent(this, EventArgs.Empty);
                 this.Close();
             }
             catch(Exception ex)

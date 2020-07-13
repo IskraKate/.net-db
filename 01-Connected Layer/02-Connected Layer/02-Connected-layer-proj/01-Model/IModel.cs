@@ -6,8 +6,9 @@ namespace HumanResourcesDepartment.ModelNamespace
     {
         void Connect();
         List<PersonInfo> FillList();
+        List<PersonInfo> GetInfo();
         void AddPersonToBase(PersonInfo personInfo);
-        void EditPerson(PersonInfo personInfoEdited);
+        void EditPerson(List<PersonInfo> personInfoEdited, int index);
         void Delete(int index);
         void Dispose();
     }

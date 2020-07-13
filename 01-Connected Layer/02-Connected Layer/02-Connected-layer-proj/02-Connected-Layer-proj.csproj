@@ -48,9 +48,10 @@
   <ItemGroup>
     <Compile Include="01-Model\IModel.cs" />
     <Compile Include="01-Model\Model.cs" />
+    <Compile Include="02-View\Interfaces\IAdd.cs" />
     <Compile Include="02-View\Interfaces\IDispose.cs" />
-    <Compile Include="PersonInfo.cs" />
-    <Compile Include="02-View\Interfaces\IDelete.cs" />
+    <Compile Include="01-Model\PersonInfo.cs" />
+    <Compile Include="02-View\Interfaces\IViewAllInfo.cs" />
     <Compile Include="03-Presenter\AddPersonPresenter.cs" />
     <Compile Include="03-Presenter\EditPersonPresenter.cs" />
     <Compile Include="03-Presenter\NameListPresenter.cs" />

@@ -1,25 +1,36 @@
-﻿using HumanResourcesDepartment.ModelNamespace;
-using HumanResourcesDepartment.View;
+﻿using HumanResourcesDepartment._02_View.Interfaces;
+using HumanResourcesDepartment.ModelNamespace;
 using System;
-using System.Linq;
 
 namespace HumanResourcesDepartment._03_Presenter
 {
     class AddPersonPresenter
     {
         IModel _model;
-        IView _view;
+        IAdd _add;
 
-        public AddPersonPresenter(IView view, IModel model)
+        public AddPersonPresenter(IAdd add, IModel model)
         {
-            _view = view;
+            _add = add;
             _model = model;
-            _view.ViewEvent += AddPersonModel;
+            _add.AddEvent += AddPersonModel;
         }
 
-        public void AddPersonModel(object sender, EventArgs e)
+        public void AddPersonModel(string name, string surname, string patronymic,
+         int contractNum, int DismissalNum, DateTime birthday, string path)
         {
-            _model.AddPersonToBase(_view.PersonInfo.Last());
+            PersonInfo personInfo= new PersonInfo
+            {
+                FirstName = name,
+                LastName = surname,
+                Patronymic = patronymic,
+                Birthday = birthday,
+                ContractNumber = contractNum,
+                DismissalNumber = DismissalNum,
+                PhotoPath = path
+            };
+
+            _model.AddPersonToBase(personInfo);
         }
     }
 }

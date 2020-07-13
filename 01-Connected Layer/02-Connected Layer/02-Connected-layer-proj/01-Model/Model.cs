@@ -12,7 +12,7 @@ namespace HumanResourcesDepartment.ModelNamespace
 
         private SqlConnection _connection = new SqlConnection();
         private List<PersonInfo> _infos = new List<PersonInfo>();
-        private string _sqlString;
+        private string _sqlString = string.Empty;
 
         private Model()
         {
@@ -51,7 +51,7 @@ namespace HumanResourcesDepartment.ModelNamespace
                 command.CommandType = System.Data.CommandType.StoredProcedure;
 
                 using (SqlDataReader reader = command.ExecuteReader())
-                { 
+                {
                     while (reader.Read())
                     {
                         _infos.Add(new PersonInfo
@@ -72,8 +72,15 @@ namespace HumanResourcesDepartment.ModelNamespace
             }
         }
 
+        public List<PersonInfo> GetInfo()
+        {
+            return _infos;
+        }
+
         public void AddPersonToBase(PersonInfo personInfo)
         {
+            _infos.Add(personInfo);
+
             _sqlString = "AddPerson";
             using (SqlCommand command = new SqlCommand(_sqlString, _connection))
             {
@@ -96,26 +103,31 @@ namespace HumanResourcesDepartment.ModelNamespace
             }
         }
 
-        public void EditPerson(PersonInfo personInfoEdited)
+        public void EditPerson(List<PersonInfo> infos, int index)
         {
             try
             {
+                _infos = infos;
                 _sqlString = "EditPerson";
                 using (SqlCommand command = new SqlCommand(_sqlString, _connection))
                 {
                     command.CommandType = System.Data.CommandType.StoredProcedure;
 
-                    command.Parameters.Add(new SqlParameter("@Id", personInfoEdited.Id));
-                    command.Parameters.Add(new SqlParameter("@FirstName", personInfoEdited.FirstName));
-                    command.Parameters.Add(new SqlParameter("@LastName", personInfoEdited.LastName));
-                    command.Parameters.Add(new SqlParameter("@Patronymic", personInfoEdited.Patronymic));
-                    command.Parameters.Add(new SqlParameter("@Birthday", personInfoEdited.Birthday));
-                    command.Parameters.Add(new SqlParameter("@ContractNumber", personInfoEdited.ContractNumber));
-                    command.Parameters.Add(new SqlParameter("@DismissalNumber", personInfoEdited.DismissalNumber));
+                    command.Parameters.Add(new SqlParameter("@Id", _infos[index].Id));
+                    command.Parameters.Add(new SqlParameter("@FirstName", _infos[index].FirstName));
+                    command.Parameters.Add(new SqlParameter("@LastName", _infos[index].LastName));
+                    command.Parameters.Add(new SqlParameter("@Patronymic", _infos[index].Patronymic));
+                    command.Parameters.Add(new SqlParameter("@Birthday", _infos[index].Birthday));
+                    command.Parameters.Add(new SqlParameter("@ContractNumber", _infos[index].ContractNumber));
+                    command.Parameters.Add(new SqlParameter("@DismissalNumber", _infos[index].DismissalNumber));
 
-                    if(!String.IsNullOrEmpty(personInfoEdited.PhotoPath))
+                    if(!String.IsNullOrEmpty(_infos[index].PhotoPath))
                     {
-                        command.Parameters.Add(new SqlParameter("@PhotoPath", personInfoEdited.PhotoPath));
+                        command.Parameters.Add(new SqlParameter("@PhotoPath", _infos[index].PhotoPath));
+                    }
+                    else
+                    {
+                        command.Parameters.Add(new SqlParameter("@PhotoPath", String.Empty));
                     }
 
                     command.ExecuteNonQuery();
@@ -131,14 +143,17 @@ namespace HumanResourcesDepartment.ModelNamespace
         {
             try
             {
+
                 _sqlString = "DeletePerson";
                 using (SqlCommand command = new SqlCommand(_sqlString, _connection))
                 {
-                    command.CommandType = System.Data.CommandType.StoredProcedure;
+                    command.CommandType = CommandType.StoredProcedure;
 
-                    command.Parameters.Add(new SqlParameter("@Id", index));
+                    command.Parameters.Add(new SqlParameter("@Id", _infos[index].Id));
                     command.ExecuteNonQuery();
                 }
+
+                _infos.RemoveAt(index);
             }
             catch (SqlException ex)
             {

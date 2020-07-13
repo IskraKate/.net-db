@@ -2,6 +2,7 @@
 using HumanResourcesDepartment.ModelNamespace;
 using HumanResourcesDepartment.View;
 using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace HumanResourcesDepartment._03_Presenter
@@ -10,36 +11,60 @@ namespace HumanResourcesDepartment._03_Presenter
     {
         private IView _view;
         private IModel _model;
-        private IDelete _delete;
         private IDispose _dispose;
+
+        private List<PersonInfo> _personInfo;
+        private ListView _listViewNames;
 
         public NameListPresenter(IView view, IModel model)
         {
+            _personInfo = new List<PersonInfo>();
+
             _view = view;
             _model = model;
-            _delete = (IDelete)view;
             _dispose = (IDispose)view;
 
             _model.Connect();
 
             _view.ViewEvent += OnUpdate;
             _dispose.FormClosedEvent += Dispose;
-            _delete.DeleteEvent += Delete;
+            _view.DeleteEvent += Delete;
         }
 
         public void OnUpdate(object sender, EventArgs e)
         {
-            _view.PersonInfo = _model.FillList();
+            if (_listViewNames == null)
+                _listViewNames = sender as ListView;
+
+            _personInfo = _model.FillList();
+            FillListView();
         }
 
         public void Delete(int index)
         {
+            _listViewNames.SelectedItems[0].Remove();
+            //_personInfo.RemoveAt(index);
             _model.Delete(index);
+            FillListView();
         }
 
         public void Dispose(object sender, FormClosedEventArgs e)
         {
             _model.Dispose();
+        }
+
+        public void FillListView()
+        {
+            if (_listViewNames != null)
+            {
+                _listViewNames.Items.Clear();
+
+                foreach (var info in _personInfo)
+                {
+                    ListViewItem listViewItem = _listViewNames.Items.Add(new ListViewItem());
+                    listViewItem.Text = info.FirstName + ' ' + info.LastName + ' ' + info.Patronymic;
+                }
+            }
         }
     }
 }
