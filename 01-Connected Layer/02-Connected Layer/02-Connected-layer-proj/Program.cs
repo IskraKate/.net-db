@@ -17,7 +17,7 @@ namespace HumanResourcesDepartment
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
                 var formNameList = new FormNameList();
-                var nameListPresenter = new NameListPresenter(formNameList, Model.GetModel());
+                var nameListPresenter = new NameListPresenter(formNameList);
                 Application.Run(formNameList);
         }
     }

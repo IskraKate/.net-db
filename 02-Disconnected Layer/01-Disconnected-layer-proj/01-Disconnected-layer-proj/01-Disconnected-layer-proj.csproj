@@ -50,6 +50,8 @@
     <Compile Include="01-Model\Model.cs" />
     <Compile Include="02-View\Interfaces\IDelete.cs" />
     <Compile Include="02-View\Interfaces\IValidate.cs" />
+    <Compile Include="02-View\Interfaces\IViewAdd.cs" />
+    <Compile Include="02-View\Interfaces\IViewFullInfo.cs" />
     <Compile Include="03-Presenter\AddFormPresenter.cs" />
     <Compile Include="03-Presenter\FullUserListPresenter.cs" />
     <Compile Include="03-Presenter\UserListFormPresenter.cs" />
@@ -65,7 +67,7 @@
     <Compile Include="02-View\Forms\FullUserInfoForm.Designer.cs">
       <DependentUpon>FullUserInfoForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="User.cs" />
+    <Compile Include="01-Model\User.cs" />
     <Compile Include="02-View\Forms\UsersListForm.cs">
       <SubType>Form</SubType>
     </Compile>

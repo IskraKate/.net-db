@@ -7,9 +7,16 @@ namespace HumanResourcesDepartment
 {
     public partial class FormAddPerson : FormAllInfo, IAdd
     {
-        private string _path;
-
         public event AddHandler AddEvent;
+
+        private string _path = String.Empty;
+        public string AddName => personName.Text;
+        public string AddSurname => personSurname.Text;
+        public string AddPatronymic => personPatronymic.Text;
+        public int AddContractNum => int.Parse(personContractNumber.Text);
+        public int AddDismissalNum => int.Parse(personDismissalNumber.Text);
+        public DateTime AddBirthday =>  birthadyDateTimePicker.Value;
+        public string AddPhoto =>  _path;
 
         public FormAddPerson()
         {
@@ -37,6 +44,7 @@ namespace HumanResourcesDepartment
             personDismissalNumber.ReadOnly = false;
             #endregion
         }
+
 
         private void AddPerson_Load(object sender, EventArgs e)
         {
@@ -70,8 +78,7 @@ namespace HumanResourcesDepartment
                 if (personPhoto.Image != null)
                     personPhoto.Image.Save(_path, System.Drawing.Imaging.ImageFormat.Jpeg);
 
-                AddEvent?.Invoke(personName.Text, personSurname.Text, personPatronymic.Text, int.Parse(personDismissalNumber.Text), int.Parse(personContractNumber.Text),
-                    birthadyDateTimePicker.Value, _path);
+                AddEvent?.Invoke();
 
                 this.Close();
             }

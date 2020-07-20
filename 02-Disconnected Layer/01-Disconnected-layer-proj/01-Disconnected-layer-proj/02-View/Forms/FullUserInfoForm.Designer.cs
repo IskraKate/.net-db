@@ -66,7 +66,7 @@ namespace _01_Disconnected_layer_proj
             this.textBoxAddress.Name = "textBoxAddress";
             this.textBoxAddress.ReadOnly = true;
             this.textBoxAddress.Size = new System.Drawing.Size(568, 22);
-            this.textBoxAddress.TabIndex = 1;
+            this.textBoxAddress.TabIndex = 2;
             this.textBoxAddress.Validating += new System.ComponentModel.CancelEventHandler(this.textBoxAddress_Validating);
             this.textBoxAddress.Validated += new System.EventHandler(this.textBoxAddress_Validated);
             // 
@@ -77,7 +77,7 @@ namespace _01_Disconnected_layer_proj
             this.textBoxPassword.Name = "textBoxPassword";
             this.textBoxPassword.ReadOnly = true;
             this.textBoxPassword.Size = new System.Drawing.Size(568, 22);
-            this.textBoxPassword.TabIndex = 2;
+            this.textBoxPassword.TabIndex = 1;
             this.textBoxPassword.MouseClick += new System.Windows.Forms.MouseEventHandler(this.textBoxPassword_MouseClick);
             this.textBoxPassword.Validating += new System.ComponentModel.CancelEventHandler(this.textBoxPassword_Validating);
             this.textBoxPassword.Validated += new System.EventHandler(this.textBoxPassword_Validated);
@@ -135,7 +135,7 @@ namespace _01_Disconnected_layer_proj
             this.buttonEdit.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.buttonEdit.Name = "buttonEdit";
             this.buttonEdit.Size = new System.Drawing.Size(75, 30);
-            this.buttonEdit.TabIndex = 8;
+            this.buttonEdit.TabIndex = 5;
             this.buttonEdit.Text = "Edit";
             this.buttonEdit.UseVisualStyleBackColor = true;
             this.buttonEdit.Click += new System.EventHandler(this.buttonEdit_Click);
@@ -147,7 +147,7 @@ namespace _01_Disconnected_layer_proj
             this.buttonEditted.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.buttonEditted.Name = "buttonEditted";
             this.buttonEditted.Size = new System.Drawing.Size(75, 30);
-            this.buttonEditted.TabIndex = 9;
+            this.buttonEditted.TabIndex = 6;
             this.buttonEditted.Text = "Editted";
             this.buttonEditted.UseVisualStyleBackColor = true;
             this.buttonEditted.Click += new System.EventHandler(this.buttonEditted_Click);
@@ -158,7 +158,7 @@ namespace _01_Disconnected_layer_proj
             this.buttonDelete.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.buttonDelete.Name = "buttonDelete";
             this.buttonDelete.Size = new System.Drawing.Size(75, 30);
-            this.buttonDelete.TabIndex = 10;
+            this.buttonDelete.TabIndex = 7;
             this.buttonDelete.Text = "Delete";
             this.buttonDelete.UseVisualStyleBackColor = true;
             this.buttonDelete.Click += new System.EventHandler(this.buttonDelete_Click);
@@ -171,7 +171,7 @@ namespace _01_Disconnected_layer_proj
             this.checkBoxAdmin.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.checkBoxAdmin.Name = "checkBoxAdmin";
             this.checkBoxAdmin.Size = new System.Drawing.Size(69, 21);
-            this.checkBoxAdmin.TabIndex = 11;
+            this.checkBoxAdmin.TabIndex = 4;
             this.checkBoxAdmin.Text = "Admin";
             this.checkBoxAdmin.UseVisualStyleBackColor = true;
             // 
@@ -202,6 +202,7 @@ namespace _01_Disconnected_layer_proj
             this.Name = "FullUserInfoForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "User Info";
+            this.Load += new System.EventHandler(this.FullUserInfoForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -1,82 +1,111 @@
-﻿using _01_Disconnected_layer_proj._02_View;
-using _01_Disconnected_layer_proj._02_View.Interfaces;
+﻿using _01_Disconnected_layer_proj._02_View.Interfaces;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
 namespace _01_Disconnected_layer_proj
 {
-    public partial class FullUserInfoForm : Form, IView, IDelete, IValidate
+    public partial class FullUserInfoForm : Form, IViewFullInfo, IDelete, IValidate
     {
-        public List<User> UserList { get; set; }
-        public User CurrentPerson { get { return UserList[_index]; } }
-
         private int _index;
+        private string _text;
 
-        public event EventHandler ViewEvent;
+        public string Login
+        {
+            get
+            {
+                return textBoxLogin.Text;
+            }
+            set
+            {
+                textBoxLogin.Text = value;
+            }
+        }
+
+        public string Password
+        {
+            get
+            {
+                return textBoxPassword.Text;
+            }
+            set
+            {
+                textBoxPassword.Text = value;
+            }
+        }
+        public string Email
+        {
+            get
+            {
+                return textBoxAddress.Text;
+            }
+            set
+            {
+                textBoxAddress.Text = value;
+            }
+        }
+        public bool IsAdmin
+        {
+            get
+            {
+                return checkBoxAdmin.Checked;
+            }
+            set
+            {
+                checkBoxAdmin.Checked = value;
+            }
+        }
+        public string Telephone
+        {
+            get
+            {
+                return textBoxNumber.Text;
+            }
+            set
+            {
+                textBoxNumber.Text = value;
+            }
+        }
+
+        public bool LoginChecked { get; set; }
+
         public event EventHandler DeleteEvent;
+        public event ViewHandler ViewEvent;
+        public event EditHandler EditEvent;
 
         public FullUserInfoForm()
         {
             InitializeComponent();
         }
 
-        public FullUserInfoForm(Users usersList, List<User> user, int index)
+        public FullUserInfoForm(int index)
         {
             InitializeComponent();
 
             textBoxPassword.UseSystemPasswordChar = true;
 
-            UserList = user;
             _index = index;
-
-
-            textBoxLogin.Text = UserList[_index].Login;
-            textBoxPassword.Text = UserList[_index].Password; 
-            textBoxAddress.Text = UserList[_index].Address;
-            checkBoxAdmin.Checked = UserList[_index].IsAdmin;
-            textBoxNumber.Text = UserList[_index].TelephoneNumber.ToString();
-        }
-
-        public bool Check()
-        {
-            for (int i = 0; i < UserList.Count - 1; i++)
-            {
-                if (!CheckUnique(textBoxLogin.Text, UserList[i].Login) && i != _index)
-                {
-                    return false;
-                }
-            }
-            return true;
-        }
-
-        public bool CheckUnique(string login, string newLogin)
-        {
-            if (newLogin == login)
-                return false;
-            else
-                return true;
         }
 
         private void buttonEditted_Click(object sender, EventArgs e)
         {
-            UserList[_index].Login = textBoxLogin.Text;
+            DialogResult result = MessageBox.Show("Are You sure You want to update info?", "Updating info", MessageBoxButtons.YesNo);
 
-            if (Check())
+            if (result == DialogResult.Yes)
             {
-                
-                UserList[_index].Password = textBoxPassword.Text;
-                UserList[_index].Address = textBoxAddress.Text;
-                UserList[_index].TelephoneNumber = int.Parse(textBoxNumber.Text);
+                EditEvent?.Invoke();
 
-                ViewEvent?.Invoke(this, EventArgs.Empty);
-
-                this.Close();
-            }
-            else
-            {
-                MessageBox.Show("Login is not unique");
+                if (!LoginChecked)
+                {
+                    MessageBox.Show("Your Login is not unique");
+                    textBoxLogin.Text = _text;
+                    LoginChecked = true;
+                    this.Show();
+                }
+                else
+                {
+                    this.Close();
+                }
             }
         }
 
@@ -87,7 +116,6 @@ namespace _01_Disconnected_layer_proj
             if (result == DialogResult.Yes)
             {
                 DeleteEvent?.Invoke(this, EventArgs.Empty);
-                UserList.RemoveAt(_index);
                 this.Close();
             }
         }
@@ -102,6 +130,8 @@ namespace _01_Disconnected_layer_proj
             textBoxAddress.ReadOnly = false;
             textBoxNumber.ReadOnly = false;
             checkBoxAdmin.Enabled = true;
+
+            _text = textBoxLogin.Text;
         }
 
         private void textBoxPassword_MouseClick(object sender, MouseEventArgs e)
@@ -221,15 +251,16 @@ namespace _01_Disconnected_layer_proj
 
         public bool ValidTelephoneNumber(string number, out string errorMessage)
         {
+            errorMessage = "";
             if (number.Length == 0)
             {
-                errorMessage = "password is required.";
+                errorMessage = "telephone number is required.";
                 return false;
             }
-            
+
             if(number.Length > 9)
             {
-                errorMessage = "";
+                errorMessage = "telephone number is longer then can be.";
                 return false;
             }
 
@@ -247,8 +278,8 @@ namespace _01_Disconnected_layer_proj
                 }
             }
 
-            errorMessage = "telephone number must be valid telephonenumber format.\n" +
-                           "Use digits";
+            errorMessage = "telephone number must be valid telephone number format.\n" +
+                           "use digits";
             return false;
         }
 
@@ -265,7 +296,7 @@ namespace _01_Disconnected_layer_proj
                 e.Cancel = true;
                 textBoxAddress.Select(0, textBoxAddress.Text.Length);
 
-                // Set the ErrorProvider error with the text to display. 
+                // Set the ErrorProvider error with the text to display.
                 this.errorProvider1.SetError(textBoxAddress, errorMsg);
             }
         }
@@ -279,7 +310,7 @@ namespace _01_Disconnected_layer_proj
                 e.Cancel = true;
                 textBoxPassword.Select(0, textBoxLogin.Text.Length);
 
-                // Set the ErrorProvider error with the text to display. 
+                // Set the ErrorProvider error with the text to display.
                 this.errorProvider1.SetError(textBoxLogin, errorMsg);
             }
         }
@@ -293,7 +324,7 @@ namespace _01_Disconnected_layer_proj
                 e.Cancel = true;
                 textBoxPassword.Select(0, textBoxPassword.Text.Length);
 
-                // Set the ErrorProvider error with the text to display. 
+                // Set the ErrorProvider error with the text to display.
                 this.errorProvider1.SetError(textBoxPassword, errorMsg);
             }
         }
@@ -307,7 +338,7 @@ namespace _01_Disconnected_layer_proj
                 e.Cancel = true;
                 textBoxNumber.Select(0, textBoxNumber.Text.Length);
 
-                // Set the ErrorProvider error with the text to display. 
+                // Set the ErrorProvider error with the text to display.
                 this.errorProvider1.SetError(textBoxNumber, errorMsg);
             }
         }
@@ -342,5 +373,9 @@ namespace _01_Disconnected_layer_proj
 
         #endregion
 
+        private void FullUserInfoForm_Load(object sender, EventArgs e)
+        {
+            ViewEvent?.Invoke(_index);
+        }
     }
 }

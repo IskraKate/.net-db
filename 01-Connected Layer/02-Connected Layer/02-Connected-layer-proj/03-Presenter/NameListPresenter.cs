@@ -16,12 +16,12 @@ namespace HumanResourcesDepartment._03_Presenter
         private List<PersonInfo> _personInfo;
         private ListView _listViewNames;
 
-        public NameListPresenter(IView view, IModel model)
+        public NameListPresenter(IView view)
         {
             _personInfo = new List<PersonInfo>();
 
             _view = view;
-            _model = model;
+            _model = Model.GetModel();
             _dispose = (IDispose)view;
 
             _model.Connect();
@@ -43,7 +43,6 @@ namespace HumanResourcesDepartment._03_Presenter
         public void Delete(int index)
         {
             _listViewNames.SelectedItems[0].Remove();
-            //_personInfo.RemoveAt(index);
             _model.Delete(index);
             FillListView();
         }

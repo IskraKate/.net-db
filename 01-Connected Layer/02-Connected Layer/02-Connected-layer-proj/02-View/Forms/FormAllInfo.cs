@@ -1,7 +1,5 @@
 ﻿using HumanResourcesDepartment._02_View;
 using HumanResourcesDepartment._03_Presenter;
-using HumanResourcesDepartment.ModelNamespace;
-using HumanResourcesDepartment.View;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
@@ -12,6 +10,14 @@ namespace HumanResourcesDepartment
     {
         private int _index;
         private string _path = string.Empty;
+
+        public string PersonName { get => personName.Text; set => personName.Text = value; }
+        public string Surname { get => personSurname.Text; set => personSurname.Text = value; }
+        public string Patronymic { get => personPatronymic.Text; set => personPatronymic.Text = value; }
+        public string ContractNum { get => personContractNumber.Text; set => personContractNumber.Text = value; }
+        public string DismissalNum { get => personDismissalNumber.Text; set => personDismissalNumber.Text = value; }
+        public DateTime Birthday { get => birthadyDateTimePicker.Value; set => birthadyDateTimePicker.Value = value; }
+        public string Path { get => _path; set => _path = value; }
 
         public event ViewAllInfoHandler ViewAllInfoEvent;
         public event EditedHandler EditedEvent;
@@ -24,7 +30,7 @@ namespace HumanResourcesDepartment
         public FormAllInfo(int index)
         {
             _index = index;
-            var editPersonPresenter = new EditPersonPresenter(this, Model.GetModel());
+            var editPersonPresenter = new EditPersonPresenter(this);
             InitializeComponent();
             PersonAllInfoShow();
 
@@ -33,8 +39,9 @@ namespace HumanResourcesDepartment
 
         private void PersonAllInfoShow()
         {
-            ViewAllInfoEvent?.Invoke(personName, personSurname, personPatronymic, personContractNumber,
-                personDismissalNumber, birthadyDateTimePicker, personPhoto, _index);
+            ViewAllInfoEvent?.Invoke(_index);
+            personPhoto.Image = new Bitmap(_path);
+            birthadyDateTimePicker.Format = DateTimePickerFormat.Custom;
         }
 
         private void FormAllInfo_Load(object sender, EventArgs e)
@@ -100,7 +107,7 @@ namespace HumanResourcesDepartment
                buttonEdit.Enabled = true;
                 buttonEddited.Enabled = false;
 
-                EditedEvent?.Invoke(personName.Text, personSurname.Text, personPatronymic.Text, int.Parse(personContractNumber.Text), int.Parse(personContractNumber.Text), birthadyDateTimePicker.Value, _path);
+                EditedEvent?.Invoke();
 
                  this.Close();
             }

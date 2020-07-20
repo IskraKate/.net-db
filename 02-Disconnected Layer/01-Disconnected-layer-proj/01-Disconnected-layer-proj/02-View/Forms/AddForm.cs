@@ -1,69 +1,22 @@
-﻿using _01_Disconnected_layer_proj._02_View;
+﻿using _01_Disconnected_layer_proj._02_View.Interfaces;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Windows.Forms;
 
 namespace _01_Disconnected_layer_proj
 {
-    public partial class AddForm : FullUserInfoForm, IView
+    public partial class AddForm : FullUserInfoForm, IViewAdd
     {
-        public new event EventHandler ViewEvent;
+        public event AddHandler AddEvent;
 
-        public new List<User> UserList { get; set; }
-
-        public AddForm(List<User> userList)
+        public AddForm()
         {
             InitializeComponent();
-            UserList = userList;
             textBoxPassword.UseSystemPasswordChar = true;
-        }
-
-        public new bool Check()
-        {
-            for (int i = 0; i < UserList.Count - 1; i++)
-            {
-                if (!CheckUnique(textBoxLogin.Text, UserList[i].Login))
-                {
-                    return false;
-                }
-            }
-            return true;
         }
 
         private void addButton_Click(object sender, EventArgs e)
         {
-            if (textBoxLogin.Text != string.Empty && textBoxPassword.Text != string.Empty && textBoxAddress.Text != string.Empty && textBoxNumber.Text != string.Empty)
-            {
-                UserList.Add(new User
-                {
-                    Login = textBoxLogin.Text,
-                    Password = textBoxPassword.Text,
-                    Address = textBoxAddress.Text,
-                    TelephoneNumber = long.Parse(textBoxNumber.Text),
-                    IsAdmin = checkBoxAdmin.Checked
-                });
-            }
-            else
-            {
-                MessageBox.Show("Please fill all fields");
-
-                return;
-            }
-
-            if (Check())
-            {
-                ViewEvent?.Invoke(this, EventArgs.Empty);
-
-                this.Close();
-            }
-            else
-            {
-                UserList.Remove(UserList.Last());
-
-                MessageBox.Show("Login is not unique");
-            }
-                
+            AddEvent?.Invoke();
+            this.Close();
         }
 
         #region ParentValidatingEvents

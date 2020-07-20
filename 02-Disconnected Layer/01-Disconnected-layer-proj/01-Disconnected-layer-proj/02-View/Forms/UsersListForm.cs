@@ -1,55 +1,45 @@
-﻿using _01_Disconnected_layer_proj._01_Model;
-using _01_Disconnected_layer_proj._02_View;
+﻿using _01_Disconnected_layer_proj._02_View;
 using _01_Disconnected_layer_proj._03_Presenter;
 using System;
-using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace _01_Disconnected_layer_proj
 {
     public partial class Users : Form, IView
     {
-        public List<User> UserList{ get; set; }
+        public string Login { get; set; }
+        public bool IsChecked { get; set; }
+        public ListBox ListBox { get; set; }
+        public bool IsAdmin { get; set; }
 
         public event EventHandler ViewEvent;
 
         public Users()
         {
             InitializeComponent();
-            UserList = new List<User>();
+            ListBox = listBoxUsers;
         }
 
         private void buttonAdd_Click(object sender, System.EventArgs e)
         {
-            var addForm = new AddForm(UserList);
-            var AddFormPresenter = new AddFormPresenter(addForm, Model.GetModel());
+            var addForm = new AddForm();
+            var AddFormPresenter = new AddFormPresenter(addForm);
             addForm.ShowDialog();
-            ViewEvent?.Invoke(this, EventArgs.Empty);
+
             FillListBox();
         }
 
         public void FillListBox()
         {
             if(listBoxUsers.Items.Count>0)
-            listBoxUsers.Items.Clear();
+                listBoxUsers.Items.Clear();
 
-            foreach (var user in UserList)
-            {
-                if (checkBoxAdminShower.Checked)
-                    listBoxUsers.Items.Add(user.Login);
-                else
-                {
-                    if(user.IsAdmin)
-                        continue;
-                    else
-                        listBoxUsers.Items.Add(user.Login);
-                }
-            }
+            ViewEvent?.Invoke(this, EventArgs.Empty);
         }
 
         private void Users_FormClosed(object sender, FormClosedEventArgs e)
         {
-           
+
         }
 
         private void Users_Load(object sender, EventArgs e)
@@ -62,8 +52,8 @@ namespace _01_Disconnected_layer_proj
         {
             if (listBoxUsers.SelectedItems.Count > 0)
             {
-                var fullUserInfoForm = new FullUserInfoForm(this, UserList, listBoxUsers.SelectedIndex);
-                var fullUserListPresenter = new FullUserListPresenter(fullUserInfoForm, Model.GetModel());
+                var fullUserInfoForm = new FullUserInfoForm(listBoxUsers.SelectedIndex);
+                var fullUserListPresenter = new FullUserListPresenter(fullUserInfoForm);
                 fullUserInfoForm.ShowDialog();
                 ViewEvent?.Invoke(this, EventArgs.Empty);
                 FillListBox();

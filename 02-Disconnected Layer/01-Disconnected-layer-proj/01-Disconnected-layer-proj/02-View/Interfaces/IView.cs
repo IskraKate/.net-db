@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Windows.Forms;
 
 namespace _01_Disconnected_layer_proj._02_View
 {
@@ -7,7 +7,13 @@ namespace _01_Disconnected_layer_proj._02_View
     {
         event EventHandler ViewEvent;
 
-         List<User> UserList { get; set; }
+        string Login { get; set; }
+
+        bool IsChecked { get; set; }
+
+        bool IsAdmin { get; set; }
+
+        ListBox ListBox { get; set; }
 
     }
 }

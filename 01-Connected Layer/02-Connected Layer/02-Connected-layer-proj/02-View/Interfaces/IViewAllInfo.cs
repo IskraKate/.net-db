@@ -1,15 +1,21 @@
 ﻿using System;
-using System.Windows.Forms;
 
 namespace HumanResourcesDepartment._02_View
 {
-    public delegate void ViewAllInfoHandler(TextBox name, TextBox surname, TextBox patronymic,
-        TextBox contractNum, TextBox DismissalNum, DateTimePicker birthday, PictureBox photo, int index);
+    public delegate void ViewAllInfoHandler(int index);
 
-    public delegate void EditedHandler(string name, string surname, string patronymic,
-        int contractNum, int DismissalNum, DateTime birthday, string path);
+    public delegate void EditedHandler();
+
     public interface IViewAllInfo
     {
+        string PersonName { get; set; }
+        string Surname { get; set; }
+        string Patronymic { get; set; }
+        string ContractNum { get; set; }
+        string DismissalNum { get; set; }
+        DateTime Birthday { get; set; }
+        string Path { get; set; }
+
         event ViewAllInfoHandler ViewAllInfoEvent;
         event EditedHandler EditedEvent;
     }

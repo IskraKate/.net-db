@@ -1,6 +1,4 @@
-﻿using HumanResourcesDepartment.ModelNamespace;
-using System;
-using System.Collections.Generic;
+﻿using System;
 
 namespace HumanResourcesDepartment.View
 {

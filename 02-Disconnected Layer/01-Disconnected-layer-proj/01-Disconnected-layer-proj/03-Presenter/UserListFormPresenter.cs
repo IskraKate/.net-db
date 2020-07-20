@@ -6,19 +6,30 @@ namespace _01_Disconnected_layer_proj._03_Presenter
 {
     class UserListFormPresenter
     {
-       private IView _view;
-       private IModel _model;
+        private IView _view;
 
-        public UserListFormPresenter(IView view, IModel model)
+        public UserListFormPresenter(IView view)
         {
             _view = view;
-            _model = model;
-            _view.ViewEvent += FillListFromBase;
+            _view.ViewEvent += FillList;
         }
 
-        public void FillListFromBase(object sender, EventArgs e)
+        public void FillList(object sender, EventArgs e)
         {
-            _view.UserList = _model.Fill(_view.UserList);
+            Model.GetModel().Fill();
+
+            foreach (var user in Model.GetModel().Users)
+            {
+                if (_view.IsChecked)
+                    _view.ListBox.Items.Add(user.Login);
+                else
+                {
+                    if (_view.IsAdmin)
+                        continue;
+                    else
+                        _view.ListBox.Items.Add(user.Login);
+                }
+            }
         }
     }
 }

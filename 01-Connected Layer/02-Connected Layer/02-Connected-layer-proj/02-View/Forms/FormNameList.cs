@@ -1,6 +1,5 @@
 ﻿using HumanResourcesDepartment._02_View;
 using HumanResourcesDepartment._03_Presenter;
-using HumanResourcesDepartment.ModelNamespace;
 using HumanResourcesDepartment.View;
 using System;
 using System.Windows.Forms;
@@ -21,7 +20,7 @@ namespace HumanResourcesDepartment
         private void AddButton_Click(object sender, EventArgs e)
         {
             var addPerson = new FormAddPerson(this);
-            var addListPresenter = new AddPersonPresenter(addPerson, Model.GetModel());
+            var addListPresenter = new AddPersonPresenter(addPerson);
 
             addPerson.ShowDialog();
 

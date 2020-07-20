@@ -2,9 +2,7 @@
 using HumanResourcesDepartment.ModelNamespace;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.IO;
-using System.Windows.Forms;
 
 namespace HumanResourcesDepartment._03_Presenter
 {
@@ -15,53 +13,43 @@ namespace HumanResourcesDepartment._03_Presenter
        private IModel _model;
        private List<PersonInfo> _infos;
 
-        public EditPersonPresenter(IViewAllInfo viewAllInfo, IModel model)
+        public EditPersonPresenter(IViewAllInfo viewAllInfo)
         {
             _viewAllInfo = viewAllInfo;
-            _model = model;
-            _viewAllInfo.ViewAllInfoEvent += FillTextBoxes;
-            _viewAllInfo.EditedEvent += EditedInfo;
+            _model = Model.GetModel();
+            _viewAllInfo.ViewAllInfoEvent += FillInfo;
+            _viewAllInfo.EditedEvent += OnUpdate;
             _infos = _model.GetInfo();
         }
 
-        public void FillTextBoxes(TextBox name, TextBox surname, TextBox patronymic,
-        TextBox contractNum, TextBox dismissalNum, DateTimePicker birthday, PictureBox photo, int index)
+        public void FillInfo(int index)
         {
             _index = index;
 
-            name.Text = _infos[_index].FirstName;
-            surname.Text = _infos[_index].LastName;
-            patronymic.Text = _infos[_index].Patronymic;
-            contractNum.Text = _infos[_index].ContractNumber.ToString();
-            dismissalNum.Text = _infos[_index].DismissalNumber.ToString();
-            birthday.Value = _infos[_index].Birthday;
+            _viewAllInfo.PersonName = _infos[_index].FirstName;
+            _viewAllInfo.Surname = _infos[_index].LastName;
+            _viewAllInfo.Patronymic = _infos[_index].Patronymic;
+            _viewAllInfo.ContractNum = _infos[_index].ContractNumber.ToString();
+            _viewAllInfo.DismissalNum = _infos[_index].DismissalNumber.ToString();
+            _viewAllInfo.Birthday = _infos[_index].Birthday;
 
             if (!String.IsNullOrEmpty(_infos[_index].PhotoPath) && File.Exists(_infos[_index].PhotoPath))
             {
-                photo.Image = new Bitmap(_infos[_index].PhotoPath);
-            }
-
-            birthday.Format = DateTimePickerFormat.Custom;
-
-            if (!string.IsNullOrEmpty(_infos[_index].PhotoPath))
-            {
-                if (File.Exists(_infos[_index].PhotoPath))
-                    photo.Image = new Bitmap(_infos[_index].PhotoPath);
+                _viewAllInfo.Path =  _infos[_index].PhotoPath;
             }
         }
 
-        public void EditedInfo(string name, string surname, string patronymic,
-        int contractNum, int dismissalNum, DateTime birthday, string path)
+        public void OnUpdate()
         {
-            _infos[_index].FirstName = name;
-            _infos[_index].LastName = surname;
-            _infos[_index].Patronymic = patronymic;
-            _infos[_index].ContractNumber = contractNum;
-            _infos[_index].DismissalNumber = dismissalNum;
-            _infos[_index].Birthday = birthday;
+            _infos[_index].FirstName = _viewAllInfo.PersonName;
+            _infos[_index].LastName = _viewAllInfo.Surname;
+            _infos[_index].Patronymic = _viewAllInfo.Patronymic;
+            _infos[_index].ContractNumber = int.Parse(_viewAllInfo.ContractNum);
+            _infos[_index].DismissalNumber = int.Parse(_viewAllInfo.DismissalNum);
+            _infos[_index].Birthday = _viewAllInfo.Birthday;
 
-            if (!String.IsNullOrEmpty(path))
-            _infos[_index].PhotoPath = path;
+            if (!String.IsNullOrEmpty(_viewAllInfo.Path))
+            _infos[_index].PhotoPath = _viewAllInfo.Path;
 
             _model.EditPerson(_infos, _index);
         }

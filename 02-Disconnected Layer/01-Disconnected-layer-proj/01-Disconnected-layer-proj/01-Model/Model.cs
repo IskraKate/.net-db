@@ -8,16 +8,17 @@ namespace _01_Disconnected_layer_proj._01_Model
     class Model : IModel
     {
         private static IModel _model = new Model();
+
         private SqlConnection _sqlConnection;
         private DataSet _myUsersDataSet;
         private SqlDataAdapter _sqlDataAdapter;
         private string _connectionString = "Data Source=(local);Initial Catalog=UsersDb;Integrated Security=True";
+        public List<User> Users { get; set; } = new List<User>();
 
         private Model()
         {
             _sqlConnection = new SqlConnection(_connectionString);
             _myUsersDataSet = new DataSet("UsersDb");
-
 
             _sqlDataAdapter = new SqlDataAdapter();
 
@@ -81,15 +82,15 @@ namespace _01_Disconnected_layer_proj._01_Model
             _sqlDataAdapter.Update(_myUsersDataSet);
         }
 
-        public List<User> Fill(List<User> userList)
+        public void Fill()
         {
-            if (userList.Count > 0)
-                userList.Clear();
+            if (Users.Count > 0)
+                Users.Clear();
 
             _myUsersDataSet.Clear();
             _sqlDataAdapter.Fill(_myUsersDataSet);
 
-            userList = _myUsersDataSet.Tables[0].AsEnumerable().Select(dataRow =>
+            Users = _myUsersDataSet.Tables[0].AsEnumerable().Select(dataRow =>
             new User
             {
                 Id = dataRow.Field<long>("Id"),
@@ -100,8 +101,6 @@ namespace _01_Disconnected_layer_proj._01_Model
                 IsAdmin = dataRow.Field<bool>("Admin")
 
             }).ToList();
-
-            return userList;
         }
 
         public void SelectCommand()

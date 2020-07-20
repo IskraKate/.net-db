@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Windows.Forms;
 
 namespace HumanResourcesDepartment.ModelNamespace
 {
@@ -35,10 +34,7 @@ namespace HumanResourcesDepartment.ModelNamespace
             {
                _connection.Open();
             }
-            catch(SqlException ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+            catch(SqlException ex){}
         }
 
         public List<PersonInfo> FillList()
@@ -133,17 +129,13 @@ namespace HumanResourcesDepartment.ModelNamespace
                     command.ExecuteNonQuery();
                 }
             }
-            catch (SqlException ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+            catch (SqlException ex) {}
         }
 
         public void Delete(int index)
         {
             try
             {
-
                 _sqlString = "DeletePerson";
                 using (SqlCommand command = new SqlCommand(_sqlString, _connection))
                 {
@@ -155,10 +147,7 @@ namespace HumanResourcesDepartment.ModelNamespace
 
                 _infos.RemoveAt(index);
             }
-            catch (SqlException ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+            catch (SqlException ex){}
         }
 
          public void Dispose()
