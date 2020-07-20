@@ -4,8 +4,12 @@ namespace _02_Disconected_layer_proj._01_Model.Interfaces
 {
     interface IModel
     {
-        List<Author> FillAuthorsList(List<Author> authors);
-        List<Press> FillPressesList(List<Press> authors);
-        List<Book> FillBooksList(List<Book> books);
+        List<Author> Authors { get; set; }
+        List<Book> Books { get; set; }
+        List<Press> Presses { get; set; }
+
+        void FillAuthorsList();
+        void FillPressesList();
+        void FillBooksList();
     }
 }

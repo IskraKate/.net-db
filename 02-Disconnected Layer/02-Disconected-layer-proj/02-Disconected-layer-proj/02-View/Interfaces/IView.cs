@@ -1,14 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Windows.Forms;
 
 namespace _02_Disconected_layer_proj._02_View.Interfaces
 {
+    public delegate void SearchHandler();
     interface IView
     {
         event EventHandler ViewEvent;
+        event SearchHandler SearchEvent;
 
-        List<Author> Authors { get; set; }
-        List<Book> Books { get; set; }
-        List<Press> Presses { get; set; }
+        ComboBox ComboBoxAuthors { get; set; }
+        ComboBox ComboBoxPresses { get; set; }
+        ListBox ListBoxBooks { get; set; }
+        bool CanSearch { get; set; }
     }
 }

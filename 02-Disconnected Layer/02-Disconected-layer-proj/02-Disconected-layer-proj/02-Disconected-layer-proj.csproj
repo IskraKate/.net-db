@@ -56,9 +56,9 @@
     </Compile>
     <Compile Include="02-View\Interfaces\IView.cs" />
     <Compile Include="03-Presenter\MainFormPresenter.cs" />
-    <Compile Include="Elements\Author.cs" />
-    <Compile Include="Elements\Book.cs" />
-    <Compile Include="Elements\Press.cs" />
+    <Compile Include="01-Model\Elements\Author.cs" />
+    <Compile Include="01-Model\Elements\Book.cs" />
+    <Compile Include="01-Model\Elements\Press.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="02-View\Forms\BooksAuthorsPresses.resx">

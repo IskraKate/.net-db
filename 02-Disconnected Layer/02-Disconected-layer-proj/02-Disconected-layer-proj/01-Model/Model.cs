@@ -16,6 +16,10 @@ namespace _02_Disconected_layer_proj._01_Model
         private SqlDataAdapter _sqlDataAdapter;
         private string _commandSelect;
 
+        public List<Author> Authors { get; set; } = new List<Author>();
+        public List<Book> Books { get; set; } = new List<Book>();
+        public List<Press> Presses { get; set; } = new List<Press>();
+
         private Model()
         {
             _connectionString = "Data Source=(local);Initial Catalog=BooksAuthorsPresses;Integrated Security=True";
@@ -32,26 +36,24 @@ namespace _02_Disconected_layer_proj._01_Model
             }
         }
 
-        public List<Author> FillAuthorsList(List<Author> authors)
+        public void FillAuthorsList()
         {
             _commandSelect = "SELECT Id, Name FROM Authors";
             _sqlDataAdapter.SelectCommand = new SqlCommand(_commandSelect, _sqlConnection);
 
             _dataSet.Clear();
             _sqlDataAdapter.Fill(_dataSet);
-            authors.Clear();
+            Authors.Clear();
 
-            authors = _dataSet.Tables[0].AsEnumerable().Select(dataRow =>
+            Authors = _dataSet.Tables[0].AsEnumerable().Select(dataRow =>
             new Author
             {
                 Id = dataRow.Field<long>("Id"),
                 Name = dataRow.Field<string>("Name")
             }).ToList();
-
-            return authors;
         }
 
-        public List<Book> FillBooksList(List<Book> books)
+        public void FillBooksList()
         {
             _commandSelect = "SELECT Books.Id, Title, AuthorFk, PressFk FROM Books, Authors, Presses" +
                    " WHERE AuthorFk=Authors.Id AND PressFk = Presses.Id";
@@ -59,9 +61,9 @@ namespace _02_Disconected_layer_proj._01_Model
 
             _dataSet.Clear();
             _sqlDataAdapter.Fill(_dataSet);
-            books.Clear();
+            Books.Clear();
 
-            books = _dataSet.Tables[0].AsEnumerable().Select(dataRow =>
+            Books = _dataSet.Tables[0].AsEnumerable().Select(dataRow =>
             new Book
             {
                 Id = dataRow.Field<long>("Id"),
@@ -70,27 +72,23 @@ namespace _02_Disconected_layer_proj._01_Model
                 AuthorFk = dataRow.Field<long>("AuthorFk"),
                 PressFk = dataRow.Field<long>("PressFk")
             }).ToList();
-
-            return books;
         }
 
-        public List<Press> FillPressesList(List<Press> presses)
+        public void FillPressesList()
         {
             _commandSelect = "SELECT Id, Name FROM Presses";
             _sqlDataAdapter.SelectCommand = new SqlCommand(_commandSelect, _sqlConnection);
 
             _dataSet.Clear();
             _sqlDataAdapter.Fill(_dataSet);
-            presses.Clear();
+            Presses.Clear();
 
-            presses = _dataSet.Tables[0].AsEnumerable().Select(dataRow =>
+            Presses = _dataSet.Tables[0].AsEnumerable().Select(dataRow =>
             new Press
             {
                 Id = dataRow.Field<long>("Id"),
                 Name = dataRow.Field<string>("Name")
             }).ToList();
-
-            return presses;
         }
     }
 }

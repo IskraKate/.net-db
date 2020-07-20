@@ -16,7 +16,7 @@ namespace _02_Disconected_layer_proj
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             MainForm booksAuthorsPresses = new MainForm();
-            MainFormPresenter mainFormPresenter = new MainFormPresenter(booksAuthorsPresses, Model.GetModel);
+            MainFormPresenter mainFormPresenter = new MainFormPresenter(booksAuthorsPresses);
             Application.Run(booksAuthorsPresses);
         }
     }
