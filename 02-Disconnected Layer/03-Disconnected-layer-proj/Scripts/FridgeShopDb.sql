@@ -44,9 +44,6 @@ CREATE TABLE Checks
 INSERT INTO Fridges(Brand, Number) VALUES ('Vestfrost', ' CW286W')
 INSERT INTO Fridges(Brand, Number) VALUES ('Bosch', ' KGN36XL306')
 INSERT INTO Fridges(Brand, Number) VALUES ('LG', ' GA-B509SLKM')
-INSERT INTO Fridges(Brand, Number) VALUES ('Vestfrost', ' CW286W')
-INSERT INTO Fridges(Brand, Number) VALUES ('Vestfrost', ' CX263W')
-INSERT INTO Fridges(Brand, Number) VALUES ('Vestfrost', 'CNF289X')
 
 INSERT INTO Sellers([Name]) VALUES ('First Seller')
 INSERT INTO Sellers([Name]) VALUES ('Second Seller')

@@ -1,16 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace _03_Disconnected_layer_proj._02_View
 {
+    public delegate void ViewHandler(ListView checklist);
     interface IView
     {
-        event EventHandler ViewEvent;
-
-        List<Check> CheckList { get; set; }
-        Check check { get; }
+        event ViewHandler ViewEvent;
     }
 }

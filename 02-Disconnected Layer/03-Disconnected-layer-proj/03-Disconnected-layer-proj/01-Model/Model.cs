@@ -1,12 +1,9 @@
-﻿using _03_Disconnected_layer_proj.Model;
+﻿using _03_Disconnected_layer_proj._01_Model.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Deployment.Application;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
 
@@ -25,6 +22,7 @@ namespace _03_Disconnected_layer_proj._01_Model
         public List<Buyer> Buyers { get; set; }
         public List<Seller> Sellers { get; set; }
         public List<Fridge> Fridges { get; set; }
+        public List<Check> Checks { get; set; }
 
         private Model()
         {
@@ -64,11 +62,12 @@ namespace _03_Disconnected_layer_proj._01_Model
             _dataSet.Clear();
             _sqlDataAdapter.Fill(_dataSet);
         }
-        List<Check> IModel.Fill(List<Check> checks)
+
+        public void Fill()
         {
             FillMainData();
 
-            checks = _dataSet.Tables[0].AsEnumerable().Select(dataRow =>
+            Checks = _dataSet.Tables[0].AsEnumerable().Select(dataRow =>
             new Check
             {
                 Id = dataRow.Field<long>("Id"),
@@ -82,8 +81,6 @@ namespace _03_Disconnected_layer_proj._01_Model
 
 
             _dataSet.Clear();
-
-            return checks;
         }
 
         public void AddCheck(Check check)
@@ -97,7 +94,6 @@ namespace _03_Disconnected_layer_proj._01_Model
             _sqlDataAdapter.InsertCommand.Parameters.Add("@FridgeFk", SqlDbType.BigInt, 8, "FridgeFk");
 
             DataRow dataRow = _dataSet.Tables[0].NewRow();
-
             dataRow.SetField("Number", check.Number);
             dataRow.SetField("Date", check.Date);
             dataRow.SetField("BuyerFk", check.Buyer.Id);
@@ -240,52 +236,92 @@ namespace _03_Disconnected_layer_proj._01_Model
 
         public void AddBuyer(Buyer buyer)
         {
-            _sqlDataAdapter.InsertCommand = new SqlCommand("INSERT INTO Buyers(Name)" +
-                                                            "VALUES (@Name)", _sqlConnection);
-            _sqlDataAdapter.InsertCommand.Parameters.Add("@Name", SqlDbType.NVarChar, 50, "Name");
+            bool isChecked = true ;
+
+            foreach (var b in Buyers)
+            {
+                if(b.Name == buyer.Name)
+                {
+                    isChecked = false;
+                }
+            }
+
+            if(isChecked)
+            {
+                _sqlDataAdapter.InsertCommand = new SqlCommand("INSERT INTO Buyers(Name)" +
+                                                                "VALUES (@Name)", _sqlConnection);
+                _sqlDataAdapter.InsertCommand.Parameters.Add("@Name", SqlDbType.NVarChar, 50, "Name");
 
 
-            DataRow dataRow = _dataSet.Tables[0].NewRow();
-            dataRow.SetField("Name", buyer.Name);
-            _dataSet.Tables[0].Rows.Add(dataRow);
+                DataRow dataRow = _dataSet.Tables[0].NewRow();
+                dataRow.SetField("Name", buyer.Name);
+                _dataSet.Tables[0].Rows.Add(dataRow);
 
 
-            _sqlDataAdapter.Update(_dataSet);
+                _sqlDataAdapter.Update(_dataSet);
 
-            FillBuyerList();
+                FillBuyerList();
+            }
         }
         public void AddSeller(Seller seller)
         {
-            _sqlDataAdapter.InsertCommand = new SqlCommand("INSERT INTO Sellers(Name)" +
+            bool isChecked = true;
+
+            foreach (var s in Sellers)
+            {
+                if (s.Name == seller.Name)
+                {
+                    isChecked = false;
+                }
+            }
+
+            if (isChecked)
+            {
+                _sqlDataAdapter.InsertCommand = new SqlCommand("INSERT INTO Sellers(Name)" +
                                                             "VALUES (@Name)", _sqlConnection);
-            _sqlDataAdapter.InsertCommand.Parameters.Add("@Name", SqlDbType.NVarChar, 50, "Name");
+                _sqlDataAdapter.InsertCommand.Parameters.Add("@Name", SqlDbType.NVarChar, 50, "Name");
 
 
-            DataRow dataRow = _dataSet.Tables[0].NewRow();
-            dataRow.SetField("Name", seller.Name);
-            _dataSet.Tables[0].Rows.Add(dataRow);
+                DataRow dataRow = _dataSet.Tables[0].NewRow();
+                dataRow.SetField("Name", seller.Name);
+                _dataSet.Tables[0].Rows.Add(dataRow);
 
 
-            _sqlDataAdapter.Update(_dataSet);
+                _sqlDataAdapter.Update(_dataSet);
 
-            FillSellerList();
+                FillSellerList();
+            }
         }
         public void AddFridge(Fridge fridge)
         {
-            _sqlDataAdapter.InsertCommand = new SqlCommand("INSERT INTO Fridges(Brand, Number)" +
-                                                            "VALUES (@Name, @Number)", _sqlConnection);
-            _sqlDataAdapter.InsertCommand.Parameters.Add("@Name", SqlDbType.NVarChar, 50, "Name");
-            _sqlDataAdapter.InsertCommand.Parameters.Add("@Number", SqlDbType.NVarChar, 50, "Number");
+            bool isChecked = true;
 
-            DataRow dataRow = _dataSet.Tables[0].NewRow();
-            dataRow.SetField("Name", fridge.Brand);
-            dataRow.SetField("Number", fridge.Number);
-            _dataSet.Tables[0].Rows.Add(dataRow);
+            foreach (var f in Fridges)
+            {
+                if (f.Brand == fridge.Brand)
+                {
+                    isChecked = false;
+                }
+            }
+
+            if (isChecked)
+            {
+                _sqlDataAdapter.InsertCommand = new SqlCommand("INSERT INTO Fridges(Brand, Number)" +
+                                                                "VALUES (@Name, @Number)", _sqlConnection);
+                _sqlDataAdapter.InsertCommand.Parameters.Add("@Name", SqlDbType.NVarChar, 50, "Name");
+                _sqlDataAdapter.InsertCommand.Parameters.Add("@Number", SqlDbType.NVarChar, 50, "Number");
+
+                DataRow dataRow = _dataSet.Tables[0].NewRow();
+                dataRow.SetField("Name", fridge.Brand);
+                dataRow.SetField("Number", fridge.Number);
+                _dataSet.Tables[0].Rows.Add(dataRow);
 
 
-            _sqlDataAdapter.Update(_dataSet);
+                _sqlDataAdapter.Update(_dataSet);
 
-            FillFridgeList();
+                FillFridgeList();
+            }
         }
+
     }
 }

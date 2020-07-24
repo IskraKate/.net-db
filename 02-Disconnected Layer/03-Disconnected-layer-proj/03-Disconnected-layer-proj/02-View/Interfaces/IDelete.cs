@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace _03_Disconnected_layer_proj._02_View.Interfaces
 {
+    public delegate void DeleteHandler(int index);
     interface IDelete
     {
-        event EventHandler DeleteEvent;
+        event DeleteHandler DeleteEvent;
     }
 }

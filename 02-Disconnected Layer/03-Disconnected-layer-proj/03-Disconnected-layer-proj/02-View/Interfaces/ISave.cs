@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace _03_Disconnected_layer_proj._02_View.Interfaces
+﻿namespace _03_Disconnected_layer_proj._02_View.Interfaces
 {
+    public delegate void SaveHandler();
     interface ISave
     {
-        event EventHandler SaveEvent;
+        event SaveHandler SaveEvent;
     }
 }

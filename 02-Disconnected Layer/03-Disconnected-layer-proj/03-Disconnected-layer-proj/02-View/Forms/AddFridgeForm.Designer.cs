@@ -40,27 +40,26 @@
             // labelname
             // 
             this.labelname.AutoSize = true;
-            this.labelname.Location = new System.Drawing.Point(24, 31);
-            this.labelname.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelname.Location = new System.Drawing.Point(32, 38);
             this.labelname.Name = "labelname";
-            this.labelname.Size = new System.Drawing.Size(38, 13);
+            this.labelname.Size = new System.Drawing.Size(50, 17);
             this.labelname.TabIndex = 32;
             this.labelname.Text = "Brand:";
             // 
             // textBoxBrand
             // 
-            this.textBoxBrand.Location = new System.Drawing.Point(27, 46);
-            this.textBoxBrand.Margin = new System.Windows.Forms.Padding(2);
+            this.textBoxBrand.Location = new System.Drawing.Point(36, 57);
+            this.textBoxBrand.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBoxBrand.Name = "textBoxBrand";
-            this.textBoxBrand.Size = new System.Drawing.Size(261, 20);
+            this.textBoxBrand.Size = new System.Drawing.Size(347, 22);
             this.textBoxBrand.TabIndex = 31;
             // 
             // buttonCancel
             // 
-            this.buttonCancel.Location = new System.Drawing.Point(169, 130);
-            this.buttonCancel.Margin = new System.Windows.Forms.Padding(2);
+            this.buttonCancel.Location = new System.Drawing.Point(225, 160);
+            this.buttonCancel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.buttonCancel.Name = "buttonCancel";
-            this.buttonCancel.Size = new System.Drawing.Size(73, 24);
+            this.buttonCancel.Size = new System.Drawing.Size(97, 30);
             this.buttonCancel.TabIndex = 30;
             this.buttonCancel.Text = "Cancel";
             this.buttonCancel.UseVisualStyleBackColor = true;
@@ -68,10 +67,10 @@
             // 
             // buttonAdd
             // 
-            this.buttonAdd.Location = new System.Drawing.Point(63, 130);
-            this.buttonAdd.Margin = new System.Windows.Forms.Padding(2);
+            this.buttonAdd.Location = new System.Drawing.Point(84, 160);
+            this.buttonAdd.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.buttonAdd.Name = "buttonAdd";
-            this.buttonAdd.Size = new System.Drawing.Size(73, 24);
+            this.buttonAdd.Size = new System.Drawing.Size(97, 30);
             this.buttonAdd.TabIndex = 29;
             this.buttonAdd.Text = "Add";
             this.buttonAdd.UseVisualStyleBackColor = true;
@@ -80,26 +79,25 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(24, 73);
-            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label1.Location = new System.Drawing.Point(32, 90);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(47, 13);
+            this.label1.Size = new System.Drawing.Size(62, 17);
             this.label1.TabIndex = 34;
             this.label1.Text = "Number:";
             // 
             // textBoxNumber
             // 
-            this.textBoxNumber.Location = new System.Drawing.Point(27, 88);
-            this.textBoxNumber.Margin = new System.Windows.Forms.Padding(2);
+            this.textBoxNumber.Location = new System.Drawing.Point(36, 108);
+            this.textBoxNumber.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBoxNumber.Name = "textBoxNumber";
-            this.textBoxNumber.Size = new System.Drawing.Size(261, 20);
+            this.textBoxNumber.Size = new System.Drawing.Size(347, 22);
             this.textBoxNumber.TabIndex = 33;
             // 
             // AddFridgeForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(311, 165);
+            this.ClientSize = new System.Drawing.Size(415, 203);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.textBoxNumber);
             this.Controls.Add(this.labelname);
@@ -107,7 +105,9 @@
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonAdd);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "AddFridgeForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Add Fridge";
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -1,11 +1,10 @@
-﻿using _03_Disconnected_layer_proj._02_View;
+﻿using _03_Disconnected_layer_proj._01_Model;
+using _03_Disconnected_layer_proj._01_Model.Interfaces;
 using _03_Disconnected_layer_proj._02_View.Interfaces;
-using _03_Disconnected_layer_proj.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace _03_Disconnected_layer_proj._03_Presenter
 {
@@ -14,49 +13,84 @@ namespace _03_Disconnected_layer_proj._03_Presenter
         private IModel _model;
         private IAdd _add;
 
-        public AddFormPresenter(IAdd add, IModel model)
+        public AddFormPresenter(IAdd add)
         {
-            _model = model;
+            _model = Model.GetModel;
             _add = add;
 
             _add.AddEvent += FillAddFormEvent;
-            _add.AddCheck += _add_AddCheck;
-            _add.AddBuyerEvent += AddBuyerEvent;
-            _add.AddSellerEvent += AddSellerEvent;
-            _add.AddFridgeEvent += AddFridgeEvent;
+            _add.BuyersUpdateEvent += BuyersOnUpdate;
+            _add.SellersUpdateEvent += SellersOnUpdate;
+            _add.FridgesUdateEvent += FridgesOnUpdate;
+            _add.AddCheckEvent += _add_AddCheck;
         }
 
-
-
-
-
-        private void AddBuyerEvent(object sender, EventArgs e)
+        private void OnUpdateElement(ComboBox comboBox)
         {
-            _model.AddBuyer(sender as Buyer);
-            _add.Buyers = _model.Buyers;
-        }
-        private void AddFridgeEvent(object sender, EventArgs e)
-        {
-            _model.AddFridge(sender as Fridge);
-            _add.Fridges = _model.Fridges;
-        }
-        private void AddSellerEvent(object sender, EventArgs e)
-        {
-            _model.AddSeller(sender as Seller);
-            _add.Sellers = _model.Sellers;
+            comboBox.Items.Clear();
         }
 
-
-        private void _add_AddCheck(object sender, EventArgs e)
+        private void BuyersOnUpdate(string name)
         {
-            _model.AddCheck(sender as Check);
+            Buyer buyer = new Buyer();
+            buyer.Name = name;
+            _model.AddBuyer(buyer);
         }
 
-        private void FillAddFormEvent(object sender, EventArgs e)
+        private void SellersOnUpdate(string name)
         {
-            _add.Fridges = _model.Fridges;
-            _add.Buyers = _model.Buyers;
-            _add.Sellers = _model.Sellers;
+            Seller seller = new Seller();
+            seller.Name = name;
+            _model.AddSeller(seller);
+        }
+
+        private void FridgesOnUpdate(string brand, string number)
+        {
+            Fridge fridge = new Fridge();
+            fridge.Brand = brand;
+            fridge.Number = number;
+            _model.AddFridge(fridge);
+        }
+
+        private void _add_AddCheck()
+        {
+            Buyer buyer = _model.Buyers.Where(b =>b.Name == _add.BuyerName).First();
+            Seller seller = _model.Sellers.Where(s => s.Name == _add.SellerName).First();
+            Fridge fridge = _model.Fridges.Where(f => f.Brand == _add.Brand).First();
+
+            Check check = new Check
+            {
+                Number = _add.Number,
+                Date = _add.Date,
+                Buyer = buyer,
+                Seller = seller,
+                Fridge = fridge
+            };
+
+             _model.AddCheck(check);
+        }
+
+        private void FillAddFormEvent(ComboBox fridges, ComboBox buyers, ComboBox sellers)
+        {
+            fridges.Items.Clear();
+            buyers.Items.Clear();
+            sellers.Items.Clear();
+
+            FillComboBox(fridges, _model.Fridges.Select(f => f.Brand).ToArray());
+            FillComboBox(buyers, _model.Buyers.Select(b => b.Name).ToArray());
+            FillComboBox(sellers, _model.Sellers.Select(s => s.Name).ToArray());
+
+            fridges.DisplayMember = "Brand";
+            fridges.SelectedIndex = 0;
+            buyers.DisplayMember = "Name";
+            buyers.SelectedIndex = 0;
+            sellers.DisplayMember = "Name";
+            sellers.SelectedIndex = 0;
+        }
+
+        private void FillComboBox(ComboBox comboBox, string[] list)
+        {
+            comboBox.Items.AddRange(list);
         }
 
     }

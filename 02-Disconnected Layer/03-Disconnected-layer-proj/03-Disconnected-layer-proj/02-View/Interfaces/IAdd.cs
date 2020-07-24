@@ -1,22 +1,29 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace _03_Disconnected_layer_proj._02_View.Interfaces
 {
+    public delegate void ViewAddHandler(ComboBox fridges, ComboBox buyers, ComboBox sellers);
+    public delegate void BuyersUpdateHandler(string name);
+    public delegate void SellersUpdateHandler(string name);
+    public delegate void FridgesUpdateHandler(string brand, string number);
+    public delegate void AddCheckHandler();
+
     interface IAdd
     {
-        List<Buyer> Buyers { get; set; }
-        List<Seller> Sellers { get; set; }
-        List<Fridge> Fridges { get; set; }
+        event ViewAddHandler AddEvent;
+        event BuyersUpdateHandler BuyersUpdateEvent;
+        event SellersUpdateHandler SellersUpdateEvent;
+        event FridgesUpdateHandler FridgesUdateEvent;
+        event AddCheckHandler AddCheckEvent;
 
-        event EventHandler AddEvent;
-        event EventHandler AddCheck;
+        string Brand { get; }
 
-        event EventHandler AddBuyerEvent;
-        event EventHandler AddSellerEvent;
-        event EventHandler AddFridgeEvent;
+        string Number { get; }
+
+        string BuyerName { get; }
+
+        string SellerName { get; }
+        DateTime Date { get; }
     }
 }
