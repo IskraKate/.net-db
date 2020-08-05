@@ -8,7 +8,7 @@ namespace Sales
         public string BLastName { get; set; }
         public string SFirstName { get; set; }
         public string SLastName { get; set; }
-        public int MoneySum { get; set; }
+        public decimal MoneySum { get; set; }
         public DateTime Date { get; set; }
     }
 }

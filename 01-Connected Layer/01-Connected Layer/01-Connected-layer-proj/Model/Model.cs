@@ -56,7 +56,7 @@ namespace Sales.ModelNamespace
                             BLastName = ((string)reader["BLastname"]),
                             SFirstName = ((string)reader["SFirstname"]),
                             SLastName = ((string)reader["SLastname"]),
-                            MoneySum = (int)reader["MoneySum"],
+                            MoneySum = (decimal)reader["MoneySum"],
                             Date  = (DateTime)reader["Date"]
                         });
                     }

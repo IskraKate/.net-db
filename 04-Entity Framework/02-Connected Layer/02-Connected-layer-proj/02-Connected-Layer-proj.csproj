@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{2704349C-0F70-45A7-B8C6-241C5867BA2F}</ProjectGuid>
+    <ProjectGuid>{4AC5644F-8A19-4DDC-AC6F-D913C9C37E07}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>Sales</RootNamespace>
-    <AssemblyName>Sales</AssemblyName>
+    <RootNamespace>HumanResourcesDepartment</RootNamespace>
+    <AssemblyName>HumanResourcesDepartment</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -46,21 +46,44 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Model\IModel.cs" />
-    <Compile Include="Presenter\Presenter.cs" />
-    <Compile Include="Model\Row.cs" />
-    <Compile Include="View\IView.cs" />
-    <Compile Include="View\FormViewList.cs">
+    <Compile Include="01-Model\IModel.cs" />
+    <Compile Include="01-Model\Model.cs" />
+    <Compile Include="02-View\Interfaces\IAdd.cs" />
+    <Compile Include="02-View\Interfaces\IDispose.cs" />
+    <Compile Include="01-Model\PersonInfo.cs" />
+    <Compile Include="02-View\Interfaces\IViewAllInfo.cs" />
+    <Compile Include="03-Presenter\AddPersonPresenter.cs" />
+    <Compile Include="03-Presenter\EditPersonPresenter.cs" />
+    <Compile Include="03-Presenter\NameListPresenter.cs" />
+    <Compile Include="02-View\Forms\FormAddPerson.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="View\FormViewList.Designer.cs">
-      <DependentUpon>FormViewList.cs</DependentUpon>
+    <Compile Include="02-View\Forms\FormAddPerson.Designer.cs">
+      <DependentUpon>FormAddPerson.cs</DependentUpon>
     </Compile>
-    <Compile Include="Model\Model.cs" />
+    <Compile Include="02-View\Forms\FormNameList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="02-View\Forms\FormNameList.Designer.cs">
+      <DependentUpon>FormNameList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="02-View\Forms\FormAllInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="02-View\Forms\FormAllInfo.Designer.cs">
+      <DependentUpon>FormAllInfo.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="View\FormViewList.resx">
-      <DependentUpon>FormViewList.cs</DependentUpon>
+    <Compile Include="02-View\Interfaces\IView.cs" />
+    <EmbeddedResource Include="02-View\Forms\FormAddPerson.resx">
+      <DependentUpon>FormAddPerson.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="02-View\Forms\FormNameList.resx">
+      <DependentUpon>FormNameList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="02-View\Forms\FormAllInfo.resx">
+      <DependentUpon>FormAllInfo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
