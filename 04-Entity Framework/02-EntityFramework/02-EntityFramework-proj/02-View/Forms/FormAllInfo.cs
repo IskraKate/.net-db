@@ -105,11 +105,11 @@ namespace HumanResourcesDepartment
             if (dlgRslt == DialogResult.OK)
             {
                buttonEdit.Enabled = true;
-                buttonEddited.Enabled = false;
+               buttonEddited.Enabled = false;
 
-                EditedEvent?.Invoke();
+               EditedEvent?.Invoke();
 
-                 this.Close();
+               this.Close();
             }
         }
     }

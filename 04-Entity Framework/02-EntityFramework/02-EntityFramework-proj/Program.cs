@@ -1,6 +1,7 @@
 ﻿using HumanResourcesDepartment._03_Presenter;
 using HumanResourcesDepartment.ModelNamespace;
 using System;
+using System.Data.Entity;
 using System.Windows.Forms;
 
 namespace HumanResourcesDepartment
@@ -14,11 +15,11 @@ namespace HumanResourcesDepartment
         static void Main()
         {
 
-                Application.EnableVisualStyles();
-                Application.SetCompatibleTextRenderingDefault(false);
-                var formNameList = new FormNameList();
-                var nameListPresenter = new NameListPresenter(formNameList);
-                Application.Run(formNameList);
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            var formNameList = new FormNameList();
+            var nameListPresenter = new NameListPresenter(formNameList);
+            Application.Run(formNameList);
         }
     }
 }

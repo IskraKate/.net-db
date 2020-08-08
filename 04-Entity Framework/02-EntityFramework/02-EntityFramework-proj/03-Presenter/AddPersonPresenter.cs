@@ -14,7 +14,6 @@ namespace HumanResourcesDepartment._03_Presenter
         public AddPersonPresenter(IAdd view)
         {
             _view = view;
-            _model = Model.GetModel();
             _view.AddEvent += AddPersonModel;
         }
 
@@ -31,7 +30,7 @@ namespace HumanResourcesDepartment._03_Presenter
                 PhotoPath = _view.AddPhoto
             };
 
-            _model.AddPersonToBase(personInfo);
+           //_model.AddPersonToBase(personInfo);
         }
     }
 }

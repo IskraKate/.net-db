@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29613.14
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "02-Connected-Layer-proj", "02-Connected-Layer-proj.csproj", "{4AC5644F-8A19-4DDC-AC6F-D913C9C37E07}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "02-EntityFramework-proj", "02-EntityFramework-proj.csproj", "{4AC5644F-8A19-4DDC-AC6F-D913C9C37E07}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
