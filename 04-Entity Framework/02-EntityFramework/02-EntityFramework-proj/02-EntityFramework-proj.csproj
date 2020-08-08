@@ -56,7 +56,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="01-Model\IModel.cs" />
     <Compile Include="01-Model\ModelContext.cs" />
     <Compile Include="01-Model\ModelContextInitializer.cs" />
     <Compile Include="02-View\Interfaces\IAdd.cs" />

@@ -1,15 +1,12 @@
-﻿using HumanResourcesDepartment._02_View;
-using HumanResourcesDepartment._02_View.Interfaces;
+﻿using HumanResourcesDepartment._02_View.Interfaces;
 using HumanResourcesDepartment.ModelNamespace;
-using HumanResourcesDepartment.View;
-using System.Windows.Forms;
 
 namespace HumanResourcesDepartment._03_Presenter
 {
     class AddPersonPresenter
     {
-        IModel _model;
-        IAdd _view;
+        private IAdd _view;
+        private ModelContext _model = ModelContext.GetModel();
 
         public AddPersonPresenter(IAdd view)
         {
@@ -19,7 +16,7 @@ namespace HumanResourcesDepartment._03_Presenter
 
         public void AddPersonModel()
         {
-            PersonInfo personInfo= new PersonInfo
+            PersonInfo personInfo = new PersonInfo
             {
                 FirstName = _view.AddName,
                 LastName = _view.AddSurname,
@@ -30,7 +27,7 @@ namespace HumanResourcesDepartment._03_Presenter
                 PhotoPath = _view.AddPhoto
             };
 
-           //_model.AddPersonToBase(personInfo);
+           _model.Insert(personInfo);
         }
     }
 }

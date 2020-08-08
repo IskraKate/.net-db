@@ -9,10 +9,10 @@ namespace HumanResourcesDepartment._03_Presenter
 {
     class EditPersonPresenter
     {
-        int _index;
         private IViewAllInfo _viewAllInfo;
         private List<PersonInfo> _personInfos = new List<PersonInfo>();
         private ModelContext _model = ModelContext.GetModel();
+        private PersonInfo _person;
 
         public EditPersonPresenter(IViewAllInfo viewAllInfo)
         {
@@ -24,35 +24,33 @@ namespace HumanResourcesDepartment._03_Presenter
 
         public void FillInfo(int index)
         {
-            _index = index;
+            _person = _personInfos[index];
 
-            _viewAllInfo.PersonName = _personInfos[_index].FirstName;
-            _viewAllInfo.Surname = _personInfos[_index].LastName;
-            _viewAllInfo.Patronymic = _personInfos[_index].Patronymic;
-            _viewAllInfo.ContractNum = _personInfos[_index].ContractNumber.ToString();
-            _viewAllInfo.DismissalNum = _personInfos[_index].DismissalNumber.ToString();
-            _viewAllInfo.Birthday = _personInfos[_index].Birthday;
+            _viewAllInfo.PersonName = _person.FirstName;
+            _viewAllInfo.Surname = _person.LastName;
+            _viewAllInfo.Patronymic = _person.Patronymic;
+            _viewAllInfo.ContractNum = _person.ContractNumber.ToString();
+            _viewAllInfo.DismissalNum = _person.DismissalNumber.ToString();
+            _viewAllInfo.Birthday = _person.Birthday;
 
-            if (!String.IsNullOrEmpty(_personInfos[_index].PhotoPath) && File.Exists(_personInfos[_index].PhotoPath))
+            if (!String.IsNullOrEmpty(_person.PhotoPath) && File.Exists(_person.PhotoPath))
             {
-                _viewAllInfo.Path = _personInfos[_index].PhotoPath;
+                _viewAllInfo.Path = _person.PhotoPath;
             }
         }
 
         public void OnUpdate()
         {
-            var personInfo = new PersonInfo()
-            {
-                FirstName = _viewAllInfo.PersonName,
-                LastName = _viewAllInfo.Surname,
-                Patronymic = _viewAllInfo.Patronymic,
-                ContractNumber = int.Parse( _viewAllInfo.ContractNum),
-                DismissalNumber = int.Parse(_viewAllInfo.DismissalNum),
-                Birthday = _viewAllInfo.Birthday,
-                PhotoPath = _viewAllInfo.Path
-            };
+            _person.FirstName = _viewAllInfo.PersonName;
+            _person.LastName = _viewAllInfo.Surname;
+            _person.Patronymic = _viewAllInfo.Patronymic;
+            _person.ContractNumber = int.Parse(_viewAllInfo.ContractNum);
+            _person.DismissalNumber = int.Parse(_viewAllInfo.DismissalNum);
+            _person.Birthday = _viewAllInfo.Birthday;
+            _person.PhotoPath = _viewAllInfo.Path;
 
-            _model.Edit(personInfo, _index);
+            if(_person!= null)
+            _model.Edit(_person);
         }
     }
 }

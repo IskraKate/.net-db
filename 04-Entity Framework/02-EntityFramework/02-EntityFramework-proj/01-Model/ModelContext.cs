@@ -35,26 +35,34 @@ namespace HumanResourcesDepartment.ModelNamespace
             modelBuilder.Entity<PersonInfo>().Property(p => p.Patronymic).HasMaxLength(50);
             modelBuilder.Entity<PersonInfo>().Property(p => p.Patronymic).IsRequired();
 
+            modelBuilder.Entity<PersonInfo>().Property(p => p.Birthday).IsRequired();
+
             modelBuilder.Entity<PersonInfo>().Property(p => p.PhotoPath).HasMaxLength(100);
             modelBuilder.Entity<PersonInfo>().Property(p => p.PhotoPath).IsRequired();
 
-            modelBuilder.Entity<PersonInfo>().Property(p => p.Birthday).IsRequired();
 
             base.OnModelCreating(modelBuilder);
         }
 
         public void Insert(PersonInfo person)
         {
-            People.Add(person);
+            _modelContext.People.Add(person);
+            _modelContext.SaveChanges();
         }
 
-        public void Edit(PersonInfo person, int index)
+        public void Edit(PersonInfo person)
         {
-            var editPerson = People.FirstOrDefault(a => a.Id == index);
-            if (editPerson != null)
+            if (person != null)
             {
-                _modelContext.Entry(editPerson).State = EntityState.Modified;
+                _modelContext.Entry(person).State = EntityState.Modified;
+                _modelContext.SaveChanges();
             }
+        }
+
+        public void Delete(int id)
+        {
+            _modelContext.Entry(_modelContext.People.Where(p => p.Id == id).Single()).State = EntityState.Deleted;
+            _modelContext.SaveChanges();
         }
     }
 }

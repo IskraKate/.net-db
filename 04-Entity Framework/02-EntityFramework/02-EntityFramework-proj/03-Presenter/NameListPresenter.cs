@@ -40,7 +40,7 @@ namespace HumanResourcesDepartment._03_Presenter
         public void Delete(int index)
         {
             _listViewNames.SelectedItems[0].Remove();
-            _model.People.Remove(_personInfo[index]);
+            _model.Delete(index);
             _personInfo.RemoveAt(index);
             FillListView();
         }
