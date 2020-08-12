@@ -16,7 +16,7 @@ namespace HumanResourcesDepartment._03_Presenter
 
         public void AddPersonModel()
         {
-            PersonInfo personInfo = new PersonInfo
+            Person personInfo = new Person
             {
                 FirstName = _view.AddName,
                 LastName = _view.AddSurname,

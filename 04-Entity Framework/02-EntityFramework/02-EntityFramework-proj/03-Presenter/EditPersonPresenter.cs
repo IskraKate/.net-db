@@ -10,9 +10,9 @@ namespace HumanResourcesDepartment._03_Presenter
     class EditPersonPresenter
     {
         private IViewAllInfo _viewAllInfo;
-        private List<PersonInfo> _personInfos = new List<PersonInfo>();
+        private List<Person> _personInfos = new List<Person>();
         private ModelContext _model = ModelContext.GetModel();
-        private PersonInfo _person;
+        private Person _person;
 
         public EditPersonPresenter(IViewAllInfo viewAllInfo)
         {

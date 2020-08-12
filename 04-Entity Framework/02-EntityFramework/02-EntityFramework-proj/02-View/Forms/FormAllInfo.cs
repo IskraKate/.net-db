@@ -40,7 +40,10 @@ namespace HumanResourcesDepartment
         private void PersonAllInfoShow()
         {
             ViewAllInfoEvent?.Invoke(_index);
-            personPhoto.Image = new Bitmap(_path);
+            if (!String.IsNullOrEmpty(_path))
+            {
+                personPhoto.Image = new Bitmap(_path);
+            }
             birthadyDateTimePicker.Format = DateTimePickerFormat.Custom;
         }
 

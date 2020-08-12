@@ -60,7 +60,7 @@
     <Compile Include="01-Model\ModelContextInitializer.cs" />
     <Compile Include="02-View\Interfaces\IAdd.cs" />
     <Compile Include="02-View\Interfaces\IDispose.cs" />
-    <Compile Include="01-Model\PersonInfo.cs" />
+    <Compile Include="01-Model\Person.cs" />
     <Compile Include="02-View\Interfaces\IViewAllInfo.cs" />
     <Compile Include="03-Presenter\AddPersonPresenter.cs" />
     <Compile Include="03-Presenter\EditPersonPresenter.cs" />

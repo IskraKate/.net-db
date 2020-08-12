@@ -12,14 +12,14 @@ namespace HumanResourcesDepartment._03_Presenter
     {
         private IView _view;
 
-        private List<PersonInfo> _personInfo;
+        private List<Person> _personInfo;
         private ListView _listViewNames;
 
         private ModelContext _model = ModelContext.GetModel();
 
         public NameListPresenter(IView view)
         {
-            _personInfo = new List<PersonInfo>();
+            _personInfo = new List<Person>();
 
             _view = view;
             _model.People.Load();
